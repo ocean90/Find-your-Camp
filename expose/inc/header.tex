@@ -1,0 +1,146 @@
+%!TEX root = ../Dokumentation.tex
+
+%Da Latex für englischsprachige Texte ausgerichtet ist,
+%wird als Dokumentenklasse das "`scrbook"' von Markus Kohm verwendet.
+%Dieses ist für deutschsprachige Texte ausgelegt.
+%BCOR12mm: 12mm Bindekorrektur (Verbreiterung des linken Randes)
+%DIV11: entspricht in etwas der geforderten Textgröße und Seitenränder
+%titlepage: eine Titelseite wird verwendet
+%a4paper: DIN A4
+%oneside: für eine spätere einseitige Bedruckung
+%Original: \documentclass[BCOR12mm,DIV11,titlepage,a4paper,oneside]{scrbook}
+\documentclass[DIV11,titlepage,a4paper,oneside,10pt]{scrbook}
+
+\textheight = 23cm
+
+%Paket für deutsche Silbentrennung etc.
+\usepackage{ngerman}
+
+%Paket für Zeichenkodierung, entspricht UTF-8
+\usepackage[utf8x]{inputenc}
+
+%Paket das die Ausgabefonts definiert
+\usepackage[T1]{fontenc}
+
+%Paket für das Einbinden von Grafiken über die figure-Umgebung
+\usepackage{graphicx}
+
+%Paket zum Ändern der Listenabstände
+\usepackage{enumitem}
+\setlist[itemize]{itemsep=0mm}
+\setlist[enumerate]{itemsep=0mm}
+
+%Paket zum Ändern der Kopf- und Fußzeile
+\usepackage{fancyhdr}
+
+%fancypagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhf{}
+%\fancyfoot[L]{FANCY}
+\fancyfoot[R]{\thepage}
+
+\fancypagestyle{plain}{
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyhf{}
+%	\fancyfoot[L]{PLAIN}
+	\fancyfoot[R]{\thepage}
+}
+
+\pagestyle{plain}
+
+%Abbildungsnummerierung ändern (abhängig von chapter, z.B. Abbildung 1.1)
+\renewcommand*{\thefigure}{\thechapter.\arabic{figure}}
+%Tabellennummerierung ändern (abhängig von chapter, z.B. Tabelle 1.1)
+\renewcommand*{\thetable}{\thechapter.\arabic{table}}
+
+%Paket, um ein Glossar/Abkürzungsverzeichnis anzulegen
+\usepackage{nomencl}
+\let\abbrev\nomenclature
+%Der Name wird in Glossar geändert
+\renewcommand{\nomname}{Glossar (optional)}
+%Definiert die Aufteilung im Glossar zwischen Begriffen und Erläuterung
+\setlength{\nomlabelwidth}{.25\hsize}
+%Definiert die Punktelinien im Glossar
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+%Veranlasst die Erstellung des Glossars
+\makenomenclature
+
+%Einrückungen nach Absätzen und Grafiken verhindern
+\setlength{\parindent}{0pt}
+
+%Verhindern, dass eine neue Seite für ein einzelnes Wort/Zeile verwendet wird
+\clubpenalty = 10000 % schliesst Schusterjungen aus
+\widowpenalty = 10000 % schliesst Hurenkinder aus (keine Beleidigung, sondern wirklich ein Fachbegriff)
+
+%Paket für ein deutsches Literaturverzeichnis
+\usepackage{bibgerm}
+
+%Paket für die Verwendung von URLs durch den Befehl \url{}
+\usepackage{url}
+
+%Paket für Zeilenabstand (onehalfspace, singlespace)
+\usepackage{setspace}
+
+%Paket zur Erzeugung von Anführungszeichen durch \enquote{Text}
+\usepackage[ngerman]{babel}
+\usepackage[babel, german=quotes]{csquotes}
+
+%Paket für farbigen Text
+%black,white,green,red,blue,yellow,cyan,magenta
+\usepackage{color}
+
+%Paket für farbigen Hintergrund für Verbatim-Umgebung (Quelltext-Umgebung)
+\usepackage{fancyvrb}
+\usepackage{verbatim,moreverb}
+
+%Grauton für Quelltext-Umgebung definieren 80% Grau
+\definecolor{source}{gray}{0.95}
+
+%Paket für Quelltext-Umgebung
+\usepackage{listings}
+
+%Paket für Positionierung der Objekte ohne Float (Verwendungsbsp.: \begin{figure}[H])
+\usepackage{float}
+
+%Paket für Tabellen über die gesamte Breite
+\usepackage{tabularx}
+
+%Paket für Definitionen, etc.
+\usepackage{amsthm}
+
+%Paket zur Erzeugung von Hyperrefs und PDF Informationen
+\usepackage[pdftex,plainpages=false,pdfpagelabels,
+            pdftitle={Projektdokumentation},
+            pdfauthor={Dennis Meyer, Dominik Schilling}
+            ]{hyperref}
+
+
+% ###################
+% Eigene Änderungen
+
+\usepackage{subfig}
+\usepackage{wrapfig}
+
+% Codestyling
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\lstset{
+    breaklines		= true,
+    numbers			= left,
+    stepnumber		= 1,
+    basicstyle		= \ttfamily,
+    numberstyle		= \footnotesize\ttfamily,
+    backgroundcolor	= \color{source},
+    language		= java,
+    commentstyle    = \color{darkgreen}\ttfamily,
+    keywordstyle    = \color{blue}\ttfamily,
+    stringstyle		= \color{red},
+    showspaces      = false,
+    showstringspaces= false,
+    captionpos		= b,
+    frame			= single,
+    aboveskip		= 1cm,
+    belowskip		= 1cm,
+}
+\renewcommand\lstlistingname{Code}
+\renewcommand\lstlistlistingname{Codeverzeichnis}

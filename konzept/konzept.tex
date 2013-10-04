@@ -1,0 +1,86 @@
+%================================================================================
+% Erstellt am: 		10.07.2008
+% Überarbeitet am:	08.07.2009
+% Autor:			Holger Fischer
+%
+% Kann frei für Bachelor-/Diplom-/Masterarbeiten verwendet werden.
+% Viel Erfolg!!!
+%================================================================================
+
+%Einbinden der Datei header.tex; diese enthält alle verwendeten Pakete,
+%sowie Änderungen am Layout
+\include{inc/header}
+
+\begin{document}
+
+%=== Einleitung ======================================================
+%Seitennummerierung Abstract bis einschließlich Inhaltsverzeichnis
+\frontmatter
+
+%Einbinden der Titelseite
+\include{inc/titelseite}
+
+%Zeilenabstand für das Inhaltsverzeichnis 1 fach
+\singlespacing
+%Einbinden des Inhaltsverzeichnis
+\include{inc/inhaltsverzeichnis}
+
+%Zeilenabstand für den Hauptteil ist 1,5 fach
+\onehalfspacing
+
+%=== Hauptteil =======================================================
+%Seitennummerierung des Hauptteils
+\mainmatter
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des ersten Kapitels
+	\include{chapter/kapitel1}
+
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+ 	%Einbinden des ersten Kapitels
+	\include{chapter/kapitel2}
+
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des zweiten Kapitels
+	\include{chapter/kapitel3}
+
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des zweiten Kapitels
+	\include{chapter/kapitel4}
+
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des zweiten Kapitels
+	\include{chapter/kapitel5}
+
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des zweiten Kapitels
+	\include{chapter/kapitel6}
+
+%Zeilenabstand 1 fach für die Verzeichnisse
+\singlespacing
+%Einbindne der Verzeichnisse
+\include{inc/verzeichnisse}
+
+%Zeilenabstand 1,5 fach für den Eid
+\onehalfspacing
+%Einbinden des Eides
+\include{inc/eid}
+
+\end{document}

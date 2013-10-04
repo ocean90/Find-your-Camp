@@ -1,0 +1,42 @@
+%================================================================================
+% Erstellt am: 		10.07.2008
+% Überarbeitet am:	08.07.2009
+% Autor:			Holger Fischer
+%
+% Kann frei für Bachelor-/Diplom-/Masterarbeiten verwendet werden.
+% Viel Erfolg!!!
+%================================================================================
+
+%Einbinden der Datei header.tex; diese enthält alle verwendeten Pakete,
+%sowie Änderungen am Layout
+\include{inc/header}
+
+\begin{document}
+
+%=== Einleitung ======================================================
+%Seitennummerierung Abstract bis einschließlich Inhaltsverzeichnis
+\frontmatter
+
+%Einbinden der Titelseite
+\include{inc/titelseite}
+
+%Zeilenabstand für das Inhaltsverzeichnis 1 fach
+%\singlespacing
+%Einbinden des Inhaltsverzeichnis
+%\include{inc/inhaltsverzeichnis}
+
+%Zeilenabstand für den Hauptteil ist 1,5 fach
+%\onehalfspacing
+\linespread{1.3}
+
+%=== Hauptteil =======================================================
+%Seitennummerierung des Hauptteils
+\mainmatter
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des ersten Kapitels
+	\include{chapter/kapitel1}
+
+\end{document}

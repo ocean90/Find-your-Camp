@@ -1,0 +1,298 @@
+%!TEX root = ../Dokumentation.tex
+
+
+\section{Projektbezogenes XML Schemata}
+
+\subsection{Vertiefung}
+Der erste Meilenstein befasst sich mit der Repräsentation von Daten in XML.\\
+
+Damit bei der Verwendung der XML Dateien bei der späteren Verarbeitung mit JAXB keine Probleme auftreten, ist es notwendig eine Validierung der Dateien durch Definition zugehöriger XML Schemas durchzuführen. Vorteil bei der Verwendung eines Schemas ist, neben der Kontrolle auf Wohlgeformtheit und der Verwendung definierter Datentypen und Strukturen, auch das festlegen von Restriktionen.\\
+
+Hinsichtlich des zugrunde liegenden Konzeptes und den benötigten Informationen, gibt es viele Elemente innerhalb der Dateien, die nur mit Strings realisiert werden können. Das Problem bei freier Definition
+besteht darin, dass die Datensätze sehr fehleranfällig sind, wenn es um die Benutzung durch Menschen geht. Rechtschreibfehler beim Namen des Landes, des Fernsehsenders oder des Genres, würden für den Benutzer der Anwendung noch kein Problem darstellen, da er vermutlich deuten könnte was gemeint ist. Für die Umsetzung ist es aber von Vorteil, die Datensätze möglichst konsistent zu halten.\\
+
+Das System des Serientrackers beruht darauf, die Verwaltung von Serien anhand von Listen zu ermöglichen. Wie bereits in der Besprechung der Umsetzung erwähnt, wird anhand dieser Informationen auch die asynchrone Datenübertragung realisiert.\\
+Das Abonnieren von Informationen zu laufenden Serien des Genre Action, greift bei Benachrichtigung auf Datensätze zu, die diesem Elementwert unter dieser eindeutigen Zeichenfolge zugeordnet sind. Formulierungsfehler wie \textit{Aktion}, die von einer einheitlichen Schreibweise abweichen, führen dementsprechend zu Komplikationen, weil sie die Konsistenz der Informationssätze beschädigen.\\
+
+\vspace{0.2cm}
+
+Hinsichtlich des Themas Serien, führten die Vorüberlegungen zu dem Entschluss, dass folgende Objekttypen innerhalb des Serientrackers von interesse sind und wiederkehrende Elemente darstellen:\\
+
+\vspace{0.2cm}
+
+\textbf{Serie}\\
+Eines der wichtigsten Elemente, dass alle Informationen beinhaltet, die für den Benutzer von bedeutung sind, ist die Serie. Eine Serie besitzt allgemeine Informationen wie Name, eine Beschreibung, der Sender auf dem sie ausgestrahlt wird oder das Produktionsland. Im realen Kontext wird eine Serie zudem in Seasons (Staffeln) ausgestrahlt, die jeweils eine bestimmte Anzahl von Episoden enthalten.
+
+\vspace{0.2cm}
+
+\textbf{Season}\\
+Bestandteil einer Serie, von der es im Laufe der Jahre immer neue Objekte gibt und die nach einer gewissen Anzahl an Episoden als abgeschlossen gelten.
+
+\vspace{0.2cm}
+
+\textbf{Episode} \\
+Ein Kernelement des Systems, dass ein wichtigen Typ für die asynchrone Kommunikation darstellt. Durch das Abonnieren von Genres oder Serien, wird die Benachrichtigung in Bezug auf eine einzelne Episode ausgelöst, die sich durch ihr jeweiliges Austrahlungsdatum und -zeitpunkt kennzeichnet. Zudem kann der Inhalt der Episode von Interesse sein.
+
+\vspace{0.2cm}
+
+\textbf{User}\\
+Neben den Serieninformation, gibt es die Benutzer des Serientrackers, die sich anmelden und durch Listen die Dienste des Serientrackers abonnieren.
+Allgemein werden hierbei personenbezogene Daten wie Username und echter Name erwartet, so wie Zusatzinformationen, die für andere Benutzer von Interesse sein könnten und die Person hinter dem Profil genauer beschreiben. Beispiele wären das Alter, ein Profilbild, Wohnort oder eine kurze Beschreibung.
+
+\vspace{0.2cm}
+
+\textbf{Liste}\\
+Die Liste kann als Sammlung mehrerer Serien zu einem bestimmten Thema aufgefasst werden. Hierbei gibt zum einen Listentypen die definitiv vorhanden sein müssen, wie beispielsweise Genrelisten oder die Favoritenliste eines Benutzers. Diese erfasst die Serien, zu denen der Eigentümer Benachrichtigungen erhalten will. Zum anderen besteht aber auch die Möglichkeit, dass der Benutzer sich Listen anlegt, die seinen individuellen Wünschen entsprechen.
+
+\vspace{0.2cm}
+
+\textbf{Message}\\
+Als zusätzlicher Typ, der jedoch erst in der asynchronen Kommunikation verwendung finden wird, wurde die Message identifiziert. Hierbei handelt es sich um eine bestimmte Nachricht, die den entsprechenden Usern bei Eintreten eines Events zugeschickt wird und ein neues Ereignis meldet.
+
+
+\newpage
+
+\subsection{Realisierung der Schemata}
+
+Nach der theoretischen Planung fand die Realisierung der XML Schemata statt.
+Dabei wurde für jeden der zuvor identifizierten Obertypen ein eigenes Schema definiert und die einzelnen Elemente/Attribute mit Datentypen und Restriktionen belegt. Die Aufteilung der einzelnen Typen auf ein seperates Schema, fand mit den Gedanken statt, die Struktur der Daten möglichst einfach und lesbar zu halten. Eine Serie die mehrere Staffeln enthält, die wiederrum jeweils eine Menge von Episoden auffassen, würde ein sehr komplexes Element definieren, dass während der Entwicklung schnell zu unübersichtlich werden kann.\\
+
+Da die Daten einer Episode, inhaltlich jedoch weiterhin davon abhängen, von welcher Serie diese ist und in welcher Staffel sie vorkam, wird eine Referenzierung mit Hilfe von global eindeutigen IDs eingeführt. Jede Serie, User, Season, Episode, Message und Liste wird mit einer einzigartigen Folge von Zeichen beschrieben, über diese es möglich ist auf gewünschte Informationen zuzugreifen und entsprechende Elemente auszulesen.\\
+
+Dieses Prinzip lässt sich am Beispiel des XML Schemas einer Episode veranschaulichen. Hierbei handelt es sich um einen Codeauszug, der die gesamte Struktur einer Episode vorgibt:\\
+
+\begin{lstlisting}[basicstyle=\ttfamily,numbers=left,numberstyle=\footnotesize\ttfamily,backgroundcolor=\color{source},basicstyle=\ttfamily,numbers=left,numberstyle=\footnotesize\ttfamily,backgroundcolor=\color{source},label=xsd-definition-episode,caption= Definition des complexElement Episode mit Elementen und Attributen]
+  <xs:element name="episode">
+    <xs:complexType>
+      <xs:choice minOccurs="0">
+        <xs:sequence>
+          <xs:element ref="episodeNumber"/>
+          <xs:element ref="title"/>
+          <xs:element ref="overview"/>
+          <xs:element ref="airdate"/>
+          <xs:element ref="images"/>
+        </xs:sequence>
+      </xs:choice>
+
+      <xs:attribute ref="serieID" use="required"/>
+      <xs:attribute ref="seasonID" use="required"/>
+      <xs:attribute ref="episodeID" use="required"/>
+    </xs:complexType>
+  </xs:element>
+\end{lstlisting}
+
+Eine Episode bekommt damit eine eindeutige \textbf{episodeID} zugeordnet und ist, gesehen unter allen Episoden, eindeutig identifiziert. Zudem erhält jede Episode auch die Referenz der serienID und seasonID als Attribute, um Verweise und Zuordnungen zu realisieren. Da sich jedes Objekt demnach durch eine Kennung repräsentiert, reicht bei anlegen von Listen und Containern ein einfacher Verweis auf entsprechendes Element, wodurch Datenredundanz bei mehreren Schemata verhindert wird, die inhaltlich voneinander abhängen. Innerhalb der XML Datei einer Serie, reicht somit der Verweis auf die einzelnen Seasons über ihre ID, ohne dass deren Inhalte mehrfach abgespeichert werden müssen. Dieser Redundanzverlust wäre auch realisierbar gewesen, wäre eine Season und Episode direkt innerhalb des Serieschemas gespeichert worden. Damit hätte eine Referenz auf die Serie genügt und auf eine Episode könnte mit einer Abfrage der Seasonnummer und Episodennummer getätigt werden. Der Entschluss zur Aufteilung der Schemata führte jedoch zwangsläufig zu dieser Entscheidung, wobei die Folge daraus auch komfortable Vorzüge in der Flexibilität der einzelnen Elemente mit sich bringt.\\
+Um die Struktur des gesamten Serien Elements zu ermöglichen und vorhandene IDs global nutzen zu können, wird jedes Schema über eine Masterdatei in die einzelnen XML Schemas inkludiert, um bereits definierte Elemente und Attribute wiederverwendbar zu machen und die Datenmenge zu reduzieren.
+
+\begin{lstlisting}[basicstyle=\ttfamily,numbers=left,numberstyle=\footnotesize\ttfamily,backgroundcolor=\color{source},label=xsd-definition-master,caption= Auszug aus der Masterinklude Serientracker.xsd]
+<!-- Dieses Schema inkludiert alle zu verwendenen Schemata-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:include schemaLocation="Series.xsd"/>
+  <xs:include schemaLocation="Serie.xsd"/>
+  <xs:include schemaLocation="Seasons.xsd"/>
+  <xs:include schemaLocation="Season.xsd"/>
+  <xs:include schemaLocation="Episodes.xsd"/>
+  <xs:include schemaLocation="Episode.xsd"/>
+
+  <xs:include schemaLocation="Lists.xsd"/>
+  <xs:include schemaLocation="List.xsd"/>
+  <xs:include schemaLocation="Users.xsd"/>
+  <xs:include schemaLocation="User.xsd"/>
+  <xs:include schemaLocation="Message.xsd"/>
+
+  <!-- Globale Elemente -->
+\end{lstlisting}
+
+Neben dem Include der einzelnen Schemata, werden auch vereinzelte Elemente darin definiert, die innerhalb der einzelnen Schemata wiederholt Verwendung finden. Hierbei vor allem die einzelnen ID Attribute.\\
+
+Während der Entwicklung dieser Variante, gab es anfängliche Schwierigkeiten innerhalb der Umsetzung. Der Verweis innerhalb eines XML Schemas auf ein Anderes und die entsprechende Verwendung der Elemente und Attribute, führte zu Komplikationen innerhalb der Deklarationen. Auch eine Definition eines einheitlichen Namespaces führte zu keiner Lösung. Im zweiten Ansatz folgte dann die direkte Auseinandersetzung zwischen den Optionen Include und Import, wobei die letztendliche Wahl auf die Inkludierung fiel. Ein Import erlaubt den Verweis auf unterschiedliche Namespaces, wobei ein Include auf einen einheitlichen Namespace verweist und bei nichtbestehen, den des Oberschemas übernimmt.\\
+Da Namespaces in der Regel dazu dienen, Elementen und Attributen einen gewissen Namensraum zu gewährleisten, der bei gängigen Bezeichnungen wie \textit{Name} zu Konflikten führen kann, ist die Definition bei größeren Projekten durchaus zu empfehlen. Ob dabei ein Einzelner oder Mehrere angelegt werden sollten, ist eventuell auch abhängig von der gesamten Struktur des Schemas. Da im Rahmen dieses Projektes jedoch mit relativ geringem Datenumfang gearbeitet wird und mit keiner Komplikation der Bezeichnungen zu rechnen ist, wurde auf eine genaue targetNamespace Definition verzichtet. Auch wenn bestimmte Elementbezeichnungen innerhalb eines \textit{http://Serientracker.de} Namensraum denkbar gewesen wäre. Letztendlich spielt dieser Aspekt für die Umsetzung innerhalb des Projektes jedoch keine tragenden Rolle. Daher wurde auf die Definition verzichtet und die entsprechende Include Variante verwendet.
+
+\vspace{0.2cm}
+
+Ein weiterer Punkt der in der Entwicklungsphase von Bedeutung war, war die Frage danach, wie die Daten innerhalb des lokalen Speichers abgelegt werden.
+Durch die Definition einzelner Schemas erhält jedes Objekt dieses Typs auch eine eigene XML Datei. Im späteren Verlauf könnten sich daraus aber Probleme beim gezielten Zugriff entwickeln, denen frühzeitig Abhilfe geschaffen werden sollte.\\
+Aus diesem Grund wurde eine weitere Gruppe von Elementen innerhalb XML angelegt, die Containerklassen.\\
+Für jeden Elementtyp, der als eigene Entität angelegt wird, wurde eine Containerklasse definiert, innerhalb derer beliebig viele Objekte eines bestimmten Typs aufgenommen werden können. Dieses Objekt dient in der letztendlichen Verwaltung als Sammlung aller Elemente.\\
+
+\newpage
+Folgendes Beispiel veranschaulicht den Ansatz und wurde in dieser Form für jeden Elementtyp angelegt:
+\begin{lstlisting}[basicstyle=\ttfamily,numbers=left,numberstyle=\footnotesize\ttfamily,backgroundcolor=\color{source},label=xsd-definition-series,caption= Auszug aus der Series.xsd Definition]
+<!-- Element das alle Serien aufnimmt -->
+  <xs:element name="series">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="serie" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+\end{lstlisting}
+
+
+Um die vorhandenen Daten semantisch sinnvoll und reichhaltig anzulegen, wurde bei der Entwicklung der XML Schemata darauf geachtet, diesen Anspruch
+durch die verschiedenen Datentypen, Restriktionen und Benutzungstypen zu gewährleisten.
+
+\subsection{Datentypen}
+
+Grundsätzlich werden innerhalb des Serientrackers Daten unterschiedlichen Typs benutzt, die entsprechend des realen Kontextes am sinnvollsten erscheinen.
+Aufgrund der Komplexität, soll hierbei nicht auf jedes einzelne Element eingegangen werden, sondern nur ein Überblick darüber vermittelt werden, mit welchen Grundideen vorgegangen wurde.
+
+\vspace{0.2cm}
+
+Neben den einfachen Standartdatentypen wie String, Boolean, Integer, Time (...), bietet XML die Möglichkeit weitere spezifische Typen wie anyURI oder ID zu definieren.\\
+Da innerhalb des Serientrackers viele Information lediglich in Textform sinnvoll sind, wurde für diese der Typ \textbf{String} verwendet. Beispielhaft seien hier die Titel und Beschreibungen, sowie Benutzernamen und Länder erwähnt.\\
+Jahreszahlen, Episodenlänge und Season- und Episodennummern werden mit Zahlen als \textbf{Integer} ausgedrückt. Bestimmte Zeitangaben wie Ausstrahlungszeit, bei denen es nur um den Zeitpunkt geht, in der einfach Form \textbf{Time} und genauere Angaben, wie bei Ausstrahlungstag in Hinsicht auf die Benachrichtigung, über den \textbf{dateTime} Typ.
+Linkverweise auf Bildquellen wie bei Avatar erhielten den Typ \textbf{anyURI}.\\
+
+\vspace{0.2cm}
+
+Einzelne Elemente wie User und List, weisen hierbei noch eine Besonderheit auf. Wie bereits bei den Kommunikationsabläufen innerhalb des Konzepts angesprochen, wird die Anwendung von Benutzern verwendet, die verschiedenen Rechtetypen angehören.\\ Aus diesem Grund wird jeder User mit dem Attribute Admin gekennzeichnet, der innerhalb einer einfachen \textbf{Boolvariablen} die entsprechenden Rechte festgelegt. Ähnliches Prinzip wird bei den Listen verwenden zur Unterscheidung, ob die Sichtbarkeit für jeden Benutzer gestattet ist oder nur für den Besitzer der Liste.
+
+\vspace{0.2cm}
+
+Zur angesprochenen Referenzierung und Identifizierung einzelner Entitäten, zeichnen sie sich durch eine eindeutige ID als Attribut aus. Generell wurden die Informationen wie ID oder Rechte, die ein Objekt nicht inhaltlich sondern eher aus verwaltender Sicht genauer beschreiben, als Attribute definiert. Inhaltliche Informationen die Bestandeteil des Objektes sind, werden hingegen als Elemente angelegt.\\
+
+Für den Datentyp einer solchen ID, wurde ein eigenes Element folgendermaßen definiert:
+\begin{lstlisting}[basicstyle=\ttfamily,numbers=left,numberstyle=\footnotesize\ttfamily,backgroundcolor=\color{source},label=xsd-definition-idtype,caption= Definition der globalen IDs]
+  <xs:simpleType name="idType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|(ss|sn|ep|us|ls|me)_[0-9a-z]{8}"/>
+    </xs:restriction>
+  </xs:simpleType>
+\end{lstlisting}
+
+Am Anfang der Zeichenketten steht ein Kürzel, dass den jeweiligen Typ angibt. SN steht dabei für Season, EP für Episode und ähnliches. Danach folgt ein optisches Trennzeichen, gefolgt von einer beliebigen Characterfolge aus 8 gemischten Zeichen mit Zahlen und Buchstaben. Eine Serie erhält damit eine Zuordnung der Form \textit{ss\_0a1b2c3d}.
+
+
+\subsection{Restriktionen}
+Damit die Informationen innerhalb der XML Dateien inhaltlich sinnvoll sind und während der Verarbeitung keine weiteren Probleme entstehen (zum Beispiel durch unterschiedliche Schreibweisen), wurden für einige Elemente Restriktionen definiert.\\
+Dabei ist das Ziel, die Fehleranfälligkeit zu reduzieren und im Kontext logische Informationen zu gewährleisten. Vorhandene Restriktionen, also Einschränkungen/Bedingungen, die für einzelne Elemente getroffen wurden, sind im folgenden mit einer kurzen Begründung aufgeführt. Häufig treten diese in Form von Längenbegrenzungen bei Texten auf oder als Grenzbereichen bei Zahlen.\\
+Weitere Elemente kennzeichnen sich entsprechend dadurch, dass der Inhalt auf eine bestimmte Auswahl an Möglichkeiten eingeschränkt wurde. Beim Konzipieren dieser Grenzen und Auswahlmöglichkeiten, ist es nicht möglich die perfekte Variante zu erzielen, sondern eine Auswahl von Optionen zu treffen, die im Kontext als zuverlässig und praktikabel erscheinen. Manche Begrenzugnen wie Anzahl an Episoden einer Staffel oder Episodenlaufzeit, wurden in Bezug auf die Realität getroffen und angelehnt an gängige Formen. Prinzipiell wären hierbei alternative Auswahlmöglichkeiten und Varianten denkbar, wie beispielsweise die freie Definition des Genres oder des TV Senders als einfacher String. Hierbei hat der verwaltende Admin dann die Option den Inhalt frei zu bestimmen. Letztendlich wurde jedoch der eigentliche Nutzen abgewägt, sodass für den Serientracker folgende Restriktionen definiert wurden:
+
+\begin{table}[H]
+\caption{Allgemeine Restriktionen}
+
+\begin{tabular}{l l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+Element/Attribut & Restriktion & Begründung
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Overview (global) & Stringlänge 10 < und < 500 & allgemeinen Informationen,\\[1ex]
+&&kurze Inhaltsangabe\\[3ex]
+Title (global) & Stringlänge 1 < und < 80 & gängige Titellänge\\[3ex]
+Name (list) & Stringlänge 2 < und < 80 & treffende Bezeichnung,\\[1ex]
+&&Name keine Beschreibung \\[3ex]
+Public (list) & Boolean True und False & feste Zustände \\[3ex]
+Episodenumber (episode) & Anzahl < 26 & sinnvolle maximale Episodenanzahl\\[3ex]
+Seasonnumber (seasons) & Anzahl < 41 & sinnvolle Begrenzung, \\[1ex]
+&&Freiraum für Langzeitserien \\[2ex]
+
+\hline
+\end{tabular}
+\label{tab:restriktionenderxsdgeneral}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Restriktionen des User Schemas}
+\centering
+
+\begin{tabular}{l l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+Element & Restriktion & Begründung
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Username & Stringlänge 2 < und < 30 & sinnvolle Namenlänge,\\[1ex]
+&& verhindert Text \\[3ex]
+
+Lastname & Stringlänge 1 < und < 40 & gängige Nachnamenlänge, \\[1ex]
+&&eventuell Doppelnamen,\\[1ex]
+&&verhindert Text \\[3ex]
+
+Firstname & Stringlänge 1 < und < 50 & gängige Vornamenlänge, \\[1ex]
+&&Mehrfachnahmen \\[3ex]
+
+Gender & Auswahl zwischen Male und Female & logische Auswahl, \\[1ex]
+&&Vorgabe verhindert Schreibfehler\\[3ex]
+
+Age & älter als 13 und jünger als 121 & Mindestalter zur Nutzung, \\[1ex]
+&&logische Obergrenze \\[3ex]
+
+Location & Stringlänge < 40 & Stadtname, Land etc. \\[1ex]
+&&Eingabe ist keine Adresse\\[1ex]
+&&und lässt sich in Kürze ausdrücken\\[3ex]
+
+About & Stringlänge < 200 & optionale Kurzbeschreibung,\\[1ex]
+&&nach oben begrenzt, \\[1ex]
+&&zu viele Informationen nicht \\[1ex]
+&&unbedingt von Interesse  \\[3ex]
+
+Admin & Boolean ob True or False & Rechtevergabe nach Status,\\[1ex]
+&&Auswahl nur in 2 Zuständen möglich\\[2ex]
+
+\hline
+\end{tabular}
+\label{tab:restriktionenderxsduser}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Restriktionen des Serie Schemas}
+
+
+\begin{tabular}{l l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+Element & Restriktion & Begründung
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Year & Jahreszahl 1900 < und < 2015 & Jahreszeiten außerhalb\\[1ex]
+&&unrelevant \\[3ex]
+
+Country & Auswahlmöglichkeit Ländern & Eingabefehler verhindern\\[3ex]
+Episoderuntime & Auswahl zwischen gängigen Episodenlängen& Serie hat feste Episodenlänge\\[3ex]
+Network & Auswahl bekannter Sender & unrelevante Sender entfallen,\\[3ex]
+&&Eingabefehler verhindern\\[3ex]
+
+Airday & Auswahl des Tagnamen & Eingabefehler verhindern\\[3ex]
+Genre & Auswahl definierter Genres & einheitliche Schreibweise,\\[1ex]
+&&Eingabefehler verhindern,\\[1ex]
+&& sinnvolle Genre\\[2ex]
+
+\hline
+\end{tabular}
+\label{tab:restriktionenderxsdserie}
+\end{table}
+
+
+
+\subsection{Beispieldaten}
+
+Bereits während der Entwicklung der XML Schemas, wurden parallel XML Dateien mit entsprechenden Beispieldaten definiert. Durch den entsprechenden Validierungstest bietet sich zum einen die Möglichkeit entsprechenden Definitionen auf Korrektheit zu prüfen und zum anderen XML Typen zu entwickeln, die möglichst praxistaugliche Elemente und Attribute aufweisen. Zu jedem XML Schema wurde daher mindestens eine Beispieldatei erzeugt und die entsprechende Referenzierung untereinander getest. Speziell im Containerelemente Series wurde deutlich, wie flexibel die Datensicherung mit globalen IDs sein kann. Zum einen reicht das Einbinden eines Objekts in der simplen Form <serie serieID="ss\_6127hdja"/>, zum anderen kann auch die gesamte Struktur einer Serie inklusive Informationen über Season und die einzelnen Episoden eingebunden werden.\\
+
+\vspace{0.2cm}
+
+Für die entsprechende Nutzung in der weiteren Entwicklung, wurden zudem korrekte Beispieldatensätze von Serien angelegt. Diese Repräsentieren von der obersten Ebene der allgemeinen Serieninformationen bis hin zur niedrigsten Ebene der einzelnen Episodeninformation vollständige Datensätze, wie sie in einem komplexen System dieser Form angelegt werden müssten. Aufgrund von Testzwecken, wurde sich jedoch auf wenige Beispielserien beschränkt. Zudem wurden entsprechende Daten innerhalb der Series.xml definiert und nicht in die entsprechenden Typen aufgeteilt. Diese Variante hatte zum Vorteil, dass die Informationen einer Serie (für Menschen) übersichtlich strukturiert und lesbarer waren, als wenn jede Beispielepisode per Hand in einzelne XML Files getrennt worden wäre.
+Aufgrund der Vielzahl von Informationen zeigte, sich aber bereits bei wenigen Daten der Nachteil, dass die Datei sehr komplex wurde. Darüber hinaus weist diese Variante auch die Schwäche beim möglichen Datenverlust auf. Sollte in diesem Fall das sammelnde Element verloren gehen, so wäre der Datenverlust größer gegenüber den seperaten Absicherungen in einzelnen Files.
+
+\vspace{0.2cm}
+
+In der Konzeptvorstellung wurde von der möglichen Einbindung einer Freundefunktion gesprochen. Die Umsetzung dieses Themas würde noch eine Änderung der XML Schemata der User mit sich ziehen. Ähnlich wie für die Abonnements von Serien, könnte man innerhalb des User Schemas ein komplexes Element \textit{Friends} einbauen, dass beliebig viele User aufnimmt. Dabei könnten normale Objekte des bereits vorhandenen Userschemas eingebunden werden und eine Liste aller Freunde bilden.\\ Um die entsprechende Kommunikation zwischen den einzelnen Freunden zu gewährleisten und Meldungen wie Empfehlungen oder Benachrichtigungen zu verschicken, muss weiterhin das Message Schema erweitert oder alternativ ein neues Schema der \textit{Friendmessage} eingeführt werden. Eine seperate Trennung beider Nachrichtenarten wäre in sofern sinnvoll, als das diese in der Funktionalität und Definition unterschiedliche Anwendungen haben. Die bisherigen Nachrichten werden von der Serverseite aus an User geschickt und beinhalten statische Nachrichten. Auch Empfehlungen könnte man mit festen Standartnachrichten wie \textit{X empfiehlt dir Serie Y} umsetzen, jedoch wäre hierbei in der Regel eine persönlichere Komponente wie Userkommentare mit enthalten.
+
+\vspace{0.2cm}
+
+Sofern dieser Aspekt umgesetzt wird, müsste man hierbei die entsprechenden Varianten abwägen und dabei mögliche Szenarien konzeptionell durchspielen, um eine passende Einbindung hinsichtlich der Funktionalität zu finden.\\
+Nach der Auseinandersetzung mit den vorhandenen Daten und entsprechender Definition der XML Schemas, folgt im nächsten Schritt die Entwicklung der synchronen Kommunikationskomponenten.

@@ -1,0 +1,251 @@
+%!TEX root = ../Dokumentation.tex
+
+\section{Interaktion mittels XMPP Server}
+
+\subsection{Vertiefung}
+
+XMPP steht für Extensible Messaging and Presence Protocol und war Bestandteil des 4. und 5. Meilensteins. XMPP ist ein offener Standard der verschiedene Erweiterungen beinhaltet. In diesem Projekt wird für die asynchrone Interaktion das Publish-Subscribe Paradigma verwendet, welches in der XMPP Spezifikation XEP-0060\footnote{\url{http://xmpp.org/extensions/xep-0060.html}} definiert wird.\\
+
+Für die weitere Planung, um die Erweitung in das Projekt einzubinden, war zunächst eine Recherche über die in der Spezifikation erwähnten Bestandteile der Erweiterung von Nöten. Im folgenden werden die Ergebnisse aufgelistet:
+
+\vspace{0.2cm}
+
+\textbf{Node}\\
+Ein Node, auch \textit{Topic} genannt, ist ein virtueller Speicherort für Informationen. Die Informationen können einem Node hinzugefügt werden sowie auch wieder ausgelesen werden. Ein Node wird durch eine unique Node ID gekennzeichnet.\\
+Ein Untertyp des Nodes ist ein \textit{Leaf Node}, welcher nur veröffentlichte Items beinhaltet.
+
+\vspace{0.2cm}
+
+\textbf{Publisher}\\
+Die Publisher sind Instanzen, die Nodes mit \textit{Items} befüllen können.
+
+\vspace{0.2cm}
+
+\textbf{Subscriber}\\
+Die Subscriber sind Instanzen, die Nodes abonniert haben und die an den Node gesendeten \textit{Items} empfangen können.
+
+\vspace{0.2cm}
+
+\textbf{Item}\\
+Ein Item ist ein XML Fragment, welches einem Node zugeordnet werden kann.
+
+\vspace{0.2cm}
+
+\textbf{Payload}\\
+Unter Payload ist zu verstehen, dass \textit{Items} um Nutzdaten erweitert werden. Die Nutzdaten sind dabei durch ein XML Schema definiert und können beim Subscriber ausgelesen werden.
+
+\vspace{0.2cm}
+
+\textbf{Service Discovery}\\
+Der Service Discovery ist ein Bereich der XMPP Entität, der den Umgang mit Anfragen und die Antwort bezüglich bestimmter Protokolle regelt. Er unterstützt dabei zum Beispiel das Auslesen von Informationen eines Nodes.
+
+\vspace{0.2cm}
+
+\textbf{Item}\\
+Ein Item ist ein XML Fragment, welches einem Node zugeordnet werden können.
+
+\vspace{0.2cm}
+
+Auf dieser Basis konnten die Punkte nun auf das Projekt übertragen werden.\\
+
+Die \textbf{Nodes} bzw. Topics werden die vorhandenen Serien sein. Ein Node wird durch die Serien ID eindeutig identifizierbar sein. Die Nodes können von den Serieninteressierten abonniert werden, sie sind somit die \textbf{Subscriber}.\\
+Die Nodes sollten von einer administrienden Position angelegt werden, da das Löschen eines Nodes nur von Eigentürmer des Nodes, also dem Anleger, wieder gelöscht werden kann. Dies wäre ein Fall für den in der Konzeption schon erwähnten \textit{Content-Admin}. In der weiteren Entwicklung kommt noch ein  \textit{Bot} zum Einsatz, welcher ebenfalls diese Aufgabe übernehmen wird.\\
+Gleichzeitg sind diese beiden Instanzen auch die \textbf{Publisher}. Sie werden dafür zuständig sein, Nachrichten an den Subscriber über den Node zu übermitteln. Der Inhalt dieses \textbf{Items} wird die Informationen über die demnächst startende Episodenaustrahlung beinhalten.
+
+\vspace{0.2cm}
+
+Bei einer möglichen Implementierung der in der Konzeptvorstellung vorgestellten Freundefunktion, würde sehr wahrscheinlich weitere Nodes hinzukommen, d.h. jeder User würde ebenfalls durch einen Node repräsentiert werden können. Alternativ könnte auch die (Gruppen-)Chat Erwweiterung von XMPP als Einsatzmöglichkeit herangezogen werden.
+
+
+\subsection{Realisierung eines Clienten}
+
+Nach der Recherche sollte im Meilenstein 5 ein XMPP Client realisiert werden, der Leafs abonnieren, Nachrichten (mit Nutzdaten) empfangen und veröffentlichen und mögliche Eigenschaften eines Services anzeigen können soll.\\
+Im Folgenden werden nun die Hauptbestandteile der Implementierung dokumentiert und welche Probleme dabei auftraten.
+
+\vspace{0.2cm}
+
+Als Serverumgebung wurde eine Openfire-Instanz eingesetzt und für die Übersetzung zwischen dem Java Client und dem Server die Bibliothek \textit{Smack}.
+
+\vspace{0.2cm}
+
+Im Hinblick auf den User-Clienten wurde die Implementierung der folgenden Funktionen bereits modular aufgebaut, sodass sie später wiederverwertet werden können.
+
+\vspace{0.2cm}
+
+Für den Verbindungsaufbau müssen Hostname und Port des Openfire-Servers bekannt sein. In der weiteren Entwicklung hat es sich bewertet die Option \textsf{Connection.DEBUG\_ENABLED = true} zu setzen. Es öffnet sich ein Debug-Fenster, welches die Interaktionen zwischen Client und Server darstellt.
+
+\begin{lstlisting}[label=xmppconnect,caption=Auszug aus ConnectionHandler für den Verbindungsaufbau]
+/**
+ * Sets up a connection to the XMPP server.
+ *
+ * @param String hostname
+ * @param int port
+ * @return boolean
+ */
+public boolean connect( String hostname, int port ) {
+  // Check if already connected
+  if ( cn != null && cn.isConnected() )
+    return true;
+
+  try {
+    //Connection.DEBUG_ENABLED = true;
+    ConnectionConfiguration config = new ConnectionConfiguration( hostname, port );
+    cn = new XMPPConnection( config );
+    cn.connect();
+    Logger.log( "Connection established" );
+  } catch ( XMPPException e ) {
+    return false;
+  }
+
+  return true;
+}
+\end{lstlisting}
+
+Weiterhin muss für die Verbindung mit dem XMPP Server ein Benutzeraccount vorhanden sein, damit der Login erfolgreich aufgebaut werden kann.
+
+\begin{lstlisting}[label=xmpplogin,caption=Auszug aus ConnectionHandler für den Login]
+/**
+ * Login.
+ *
+ * @param String username
+ * @param String password
+ * @param String resource
+ * @return boolean
+ */
+public boolean login( String username, String password, String resource ) {
+  try {
+    SASLAuthentication.supportSASLMechanism( "PLAIN", 0 );
+    this.cn.login( username, password, resource );
+    Logger.log( "Login successful" );
+  } catch ( XMPPException e ) {
+    Logger.err( "Login failed" );
+    return false;
+  }
+
+  // Init the Pub Sub Manager
+  this.psh = new PubSubHandler();
+
+  return true;
+}
+\end{lstlisting}
+
+Hierbei ist anzumerken, dass im Bezug auf die Sicherheit das Passwort unverschlüsselt zwischen Client und Server transportiert wird. Im produktiven Einsatz sollte dieser Schritt nochmal überdacht werden und auf eine Verschlüsselung gesetzt werden.
+
+\vspace{0.2cm}
+
+Nachdem die Verbindung steht kann eine Instanz des PubSubManagers angelegt werden. Dieser wird ebenfalls in Smack bereitgestellt. Wegen es Modualren Aufbaus wurde auch hier eine Wrapper Klasse generiert, die unter dem Namen \textit{PubSubHandler} zu finden ist. Mit Hilfe dieser Klassen können die weiteren Operationen für die Bearbeitung von Nodes durchgeführt werden.
+
+\vspace{0.2cm}
+
+Für das Anlegen eines Nodes gibt es verschiedene Dinge zu beachten. Während der Entwicklung traten an dieser Stelle die meisten Probleme auf.\\
+
+Jeder Node kann mit einer standardmäßigen Konfiguration ausgestattet werden. Er lässt sich allerdings auch durch die in Smack mitgelieferte \textit{ConfigureForm} konfigurieren.
+
+\begin{lstlisting}[label=xmppnodecreate,caption=Auszug aus PubSubHandler.createNode() für das Anlegen eines Nodes]
+public LeafNode createNode( String nodeID, String nodeTitle ) {
+  LeafNode node = null;
+
+  try {
+    // Node configuration
+    ConfigureForm form = new ConfigureForm( FormType.submit );
+    // Access
+    form.setAccessModel( AccessModel.open );
+    // Publish
+    form.setPublishModel( PublishModel.open );
+    // With payload
+    form.setDeliverPayloads( true );
+    // Delete message
+    form.setNotifyRetract( true );
+    // Persistent data
+    form.setPersistentItems( false );
+    // An frindly name
+    form.setTitle( nodeTitle );
+
+    // Create new node with configuration
+    node = (LeafNode) this.psm.createNode( nodeID, form );
+\end{lstlisting}
+
+Der Code 3.13 war schlussendlich die für uns funktionierende Variante, womit die Verwendung des Nodes im Clienten funktionierte. Zusammengefasst:\\
+
+Jeder kann den Node abonnieren, jeder könnte etwas auf den Node veröffentlichen, Nachrichten müssen einen Payload besitzen und es handelt sich um einen transienten Node.
+
+\vspace{0.2cm}
+
+Der nächste Punkt ist nun das Senden eines Items an einen Node. Hierfür bietet die Smack API zwei Wege: \textsf{node.send( new Item() )} oder \textsf{node.publish( new Item() )}, zweiters arbeitet asynchron.\\
+Bei der Implementierung hat die Variante über \textit{send()} nicht funktioniert und warf den Fehler \textit{bad-request(400)} raus. Aus diesem Grund wurde in der weiteren Entwicklung auf die \textit{publish()} Variante gesetzt, siehe Code 3.14.
+
+\begin{lstlisting}[label=xmppnodepayload,caption=Auszug aus XMPP Client für das Senden eines Items mit einem JAXB Objekt als Payload]
+/**
+   * Sends a test item to the selected node.
+   */
+  private void sendPayload() {
+    // Create a new message object
+    ObjectFactory factory = new ObjectFactory();
+    Message message = factory.createMessage();
+    message.setContent( testNodePayload.getText() );
+
+    StringWriter notification = new StringWriter();
+    try {
+      JAXBContext jaxb_context = JAXBContext.newInstance( Message.class );
+      Marshaller marshaller = jaxb_context.createMarshaller();
+      marshaller.setProperty( Marshaller.JAXB_FRAGMENT, true ); // Marshall without namespace
+      marshaller.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
+      marshaller.marshal( message, notification );
+    } catch ( JAXBException e ) {
+      return;
+    }
+
+    // Get selected node
+    String selectedNode = (String) coboxExistingNodes.getSelectedItem();
+
+    // Publish item to node
+    PubSubHandler psh = this.ch.getPubSubHandler();
+    LeafNode node = psh.getNode( selectedNode );
+
+    node.publish(
+      new PayloadItem<SimplePayload>(
+        null,
+        new SimplePayload(
+          "message",              // Element name
+          "",                     // Namespace
+          notification.toString() // Payload
+        )
+      )
+    );
+  }
+\end{lstlisting}
+
+Beim Senden von JAXB Objekten muss darauf geachtet werden, dass der Wert \textsf{Marshaller.JAXB\_FRAGMENT} auf \textsf{true} gesetzt wird, damit kein Namespace mitausgegeben wird.\\
+Da durch das Veröffentlichen ein weiterer Namespace zum XML Objekt hinzugefügt wird, siehe Code 3.15, muss dieses vor der Verarbeitung durch den Marschaller entfernt werden.
+
+\begin{lstlisting}[label=xmppnodegetpayload,caption=Auszug aus XMPP Client für das Verarbeiten eines veröffentlichten Items mit einem JAXB Objekt als Payload]
+public void handlePublishedItems( ItemPublishEvent<Item> items ) {
+    for ( Item item : items.getItems() ) {
+      String rawXML = ((PayloadItem<SimplePayload>) item).getPayload().toXML();
+
+      // Remove the the namespace
+      String xml = rawXML.replaceFirst( " xmlns=\"http://jabber.org/protocol/pubsub\"", "" );
+
+      // Get a JAXB object of the XML data.
+      Message payload = null;
+      try {
+        JAXBContext jaxbContext = JAXBContext.newInstance( Message.class );
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        StringReader xmlString = new StringReader( xml );
+        payload = (Message) unmarshaller.unmarshal( xmlString );
+      } catch ( JAXBException e ) {
+        e.printStackTrace();
+      }
+      Logger.log( "Message Content: " + payload.getContent() );
+    }
+  }
+}
+\end{lstlisting}
+
+
+Damit die Items einen Empfänger haben, kommen die Subscriber zum Einsatz. Die Smack Bibliothek bietet dafür die Methoden \textsf{node.subscribe()} bzw \textsf{node.unsubscribe()}. Außerdem muss über \textsf{node.addItemEventListener} ein Listener hinzugefügt werden, welcher die Verarbeitung der veröffentlichten Items übernimmt.\\
+Hierbei muss beachtet werden, dass dieser Listener bei einer Kündigung auch wieder gelöscht werden müssen, da es sonst später zu mehrfachen Verarbeitung kommt.
+
+\vspace{0.2cm}
+
+Dieser Client wurde in der laufenden Entwicklung weiter als XMPP Debug Client ausgebaut um so die Richtigkeit des späteren User Clienten zu prüfen.
