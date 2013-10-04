@@ -1,0 +1,39 @@
+# Eclipse
+bin/
+
+# Finder
+.DS_Store
+
+# Latex files
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lol
+*.lot
+*.maf
+*.mp
+*.mtc
+*.mtc1
+*.nlo
+*.out
+*.pdf
+*.synctex.gz
+*.tmp
+*.toc
+*.top
+*.tui
