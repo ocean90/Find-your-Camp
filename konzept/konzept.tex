@@ -71,7 +71,16 @@
 	\setcounter{table}{1}
 	\setcounter{figure}{1}
 	%Einbinden des zweiten Kapitels
-	\include{chapter/kapitel6}
+	
+	\include{chapter/kapitel6} 
+
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des zweiten Kapitels
+	
+	%\include{chapter/kapitel7} 
 
 %Zeilenabstand 1 fach für die Verzeichnisse
 \singlespacing
@@ -81,6 +90,6 @@
 %Zeilenabstand 1,5 fach für den Eid
 \onehalfspacing
 %Einbinden des Eides
-\include{inc/eid}
+%\include{inc/eid}
 
 \end{document}
