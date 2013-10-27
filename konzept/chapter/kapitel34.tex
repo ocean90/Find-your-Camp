@@ -1,68 +1,101 @@
 %!TEX root = ../konzept.tex
 
 \section{Anforderungsanalyse}
-
-\subsection{Problemanalyse}
-Um einen ersten Ansatz für potentielle Ansatzpunkte zu finden, wurde ein Problemszenario definiert, dass einen derzeitigen Handlungsablauf widerspiegelt. Dazu wurde mit fiktiven Persona der primary User Gruppe gearbeitet, jedoch nur mit wenigen spezifischen Charakteristiken der einzelnen Menschen gearbeitet.\\
+Ziel des Projektes ist die Entwicklung einer Software, welche im Vergleich zu vorhandenen Systemen der Domäne gebrauchstauglicher ist. Bei der Untersuchung der Benutzerinterkationen, sollen zudem Ansätze gefunden werden, bei denen sich, unter anderem durch Einbezug von unique features der Geräte, Möglichkeiten zur Produktivitätssteigerung ergeben. 
+Um einen ersten Ansatz für potentielle Ansatzpunkte zu finden, wurde ein Problemszenario definiert, dass einen derzeitigen Handlungsablauf widerspiegelt. Dazu wurde mit fiktiven Persona der primary User Gruppe gearbeitet, jedoch vorerst nur mit wenigen spezifischen Charakteristiken der einzelnen Menschen gearbeitet.\\
 
 1 SZENARIO: Vater-Sohn
-Der 40-jährige Vater will eine Fahrrad-Tour von München nach Berlin mit seinem 15-jährigen Sohn ab nächster Woche in der Zeit vom 1. Juli bis 10. Juli machen. Die Fahrt hin soll komplett mit dem Fahrrad zurückgelegt werden. Dabei soll ein Stück durch Tschechien gefahren werden. Die Strecke Berlin-München zurück soll größenteils mit der Bahn absolviert werden. Für die Übernachtungen nimmt der Vater ein Zelt mit, denn um Kosten zu sparen sollen Hotels vermieden werden.
-Der Vater hat eine Fahrradstrecke ausgesucht wo er damit rechnet. dass pro Tag 100km zurückgelegt werden können. Auf Basis der Strecke begibt er sich auf die Suche nach passenden Zeltplätzen. Als Bedingung für einen Zeltplatz ist zum einen der benötigte Platz - das Zelt ist 3x3m groß - sowie Zugriff auf Wasser. Eine Dusche mit warmen Wasser ist nicht zwingend notwendig.
-Die Fahrradstrecke ist so gewählt, dass größere Städte und Umwege vermieden werden, sowie die strategisch kürzeste Strecke.
-Der Vater beginnt mit einer allgemeinen Suche über Google über den Suchbegriff “private Zeltplätze Langenbach”. Dabei stößt er auf die Seite http://www.schwarzzeltvolk.de/gardensurfing-private-garten-als-zeltplatze/
-Dort wird ein Portal names “Freagle.org” und “CampinmyGarden.com” vorgestellt. Er registiert sich zunächst bei “Freagle.org”. Nach der Anmeldung stellt er allerdings fest, dass das Portal auf Gemeinschaft und Gastfreundschaft setzt, heißt er muss selbst einen Garten anbieten. Der Vater hat jedoch keinen eigenen Garten.
-Das Portal “CampinmyGarden.com” ist nur auf englischer Sprache verfügbar. Nach einer kurzen Auffrischung seiner Englischkenntnisse findet er sich auf der Seite zurecht. Eine erste Suche zeigt schnell, dass das Angebot in Deutschland recht eingeschränkt ist.
+Ein 40-jähriger Vater will eine Fahrrad-Tour von München nach Berlin mit seinem 15-jährigen Sohn ab nächster Woche in der Zeit vom 1. Juli bis 10. Juli machen. Die Strecke hin soll komplett mit dem Fahrrad zurückgelegt werden. Dabei soll auch ein Stück durch Tschechien zurückgelegt werden. Der Rückweg von Berlin nach München, soll größenteils mit der Bahn absolviert werden. Für die Übernachtungen nimmt der Vater ein Zelt mit, denn um Kosten zu sparen sollen Hotels vermieden werden.
+Der Vater hat eine Fahrradstrecke ausgesucht und rechnet damit, dass pro Tag 100km zurückgelegt werden können. Auf Basis der Strecke begibt er sich auf die Suche nach passenden Zeltplätzen. Eine Bedingung zum potentiellen Zeltplatz, ist zum einen der benötigte Platz - das Zelt ist 3x3m groß - sowie Zugriff auf Wasser. Eine Dusche mit warmen Wasser ist nicht zwingend notwendig.
+Die Fahrradstrecke ist so gewählt, dass größere Städte und Umwege vermieden werden und die strategisch kürzeste Strecke zugrunde liegt.\\
+Der Vater beginnt mit einer allgemeinen Suche über Google über den Suchbegriff “private Zeltplätze Langenbach”. Dabei stößt er auf die Seite\\ http://www.schwarzzeltvolk.de/gardensurfing-private-garten-als-zeltplatze/
+Dort wird ein Portal names “Freagle.org” und “CampinmyGarden.com” vorgestellt. Er registiert sich zunächst bei “Freagle.org”. Nach der Anmeldung stellt er allerdings fest, dass das Portal auf Gemeinschaft und Gastfreundschaft setzt, heißt er muss selbst einen Garten anbieten. Der Vater hat jedoch keinen eigenen Garten und keine Möglichkeit sich auf anderen Wegen zu registrieren (3 Freunde werben). Eine Mitgliedsgebühr möchte er auch nicht zahlen, da er noch gar nicht sicher ist, wirklich ein passendes Angebot zu finden.\\
+Das Portal “CampinmyGarden.com” ist nur auf englischer Sprache verfügbar. Nach einer kurzen Auffrischung seiner Englischkenntnisse findet er sich auf der Seite zurecht. Eine erste Suche zeigt schnell, dass das Angebot in Deutschland recht eingeschränkt ist.\\
 Er findet allerdings einen Garten in Stammham: http://campinmygarden.com/campsites/993
 Weitere Gärten findet er im Raum Nürnberg, Illmenau, Leipzig und Dresden. Der Vater fragt die Vermieter über das Portal an. Dafür muss er immer wieder die selben Daten für die Anfrage über ein Formular abschicken. Eine direkte Kontaktmöglichkeit vorab scheint nicht möglich zu sein.
-Der Plan, auch einen Stopp in Tschechien zu machen wird erstmal gestrichen, da hier die Sprachbarriere sowie die Unsicherheit nicht von dem Portal gelöst werden konnte.
-Da die Gärten nicht auf der schon vorher angedachten Strecke liegen, muss diese dementsprechend geändert werden.
+Der Plan, auch einen Halt in Tschechien zu machen, wird erstmal gestrichen, da hier die Sprachbarriere sowie die Unsicherheit nicht von dem Portal gelöst werden konnte.
+Da die Gärten nicht auf der schon vorher angedachten Strecke liegen, muss diese dementsprechend geändert werden.\\
 
-Es ist der 1. Juli und die Reise beginnt. Einige Stunden später ist der Vater mit seinem Sohn in Stammham angekommen. Er holt sein Smartphone raus und merkt, dass er nun alle Daten zusammen suchen muss, um sie in seiner Navigation eingeben zu können um das engültige Ziel zu finden. Er hofft, dass der Vermieter zu Hause ist, da der vorab angekündigte Termin um 1 Stunde schon überzogen ist. Am Garten angekommen ist keiner mehr da. Der Vater versucht den Vermieter zu erreichen, zunächst per Mail, dann per Telefonanruf. Kurze Zeit später meldet sich der Vermieter und empfängt den Vater und den Sohn.
+Es ist der 1. Juli und die Reise beginnt. Einige Stunden später ist der Vater mit seinem Sohn in Stammham angekommen. Er holt sein Smartphone raus und merkt, dass er nun alle Daten zusammen suchen muss, um sie in seiner Navigation eingeben zu können um das engültige Ziel zu finden. Er hofft, dass der Vermieter zu Hause ist, da der vorab angekündigte Termin zeitlich nicht ganz eingehalten werden konnte. Der Vater versucht den Vermieter zu erreichen, zunächst per Mail, dann per Telefon, er erreicht ihn jedoch nicht direkt. Kurze Zeit später meldet sich der Vermieter und empfängt den Vater und den Sohn.
 
 Der nächste Tag bricht an und die Reisenden wollen sich wieder auf den Weg machen. Die Bezahlung wurde nicht vorab getätigt und muss nun nachgeholt werden. Der Vater hat jedoch aus Sicherheitsaspekten nicht so viel Geld dabei und muss erst zur nächsten Bank, um die benötigte Summe abzuheben.\\
 
-Im Problemszenarien wurden die Benutzer mit folgenden Problemen konfrontiert: 
-TODO\\
 
-Aus diesem Beispiel und vertiefender Betrachtung, konnten für das geplante System daher folgende funktionale und nonfunktionale Nutzeranforderungen ermittelt werden.
+Anhand dieses Problemszenarios, lassen sich folgende Aktivitäten ausmachen:
+\begin{itemize}
+   \item 
+   Planung der Route, dabei Kalkulieren mit ungenauen Werten (Reisegeschwindigkeit)
+   \item 
+   Suchen von preislich angemessenen Anbietern, Besichtigung mehrerer Portal
+   \item 
+   Kontaktaufnahme mit mehreren Anbietern (auf mehreren Portalen), dabei wiederholte Eingabe der Daten
+   \item
+   Navigation zum Zielort, Verwalten der Zielinformationen
+   \item
+   Kontaktaufnahme mit Vermieter
+   \item
+   Bezahlung
+
+\end{itemize}
+
+Das Szenario orientierte sich an einem möglichen Ablauf unter jetzigen Voraussetzungen. Da nicht jede Situation unter optimalen Bedingungen abläuft, wurde der Reisende auch hier, vor diverse Herausforderungen gestellt die realistisch erscheinen. \\
+Ein Problem das während der Planung auftritt, ist die Zeitkalkulation. Indem er vorher die Route mit festen Zeiten plant und dementsprechend unterschiedliche Anbieter anschreiben muss, ist er während seiner Reise auf diese Strecke und Abmachungen angewiesen. Abweichungen im Fahrplan oder zeitliche Rückschläge stellen ihn vor neuen Problemen. 
+
+Bei der Benutzung der Portale wird er vor mehrere Probleme gestellt. Bei Freagle findet keine Registrierung statt aufgrund genannter Faktoren und Campinmygarden stellt ihn anfangs vor eine geringe Sprachhürde. Dennoch klappt die Kontaktaufnahme. Für mehrere Anfragen muss er jedoch wiederholte Tätigkeiten ausführen und wird in seinem Suchverhalten nicht unterstützt.
+
+Bei der Suche des Zielortes muss er die Informationen erstmal auf sein Smartphone speichern und anschließend Kontakt mit dem Vermieter aufnehmen. Da er nur seine Emailadresse kennt und eine Telefonnummer, auf der er nicht zu erreichen ist, muss er warten bis der Vermieter zurück ist. 
+Problem an dieser Kontaktaufnahme kann sein, dass der Vermieter unterwegs nicht immer seine Emails kontrolliert und eventuell die Hausnummer angegeben hat. Auch die Bezahlung läuft nicht ohne Verzögerung ab und hat Einfluss auf den Zeitplan.\\
+
+Aus diesem Beispiel und vertiefender Betrachtung, konnten erste funktionale Anforderungen ermittelt werden.
         	
 
-\subsection{funktionale Anforderungen}        	
+\subsection{Funktionale Anforderungen}        	
+Im Vergleich zu obigem Beispiel sollte dabei beachtet werden, dass die Software über ein Smartphone stattfindet und von dem Kontext ausgegangen wird, dass ein Benutzer auf seiner Strecke die entsprechenden Suchfunktionen nutzt. Zusätzlich dazu wurden auch Grundfunktionalitäten betrachtet, die nicht mit dem direkten Suchen zusammenhängen.
 
-TODO ausformulieren
+\begin{itemize}
+   \item 
+   Registrierung der Anwender und speichern von relevanten Informationen
+   \item
+   Erstellung und Bearbeitung eines Benutzerprofils/ Camp Profils
+   \item 
+   Suchen nach vorhanden Anbietern/Anfrage und Rückmeldung über Suchtreffer
+   \item 
+   Anzeige der Anfrage/Angebote, Übersenden der Kontaktinformationen 
+   \item
+   Kontaktaufnahme und Kommunikation des Mieters und Vermieters (Google Cloud Messaging)
+   \item
+   lokale Speicherung der Kontaktinformationen zur GPS Benutzung oder bei Verbindungsabbruch
+   \item
+   Bezahlfunktion über Applikation
+   \item
+   Bewertung des Benutzers
 
+\end{itemize}
 
-- Funktionen für effektive und effiziente Erledigung
-- Informationsrepräsentation am User Interface (was wird benötigt
-- Allokation finden: besonders potentielle Stellen für Aufgabenunterstützung finden
+\newpage 
 
+\subsection{Qualitative Anforderungen} 
+Neben den funktionalen Anforderungen, ergaben sich auch erste nonfunktionale Anforderungen an das System.
 
-Suchen im Radius
-Profil eines Camps
-Fotos
-Anzahl
-Belegung
-Bewertung
-Möglichkeiten (Duschen, etc)
-Zelt schon vorhanden
-Reservierung
-Kontaktaufnahme (Google Cloud Messaging)
-Check-In/Check-Out
-Bewertung, wenn Ort wieder verlassen wird (GPS)
-Statistiken
-Badges/Bewertung
-Push-Benachrichtigungen
-Mieter
-für im Umkreis befindlicher Camps nach Aktivierung
-Vermieter
-für im Umkreis befindliche Sucher
+\begin{itemize}
+   \item 
+   \textbf{Zuverlässigkeit}: Applikation muss Standort genau ausmachen und treffende Anbieter ausfindig machen. Der Mieter ist darauf angewiesen, dass die Nachricht zielgerichtet an alle  
+   potentiellen Anbieter übertragen wird und von ihnen auch gelesen wird.
+   
+   \item
+   \textbf{Usability}: Geforderte Funktionen müssen ausführbar sein und möglichst effektiv zum Ziel führen. Dabei sollte auch das physikalische Umfeld betrachtet werden, da der Anwender sich verstärkt im freien Aufhalten wird und unter zeitlichen Faktoren stehen kann.
+   
+   \item 
+   \textbf{Effiziens und Effektivität}: Funktionen müssen die Suche gezielt unterstützen und eine sinnvolle Allokation der Arbeitsschritte muss vorhanden sein, um dem Benutzer möglichst viel Arbeit abzunehmen. Mit möglichst geringem Aufwand an gewünschtes Ziel führen.   
+   
+   \item
+   \textbf{Sicherheit und Stabilität}: Die Daten müssen sicher gespeichert und übertragen werden. Auch bei Verbindungsprobleme soll eine passende Alternative vorhanden sein.
 
+   \item
+   \textbf{Barrierefrei und Zugänglichkeit}: Applikation sollte so gestaltet sein, dass eine möglichst große Interessentengruppe angesprochen wird. Sie sollte daher einfach und effizient zu benutzen sein, leicht erlernbar und den User unterstützen.
+ 
 
+\end{itemize}
 
-\subsection{qualitative Anforderungen}   
-TODO 
-\subsubsection{Zuverlässigkeit}
-\subsubsection{Usabillity}
-\subsubsection{Effiziens}
 
 
