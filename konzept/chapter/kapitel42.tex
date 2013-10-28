@@ -2,19 +2,143 @@
 
 \section{Verteilte Anwendung}
 
+Im vorausgegangen Kommunikationsablauf ist erkennbar, dass mehrere verteilte Komponenten untereinander kohärent kommunizieren müssen.\\
+
+Der Architekturstil sollte diese Anfordung dementsprechend unterstützen. Das Paradigma \textit{Entfernte Prozedur- und Methodenaufrufe} wäre deswegen eher ungeeigent, da die Interaktion hier vorwiegend synchron abläuft. Dies würde bedeuten, dass zum Beispiel bei der Kommunikation zwischen Server und den einzelnen potentiellen Vermieter die Verbindung aufrechtgehalten werden muss. Bei mobilen Endgeräten kann dies allerdings nicht 100\%tig gewährleistet werden.
+Ein Paradigma, welches die Eigenschaften einer losen Kopplungen untersützt ist eher vorzuziehen - eine ereignisorientierte Architektur.\\
 
 
-Softwarekomponenten, verteilte Systeme,Kohärenz
+
+\subsection{Google Cloud Messaging}
+
+Google Cloud Messaging für Android (GCM)\footnote{http://developer.android.com/google/gcm/index.html} ist ein Dienst, der die ereignisorientierte Architektur unterstützt.
+Der Dienst soll dazu genutzt werden um die Kommunikation zwischen unserem Server, mit der Zuordnung Vermieter und Ort, und den Vermieter sowie die direkte Kommunikation zwischen Mieter und Vermieter zu realisieren.
+GCM besteht dabei aus den Kompontenten \textit{GCM Server} und \textit{GCM Client}.
+Der \textit{GCM Client} wird dabei in die Anwendung implementiert und der \textit{GCM Server} ist für das Senden der Ereignisse an die einzelnen Endgeräte zuständig. Den \textit{GCM Server} gibt es dabei in zwei Varianten (siehe Tab. \ref{tab:unterschiedegcmconnectionserver} \footnote{Quelle: http://developer.android.com/google/gcm/server.html\#choose, letzes Sichtdatum 28.10.2013}) die einer genauere Überprüfung unterzogen werden müssen, da sich hier zwei Systemarchitekturen herausarbeiten lassen.
+
+\begin{table}[H]
+\caption{Unterschiede GCM Connection Server}
+
+\centering
+\begin{tabular}{ p{4cm} p{5cm} p{5cm} }
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+Eigenschaft & GCM HTTP & CCS
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Upstream/Downstream messages & Downstream only: cloud-to-device. & Upstream and downstream (device-to-cloud, cloud-to-device). \\[1.5ex]
+Asynchronous messaging & 3rd-party app servers send messages as HTTP POST requests and wait for a response. This mechanism is synchronous and causes the sender to block before sending another message. & 3rd-party app servers connect to Google infrastructure using a persistent XMPP connection and send/receive messages to/from all their devices at full line speed. CCS sends acknowledgment or failure notifications (in the form of special ACK and NACK JSON-encoded XMPP messages) asynchronously.\\[1.5ex]
+JSON & JSON messages sent as HTTP POST. & JSON messages encapsulated in XMPP messages.\\[1.5ex]
+\hline
+\end{tabular}
+\label{tab:unterschiedegcmconnectionserver}
+\end{table}
 
 
-Für die Analyse zunächst ein Überblick über die möglichen Architektur-Paradigmen, mit einer ersten Abwägung.\\
-
-\textbf{Publish-Subscribe}\\
-
-
-Entfernte Prozedur- und Methodenaufrufe => Polling
-
-WS* Architektur
+\textbf{GCM HTTP Connection Server}\\
+Bei der Implementierung der HTTP Variante gibt es eine wichtige Eigenschaft zu beachten: Nachrichten können nur von der Cloud zum Client geschickt werden. Im Kommunikationsdiagramm ist allerdings angedacht, dass auch ein Client selbst Nachrichten an die Cloud schicken darf, um die mögliche Anzahl an Verbindungsaufbauten zu reduzieren.
+Diese Eigenschaft muss deswgen mit einem anderen Architekturstil ausgeglichen werden, beispielweise über eine REST Schnittstelle, da diese keine weiteren größeren Abhängigkeiten benötigt.
 
 
-Lose Kopplung
+\textbf{GCM Cloud Connection Server}\\
+Cloud Connection Server ist nach derzeitigem Stand ein neues Features, welches Google im Zusammenhang mit GCM anbietet. Die Kommunikation findet bei dieser Variante über das \textit{Extensible Messaging and Presence Protocol} statt.
+Diese Variante lässt neben das Empfangen von GCM Nachrichten auch das Senden zu, stellt somit auch einen Rückkanal bereit.
+
+
+Beide Varianten sollten einmal als Proof-of-Concept umgesetzt werden um die genauen Funktionalitäten zu prüfen und Vor- und Nachteile zu evaluieren.
+
+\subsection{Verteiltheit}
+
+Eine verteilten Anwendung bedeutet auch gleichzeitg verteile Logik. Im folgenden werden die einzelnen Komponten bezüglich der benötigten Logik anaylisiert.\\
+
+\textbf{Dienstnutzer: Mobil als Vermieter}
+\begin{itemize}
+	\item Präsentationslogik
+	\begin{itemize}
+  		\item Darstellung eines Formulars zur Registrierung
+  		\item Darstellung eines Formulars zum Anlegen eines Mietobjektes
+  		\item Darstellung der Mietanfragen
+  		\item Darstellung einer erfolgreichen finanziellen Abwicklung
+    \end{itemize}
+	\item Anwendungslogik
+	\begin{itemize}
+  		\item Übertragung von Registrierungsdaten zum Server
+  		\item Auslesen Daten des Mietobjektes
+  		\item Auswertung von Mietanfragen
+    \end{itemize}
+	\item Ressourcen Management
+	\begin{itemize}
+  		\item Speicherung der Daten des Mietobjektes
+		\item Metainfos
+		\item Fotos
+		\item Zusätzliche Infos
+	\end{itemize}
+\end{itemize}
+
+\textbf{Dienstnutzer: Mobil als Mieter}
+\begin{itemize}
+	\item Präsentationslogik
+	\begin{itemize}
+  		\item Darstellung eines Formulars zur Registrierung
+  		\item Darstellung eines Formulars zum Anlegen eines Nutzerprofils
+  		\item Darstellung eines Formulars zum Anlegen eines Mietanfrage
+  		\item Darstellung der erfolgreichen Mietanfrage
+    \end{itemize}
+	\item Anwendungslogik
+	\begin{itemize}
+  		\item Übertragung von Registrierungsdaten zum Server
+  		\item Verbindung zum GPS-Dienst
+  		\item Übertragung der Anfragedaten zum Server
+  		\item Finanzielle Abwicklung
+    \end{itemize}
+	\item Ressourcen Management
+	\begin{itemize}
+  		\item Speicherung der Daten des Nutzerprofils
+  		\item Alter
+  		\item Typ
+  		\item Vorlieben
+	\end{itemize}
+\end{itemize}
+
+\textbf{Dienstnutzer: Stationär als (Ver-)Mieter}
+\begin{itemize}
+	\item Präsentationslogik
+	\begin{itemize}
+  		\item Darstellung eines Formulars zur Registrierung
+	\end{itemize}
+\end{itemize}
+
+\textbf{Dienstanbieter: „Find your Camp“}
+\begin{itemize}
+	\item Anwendungslogik
+	\begin{itemize}
+  		\item Verarbeitung von Registrierungsdaten
+  		\item Verarbeitung User-Login
+  		\item Verarbeitung  von Daten für neue Mietobjekte
+  		\item Verarbeitung  von Daten für Mietanfragen
+  		\item Vergleich mit Datenbank
+  		\item Senden von Anfragen an zugehörige User über GCM
+    \end{itemize}
+	\item Ressourcen Management
+	\begin{itemize}
+  		\item Speicherung von Daten der Nutzer
+  		\begin{itemize}
+  			\item Location
+  			\item „Bewertung“
+  			\item Device ID (für GCM)
+  		\end{itemize}
+		\item Speicherung von Daten der Mietobjekte
+		\begin{itemize}
+  			\item User
+  			\item ocation
+  		\end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\textbf{Dienstanbieter: Kreditinstitut}
+\begin{itemize}
+	\item Verarbeitung der eventuell auftreten Mietkosten
+\end{itemize}
