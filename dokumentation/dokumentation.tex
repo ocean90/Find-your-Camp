@@ -36,35 +36,18 @@
 	\setcounter{table}{1}
 	\setcounter{figure}{1}
 	%Einbinden des ersten Kapitels
-	\include{chapter/kapitel1}
+
+	%Einführung
+	\include{chapter/kapitel1_einfuehrung}
 
 	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
 	%in jedem Kapitel die Nummerierung neu beginnt
 	\setcounter{table}{1}
 	\setcounter{figure}{1}
  	%Einbinden des ersten Kapitels
-	\include{chapter/kapitel2}
-
-	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
-	%in jedem Kapitel die Nummerierung neu beginnt
-	\setcounter{table}{1}
-	\setcounter{figure}{1}
-	%Einbinden des zweiten Kapitels
-	\include{chapter/kapitel3}
-
-	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
-	%in jedem Kapitel die Nummerierung neu beginnt
-	\setcounter{table}{1}
-	\setcounter{figure}{1}
-	%Einbinden des zweiten Kapitels
-	\include{chapter/kapitel4}
-
-	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
-	%in jedem Kapitel die Nummerierung neu beginnt
-	\setcounter{table}{1}
-	\setcounter{figure}{1}
-	%Einbinden des zweiten Kapitels
-	\include{chapter/kapitel5}
+	
+	%Überarbeitungen des Konzeptes
+	\include{chapter/kapitel2_konzeptueber}
 
 	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
 	%in jedem Kapitel die Nummerierung neu beginnt
@@ -72,7 +55,8 @@
 	\setcounter{figure}{1}
 	%Einbinden des zweiten Kapitels
 	
-	\include{chapter/kapitel6} 
+	%Prozessdokumentation
+	\include{chapter/kapitel3_prozessdoku}
 
 	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
 	%in jedem Kapitel die Nummerierung neu beginnt
@@ -80,8 +64,27 @@
 	\setcounter{figure}{1}
 	%Einbinden des zweiten Kapitels
 	
-	\include{chapter/kapitel7} 
+	%Systemdokumentation
+	\include{chapter/kapitel4_systemdoku}
 
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des zweiten Kapitels
+	
+	%Installationsdokuemntation
+	\include{chapter/kapitel5_installationsdoku}
+
+	%Die Zähler für Tabellen und Abbildungen werden zurückgesetzt, damit
+	%in jedem Kapitel die Nummerierung neu beginnt
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+	%Einbinden des zweiten Kapitels
+
+	%Fazit
+	\include{chapter/kapitel6_fazit}
+ 
 %Zeilenabstand 1 fach für die Verzeichnisse
 \singlespacing
 %Einbindne der Verzeichnisse
@@ -91,5 +94,9 @@
 \onehalfspacing
 %Einbinden des Eides
 %\include{inc/eid}
+
+%Konzept als Anhang einbinden
+\include{inc/anhang}
+
 
 \end{document}
