@@ -1,0 +1,10 @@
+<resources>
+    <string-array name="dialog_select">
+        <item >one</item>
+        <item >two</item>
+    </string-array>
+    <string name="one">Eins</string>
+    <string name="two">Zwei</string>
+
+
+</resources>
