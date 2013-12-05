@@ -1,6 +1,7 @@
 package de.fhkoeln.gm.poc3_client;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -15,6 +16,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -32,8 +36,9 @@ public class MainActivity extends Activity {
 	 * Substitute you own sender ID here. This is the project number you got
 	 * from the API Console, as described in "Getting Started."
 	 */
-	String SENDER_ID = "Your-Sender-ID";
+	String SENDER_ID = "474445016109";
 
+    AtomicInteger msgId = new AtomicInteger();
 	GoogleCloudMessaging gcm;
 	Context context;
 	String regid;
@@ -57,6 +62,13 @@ public class MainActivity extends Activity {
 			Log.i(TAG, "No valid Google Play Services APK found.");
 		}
 	}
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Check device for Play Services APK.
+        checkPlayServices();
+    }
 
 	/**
 	 * Stores the registration ID and the app versionCode in the application's
@@ -204,6 +216,52 @@ public class MainActivity extends Activity {
 	 */
 	private void sendRegistrationIdToBackend() {
 	  // Your implementation here.
+	}
+
+	public void onButtonClick(View view) {
+		switch ( view.getId() ) {
+			case R.id.send_message_button:
+				sendMessage();
+				break;
+		}
+	}
+
+	private void sendMessage() {
+
+
+		//showToast(message);
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                try {
+
+                	EditText messageText = (EditText) findViewById(R.id.messageText);
+            		String message = messageText.getText().toString();
+
+                    Bundle data = new Bundle();
+                    data.putString("my_message", message);
+                    data.putString("my_action", "de.fhkoeln.gm.poc3_client.app.ECHO_NOW");
+                    String id = Integer.toString(msgId.incrementAndGet());
+                    gcm.send(SENDER_ID + "@gcm.googleapis.com", id, data);
+                    msg = "Sent message";
+                    Log.i(TAG, "RegID " + getRegistrationId( getApplicationContext()));
+                } catch (IOException ex) {
+                    msg = "Error :" + ex.getMessage();
+                }
+                return msg;
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+            	showToast(msg);
+            }
+        }.execute(null, null, null);
+	}
+
+	private void showToast( String message ) {
+		Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG );
+		toast.show();
 	}
 
 }
