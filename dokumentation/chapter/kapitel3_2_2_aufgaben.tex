@@ -215,6 +215,9 @@ Korrektheit der Daten prüfen und bestätigen			& 												\\[1ex]
 													& Funktion zur Bestätigung anbieten 			\\[1ex]
 													& weitere Funktionalitäten anbieten, Mietobjekt \\[1ex]
 													& anlegen oder Mietauftrag anlegen				\\[1ex]
+													& Informationen zur Verifizierung senden		\\[1ex]
+Profil verifizieren									& 												\\[1ex]
+													& TODO verifizierungsschritte (extra Use Case?)	\\[1ex]
 
 
 \hline
@@ -293,17 +296,24 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen 			& 											 \\[1ex]
-							& Optionen bekanntmachen, Wahl ermöglichen	 \\[1ex]
-Mietauftrag bekanntmachen	& 											 \\[1ex]
-							& vorhandene Mietaufträge präsentieren		 \\[1ex]
-							& Option für neuen Mietauftrag anbieten      \\[1ex]
-Anfrage bestätigen   		& 											 \\[1ex] 
-							& Anfrage akzeptieren						 \\[1ex]
-							& Anfrage bearbeiten 						\\[1ex]
-Antwort erhalten			& 											 \\[1ex]
-							& Akteur über Antwort informieren			 \\[1ex]
-
+Funktion zur neuen Suchanfrage starten 	& 											 	\\[1ex]
+										& Funktion bereitstellen, die dies ermöglicht	\\[1ex]
+Passenden Mietauftrag zur Reise wählen	& 												\\[1ex]
+										& Vorhandene angelegte Mietaufträge anzeigen	\\[1ex]
+										& und Auswahl ermöglichen, Option zum anlegen   \\[1ex]
+										& eines neuen Auftrags anzeigen					\\[1ex]
+Suchanfrage ausführen 					& 												\\[1ex] 
+										& Ausgewählten Auftrag anzeigen	und Suchanfrage	\\[1ex]
+										& funktional ermöglichen, nach Bestätigung 		\\[1ex]
+										& GPS Daten bestimmen und Anfrage weiterleiten.	\\[1ex]
+										& Benutzer über getätigte Suche informieren		\\[1ex]
+Rückmeldung zu vorhandenen Angeboten	& 												\\[1ex]
+erhalten								& 												\\[1ex]
+										& Wenn kein Angebot vorhanden ist, direkte		\\[1ex]
+										& Rückmeldung. Ansonsten regelmäßige Abfrage 	\\[1ex]
+										& an Server, ob Vermieter angenommen hat.		\\[1ex]
+										& Meldung an Benutzer schicken bei Treffer 		\\[1ex]
+										& nach Ablauf einer kritischen Zeit.				\\[1ex]
 \hline
 \end{tabular}
 \label{tab:mietobjektUC}
@@ -321,16 +331,24 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Mietanfrage bekommen 		& 											 \\[1ex]
-							& neue Mietanfrage präsentieren				 \\[1ex]
-Mietanfrage einsehen		& 											 \\[1ex]
-							& Informationen präsentieren				 \\[1ex]
-Mietanfrage beantworten  	& 											 \\[1ex] 
-							& Auswahl anbieten							 \\[1ex]
-							& nächsten Schritt anbieten					 \\[1ex]
-Informationen mitteilen		& 											 \\[1ex]
-							& vorhandene Informationen anzeigen			 \\[1ex]
-							& Informationen vermitteln					 \\[1ex]
+Meldung über relevante Mietanfrage 	& 												\\[1ex]
+erhalten 							& 												\\[1ex]
+									& Mietauftrag empfangen und lokal matchen		\\[1ex]
+									& bei Bestätigung Meldung mit Informationen		\\[1ex]
+									& auf dem Display hervorheben, Benachrichtigen	\\[1ex]
+Mieterdaten ansehen					& 											 	\\[1ex]
+									& Reisedaten anzeigen: Datum Gruppengröße		\\[1ex]
+									& Preisvorstellung, Anfragezeit					\\[1ex]
+Mietanfrage beantworten  			& 												\\[1ex] 
+									& Funktion anbieten zur Annahme oder Ablehnung 	\\[1ex]
+									& der Anfrage, Meldung an Mieter schicken      	\\[1ex]
+Annahme des Auftrags erhalten		& 											 	\\[1ex]
+									& Bestätigung des Mieters empfangen, Auswahl	\\[1ex]
+									& dem Vermieter anzeigen und ggf. weitere 		\\[1ex]
+									& Funktion zum Senden der Objektinformationen	\\[1ex]
+Objektinformationen verschicken		& 											 	\\[1ex]
+Funktionsausführung					& 											 	\\[1ex]
+
 
 
 \hline
@@ -339,7 +357,7 @@ Informationen mitteilen		& 											 \\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Use Case\#6 Bezahlung }
+\caption{Use Case\#6 Mietobjekt anlegen }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -350,26 +368,37 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen	 		& 											 \\[1ex]
-							& Option anbieten							 \\[1ex]
-Identität bestätigen		& 											 \\[1ex]
-							& Identität prüfen							 \\[1ex]
-Mietauftrag wählen		  	& 											 \\[1ex] 
-							& Mietaufträge präsentieren, Wahl ermöglichen\\[1ex]
-Bezahlauftrag starten		& 											 \\[1ex]
-							& relevante Informationen präsentieren		 \\[1ex]
-							& Informationsaufnahme anbieten	     		 \\[1ex]
-Auftrag bestätigen			&	     									 \\[1ex]
-							& Bestätigung anbieten				   		 \\[1ex]
-							& Ergebnis präsentieren			    		 \\[1ex]
+Funktion zur Objektverwaltung auswählen		& 												\\[1ex]
+											& Funktion bereitstellen, die dies ermöglicht	\\[1ex]
+Auswahl ob altes Objekt bearbeiten oder		& 												\\[1ex]
+neues Anlegen         						& 												\\[1ex]
+											& Funktion bereitstellen, die dies ermöglicht	\\[1ex]
+Neues Mietobjekt registrieren				& 											 	\\[1ex] 
+Besitzer festlegen							& 											 	\\[1ex] 
+											& Verifizierung des Besitzers durch Accountdaten \\[1ex]
+											& Eingabefelder bereitstellen und prüfen 		\\[1ex]
+Objektstandort bestimmten					& 					 							\\[1ex]
+											& Funktion zur Standortbestimmung bereitstellen  \\[1ex]	
+											& Kartenanbindung mit Stecknadel?			     \\[1ex]	
+Objektmerkmale wie Größe, Preis eingeben	& 					 							\\[1ex]
+											& Eingabefelder anzeigen und Eingabe über  		\\[1ex]
+											& vordefinierte Optionen ermöglichen			\\[1ex]
+Gewünschte Austattung auswählen				& 					 							\\[1ex]
+											& Austattungsmerkmale anzeigen und 				\\[1ex]
+											& Auswahl über Menü ermöglichen 				\\[1ex]
+Informationen kontrollieren, bearbeiten 	& 												\\[1ex]
+und abspeichern 							& 												\\[1ex]
+										 	& Funktionalität zur Navigation bereitstellen	\\[1ex]
+										 	& eingegebene Daten zeigen und speichern 		\\[1ex]
+										 	& funktional ermöglichen						\\[1ex]
+
+
 
 \hline
 \end{tabular}
-\label{tab:statuscodesUC}
+\label{tab:mietobjektAUC}
 \end{table}
 
 
-
-\subsection{Persona Use Cases ?}
 \subsection{HTA?}
 
