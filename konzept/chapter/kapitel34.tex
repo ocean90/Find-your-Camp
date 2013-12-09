@@ -1,10 +1,10 @@
 %!TEX root = ../konzept.tex
 
 \section{Anforderungsanalyse}
-Ziel des Projektes ist die Entwicklung einer Software, welche im Vergleich zu vorhandenen Systemen der Domäne gebrauchstauglicher ist. Bei der Untersuchung der Benutzerinterkationen, sollen zudem Ansätze gefunden werden, bei denen sich, unter anderem durch Einbezug von unique features der Geräte, Möglichkeiten zur Produktivitätssteigerung ergeben. 
-Um einen ersten Ansatz für potentielle Ansatzpunkte zu finden, wurde ein Problemszenario definiert, dass einen derzeitigen Handlungsablauf widerspiegelt. Dazu wurde mit fiktiven Persona der primary User Gruppe gearbeitet, jedoch vorerst nur mit wenigen spezifischen Charakteristiken der einzelnen Menschen gearbeitet.\\
+Ziel des Projektes ist die Entwicklung einer Software, welche im Vergleich zu vorhandenen Systemen der Domäne, gebrauchstauglicher ist. Bei der Untersuchung der Benutzerinteraktionen, sollen zudem Ansätze gefunden werden, bei denen sich, unter anderem durch Einbezug von unique features der Geräte, Möglichkeiten zur Produktivitätssteigerung ergeben. 
+Um einen ersten Ansatz für potentielle Verbesserungsstellen zu finden, wurde ein Problemszenario definiert, dass einen derzeitigen Handlungsablauf widerspiegelt. Dazu wurde mit fiktiven Persona der primary User Gruppe gearbeitet, jedoch vorerst nur mit wenigen spezifischen Charakteristiken der einzelnen Menschen gearbeitet.\\
 
-1 SZENARIO: Vater-Sohn
+1 Szenario: Vater-Sohn
 Ein 40-jähriger Vater will eine Fahrrad-Tour von München nach Berlin mit seinem 15-jährigen Sohn ab nächster Woche in der Zeit vom 1. Juli bis 10. Juli machen. Die Strecke hin soll komplett mit dem Fahrrad zurückgelegt werden. Dabei soll auch ein Stück durch Tschechien zurückgelegt werden. Der Rückweg von Berlin nach München, soll größenteils mit der Bahn absolviert werden. Für die Übernachtungen nimmt der Vater ein Zelt mit, denn um Kosten zu sparen sollen Hotels vermieden werden.
 Der Vater hat eine Fahrradstrecke ausgesucht und rechnet damit, dass pro Tag 100km zurückgelegt werden können. Auf Basis der Strecke begibt er sich auf die Suche nach passenden Zeltplätzen. Eine Bedingung zum potentiellen Zeltplatz, ist zum einen der benötigte Platz - das Zelt ist 3x3m groß - sowie Zugriff auf Wasser. Eine Dusche mit warmen Wasser ist nicht zwingend notwendig.
 Die Fahrradstrecke ist so gewählt, dass größere Städte und Umwege vermieden werden und die strategisch kürzeste Strecke zugrunde liegt.\\
@@ -26,7 +26,7 @@ Anhand dieses Problemszenarios, lassen sich folgende Aktivitäten ausmachen:
    \item 
    Planung der Route, dabei Kalkulieren mit ungenauen Werten (Reisegeschwindigkeit)
    \item 
-   Suchen von preislich angemessenen Anbietern, Besichtigung mehrerer Portal
+   Suchen von preislich angemessenen Anbietern, Besichtigung mehrerer Portale
    \item 
    Kontaktaufnahme mit mehreren Anbietern (auf mehreren Portalen), dabei wiederholte Eingabe der Daten
    \item
@@ -38,37 +38,47 @@ Anhand dieses Problemszenarios, lassen sich folgende Aktivitäten ausmachen:
 
 \end{itemize}
 
-Das Szenario orientierte sich an einem möglichen Ablauf unter jetzigen Voraussetzungen. Da nicht jede Situation unter optimalen Bedingungen abläuft, wurde der Reisende auch hier, vor diverse Herausforderungen gestellt die realistisch erscheinen. \\
-Ein Problem das während der Planung auftritt, ist die Zeitkalkulation. Indem er vorher die Route mit festen Zeiten plant und dementsprechend unterschiedliche Anbieter anschreiben muss, ist er während seiner Reise auf diese Strecke und Abmachungen angewiesen. Abweichungen im Fahrplan oder zeitliche Rückschläge stellen ihn vor neuen Problemen. 
+Das Szenario orientierte sich an einem möglichen Ablauf unter jetzigen Voraussetzungen. Da nicht jede Situation unter optimalen Bedingungen abläuft, wurde der Reisende auch hier vor diverse Herausforderungen gestellt, die realistisch erscheinen. \\
+Ein Problem das während der Planung auftritt, ist die Zeitkalkulation. Indem er vorher die Route mit festen Zeiten plant und dementsprechend unterschiedliche Anbieter anschreiben muss, ist er während seiner Reise auf diese Strecke und auf Abmachungen angewiesen. Abweichungen im Fahrplan oder zeitliche Rückschläge stellen ihn vor neuen Problemen. 
 
-Bei der Benutzung der Portale wird er vor mehrere Probleme gestellt. Bei Freagle findet keine Registrierung statt aufgrund genannter Faktoren und Campinmygarden stellt ihn anfangs vor eine geringe Sprachhürde. Dennoch klappt die Kontaktaufnahme. Für mehrere Anfragen muss er jedoch wiederholte Tätigkeiten ausführen und wird in seinem Suchverhalten nicht unterstützt.
+Bei der Benutzung der Portale wird er mit weiteren Schwierigkeiten konfrontiert. Bei Freagle findet keine Registrierung statt, da er selbst weder einen Garten besitzt noch extra Gebühren zahlen möchte. Campinmygarden stellt ihn anfangs vor eine geringe Sprachhürde. Dennoch klappt die Kontaktaufnahme. Für mehrere Anfragen muss er jedoch wiederholte Tätigkeiten ausführen und wird in seinem Suchverhalten nicht unterstützt.
 
-Bei der Suche des Zielortes muss er die Informationen erstmal auf sein Smartphone speichern und anschließend Kontakt mit dem Vermieter aufnehmen. Da er nur seine Emailadresse kennt und eine Telefonnummer, auf der er nicht zu erreichen ist, muss er warten bis der Vermieter zurück ist. 
+Bei der Suche des Zielortes muss er die Informationen erstmal auf sein Smartphone speichern und anschließend Kontakt mit dem Vermieter aufnehmen. Da er nur die Emailadresse kennt und eine Telefonnummer, auf der er nicht zu erreichen ist, muss er warten bis der Vermieter zurück ist. 
 Problem an dieser Kontaktaufnahme kann sein, dass der Vermieter unterwegs nicht immer seine Emails kontrolliert und eventuell die Hausnummer angegeben hat. Auch die Bezahlung läuft nicht ohne Verzögerung ab und hat Einfluss auf den Zeitplan.\\
 
 Aus diesem Beispiel und vertiefender Betrachtung, konnten erste funktionale Anforderungen ermittelt werden.
         	
 
 \subsection{Funktionale Anforderungen}        	
-Im Vergleich zu obigem Beispiel sollte dabei beachtet werden, dass die Software über ein Smartphone stattfindet und von dem Kontext ausgegangen wird, dass ein Benutzer auf seiner Strecke die entsprechenden Suchfunktionen nutzt. Zusätzlich dazu wurden auch Grundfunktionalitäten betrachtet, die nicht mit dem direkten Suchen zusammenhängen.
+Im Vergleich zu obigem Beispiel sollte dabei beachtet werden, dass die Software auf einem Smartphone läuft und von dem Kontext ausgegangen wird, dass ein Benutzer auf seiner Strecke die entsprechenden Suchfunktionen nutzt. Zusätzlich dazu wurden auch Grundfunktionalitäten betrachtet, die nicht mit dem direkten Suchen zusammenhängen.
 
 \begin{itemize}
    \item 
-   Registrierung der Anwender und speichern von relevanten Informationen
+   Registrierung der Anwender und Speichern von relevanten Informationen.
    \item
-   Erstellung und Bearbeitung eines Benutzerprofils/ Camp Profils
+   Erstellung und Bearbeitung eines Benutzerprofils/ Camp Profils.
+   \item
+   Erstellen eines Reiseprofils: geplante Reisezeit, gewünschte Ausstattung und Gruppengröße, anhand dessen das Matching stattfindet.
+   \item
+   Lokalisierung über GPS.
    \item 
-   Suchen nach vorhanden Anbietern/Anfrage und Rückmeldung über Suchtreffer
+   Suchen nach vorhanden Grundstücksanbietern und Rückmeldung über Suchtreffer.
    \item 
-   Anzeige der Anfrage/Angebote, Übersenden der Kontaktinformationen 
+   Anzeige der Anfrage beim potentiellen Vermieter.
    \item
-   Kontaktaufnahme und Kommunikation des Mieters und Vermieters (Google Cloud Messaging)
+   Kontaktaufnahme und Kommunikation des Mieters und Vermieters (Google Cloud Messaging) über Nachrichten.
    \item
-   lokale Speicherung der Kontaktinformationen zur GPS Benutzung oder bei Verbindungsabbruch
+   Übersenden von Kontaktinformationen: Reiseinformationen des Mieters, sowie Grundstücksinformationen des Vermieters. 
+   \item 
+   Matchingfunktion anhand derer relevante Anfragen gefiltert werden.
+   \item 
+   (Eventuell) Lokale Speicherung der Kontaktinformationen zur GPS Benutzung oder bei Verbindungsabbruch.
    \item
-   Bezahlfunktion über Applikation
+   Bezahlfunktion über Applikation.
    \item
-   Bewertung des Benutzers
+   Bewertung des Benutzers.
+   \item
+   Einblenden von Werbeaktionen
 
 \end{itemize}
 
@@ -77,27 +87,46 @@ Im Vergleich zu obigem Beispiel sollte dabei beachtet werden, dass die Software 
 \subsection{Qualitative Anforderungen} 
 Neben den funktionalen Anforderungen, ergaben sich auch erste nonfunktionale Anforderungen an das System.
 
+
+Qualitätsattribute der gewünschten Funktionen,
+Anforderungen an das implementierte System als 
+Ausführungsverhalten (Verarbeitung unter Echtzeitbedingungen, Auslastung von Ressourcen, Genauigkeit, Antwortzeiten, Durchsatz, Speicherbedarf)
+
 \begin{itemize}
    \item 
-   \textbf{Zuverlässigkeit}: Applikation muss Standort genau ausmachen und treffende Anbieter ausfindig machen. Der Mieter ist darauf angewiesen, dass die Nachricht zielgerichtet an alle  
-   potentiellen Anbieter übertragen wird und von ihnen auch gelesen wird.
-   
+   \textbf{Zuverlässigkeit}: Funktionen müssen zuverlässig arbeiten und die Aktivitäten zielgerichtet unterstützen. Dazu gehört vorallem die genaue GPS Ortung, ein passendes Matchingsystem und die effektive Nachrichtenweiterleitung. Auch der Bezahlvorgang sollte problemlos funktionieren, da hierbei nachhaltiger Schaden bei Fehlern entstehen kann. 
+
+   \item
+   \textbf{Ausfallsicherheit}: Da die Anwendung verstärkt im freien Verwendung findet, muss die Anwendung auf Verbindungsausfälle reagieren. Dazu kann bei leerem Akku eine Unterbrechung während einer Aktivität stattfinden. In folge dessen, mussen die Information weiterhin unversehr bleiben.
+
+   \item
+   \textbf{Robustheit}: Die Anwendung muss, speziell für das Matching, sehr robust bei fehlerhaften Eingaben des Anwenders sein. Bei fehlerhafter Benutzung (z.B. durch Unerfahrenheit oder durch Auswahl einer falschen Option aufgrund von Sonneneinstrahlung/Sichteinschränkung), sollen für den Anwender keine Folgeschäden auftreten.
+
    \item
    \textbf{Usability}: Geforderte Funktionen müssen ausführbar sein und möglichst effektiv zum Ziel führen. Dabei sollte auch das physikalische Umfeld betrachtet werden, da der Anwender sich verstärkt im freien Aufhalten wird und unter zeitlichen Faktoren stehen kann.
    
    \item 
-   \textbf{Effiziens und Effektivität}: Funktionen müssen die Suche gezielt unterstützen und eine sinnvolle Allokation der Arbeitsschritte muss vorhanden sein, um dem Benutzer möglichst viel Arbeit abzunehmen. Mit möglichst geringem Aufwand an gewünschtes Ziel führen.   
+   \textbf{Effiziens}: Funktionen müssen die Suche gezielt unterstützen und eine sinnvolle Allokation der Arbeitsschritte muss vorhanden sein, um dem Benutzer möglichst viel Arbeit abzunehmen. (Mit möglichst geringem Aufwand an gewünschtes Ziel führen.)
+   Die einzelnen Aktivitäten müssen möglichst schnell durchgeführt und Daten schnell weitergeleitet werden. Da mit Verbindungsabbrüchen zu rechnen ist, sollen einzelne Schritte während der Kommunikation zwischen Mieter und Vermieter zwischengespeichert werden.
    
    \item
-   \textbf{Sicherheit und Stabilität}: Die Daten müssen sicher gespeichert und übertragen werden. Auch bei Verbindungsprobleme soll eine passende Alternative vorhanden sein.
+   \textbf{Sicherheit}: Permanent gespeicherte Daten müssen sicher gespeichert und übertragen werden. 
 
    \item
-   \textbf{Barrierefrei und Zugänglichkeit}: Applikation sollte so gestaltet sein, dass eine möglichst große Interessentengruppe angesprochen wird. Sie sollte daher einfach und effizient zu benutzen sein, leicht erlernbar und den User unterstützen.
- 
-
+   \textbf{Barrierefrei und Zugänglichkeit}: Applikation sollte so gestaltet sein, dass eine möglichst große Interessentengruppe angesprochen wird. Sie sollte daher einfach und effizient zu benutzen sein, leicht erlernbar und den User unterstützen. Von der  Gestaltung sollten auch Anwender mit visuellen Beeinträchtigungen unterstützt werden.
 \end{itemize}
 
+
+
 \subsection{Organisationale Anforderungen}          
+\begin{itemize}
+   \item
+   \textbf{Kommunikationsmöglichkeit über Hierachieebenen}: Direkter Austausch zwischen Nutzer und Mitarbeitern. Direktes Feedback einholen sollte eingeholt werden, um Matching zu verbessern und vorhandene Risiken zu identifizieren.
 
+   \item 
+   \textbf{Seriöses Firmenbild}: In der Präsentation nach Außen und Innen, sollte ein angemessener Umgang mit der Thematik stattfinden. Da das System nur mit der Eingabe sensibler Benutzerinformationen funktioniert, müssen die Anwender dazu ermutigt werden, sich darauf einzulassen. Daher sollte die Sicherheit und Seriösität kommuniziert werden.
 
+   \item
+   \textbf{TODO 3}
 
+\end{itemize}

@@ -1,26 +1,25 @@
 %!TEX root = ../konzept.tex
 
 \chapter{Zielhierachie}
-
-TODO mehr Bezug zum Projekt
-Das Projekt unterliegt einer gewissen Zielhierachie, die im Rahmen der Zielsetzung aufgestellt wurde. Dabei wurden zum einen high-level Ziele betrachtet, die auch über den Projektrahmen hinausgehen und eine mögliche Entwicklung im Kontext beschreiben, sowie konkretere Ziele, die sich direkt auf das Projekt anwenden lassen.
+Das Projekt unterliegt einer gewissen Zielhierachie, die im Rahmen der Zielsetzung aufgestellt wurde. Dabei wurden high-level Ziele betrachtet, die sich über den gesamten Projektrahmen erstrecken und eine mögliche Entwicklung im Kontext beschreiben, sowie konkretere low-level Ziele, die sich direkt auf einzelne Aspekte des Projekt beziehen.
 
 \subsubsection{Strategische Ziele}
-Konkretisiert man den Betrachtungsraum auf den Projektrahmen, so ist das strategische Ziel die prototypische Entwicklung eines Verleihsystems für private Grundstücke als Campingplatz für Reisende. Schwerpunkt des Projektes liegt dabei auf der Konzipierung und Dokumentierung des Entwicklungsprozess und die Realisierung der Minimalziele.
+Oberstes Ziel ist die prototypische Entwicklung eines Verleihsystems für private Grundstücke als Campingplatz für Reisende. Schwerpunkt des Projektes liegt auf der Unterstützung von Reisenden, indem Angebotssuche und -anfrage effektiver gestaltet wird. Für den Vermieter sollen dabei relevante Anfragen gefiltert werden. Zur Kommunikation soll eine einheitliche Anwendung entwickelt werden, welche die Aktivitäten der Reisenden und Grundstücksbesitzer gleichermaßen unterstützt. Der Einsatz des Produktes soll auf die vorhandenen Umstände während einer Reise (in der Regel kein Laptop) ausgelegt werden und spezieller auf die Domäne zugeschnitten werden. 
+Die Entwicklung muss kostengünstig durchgeführt werden, um einer möglichst breiten Masse einen kostenfreien Einstieg zu ermöglichen. Um die Kosten auf Dauer decken zu können, sollen Einnahmen über Kooperationen mit Werbe- und Eventpartnern, sowie über prozentuale Beteiligung an Mietprozessen gewonnen werden.
 
 \subsubsection{Taktisches Ziele}
-Für das Projekt speziell bedeutet dies, das Aufstellen eines Interaktionsplans zwischen Vermieter und Mieter während eines Mietprozesses und das Herausstellen der einzelnen Aktivitätsschritte, die zur Aufgabenbewältigung notwendig sind.
-Daraus einhergehend die funktionale Unterstützung dieser. Grob umfasst dies, die Angebotssuche und Mietanfrage des Mieters (Reisenden), den Kommunikationsaufbau zwischen Mieter und Vermieter und den Datenaustausch der Beteiligten, gefolgt vom Kommunikationsabschluss. (Zum Beispiel durch Bewertung und Bezahlung)
+TODO
 
 \subsubsection{Operative Ziele}
-Operativ bedeutet dies, dass die einzelnen Aktivitätsschritte genau untersucht werden und darauf hin eine mögliche Realisierung geplant wird. Die Gestaltung einer möglichen Lösung der taktischen Schritte anhand verschiedener Technologien, die in diesem Zusammenhang ermittelt, abgewogen und umgesetzt werden sollten.
-Genau bedeutet dies, mit Hilfe der Verteiltheit des Systems, einzelne Kommunikationsbereiche genauer zu betrachten.
+Die einheitliche Anwendung soll als Smartphoneapplikation für Geräte mit Android Betriebssystem entwickelt werden. Um die Lokalisierung der Grundstücke zu ermöglichen, wird bei der Eintragung eines Mietobjektes ein Verweis in der Datenbank abgelegt. Über einen automatisierten Abgleich zwischen GPS Koordinaten des Reisenden bei einer Suchanfrage mit den gespeicherten Koordinaten zu Mietobjekten, sollen Ortsrelevante Angebote herausgefilter werden. Der Austausch der Informationen unter den Anwendern wird über ein Cloudbasiertes System durchgeführt.
+Durch Erstellung eines Reise- und Grundstückprofils mit identischen Informationskategorien, soll ein zweites Matching innherhalb der Anwendungslogik der Applikation stattfinden. Um die Authentizität der Benutzer zu gewährleisten, soll eine Benutzerdefiniertes Passwort zur Anwendung festgelegt werden und eine Verifikation stattfinden.
+
+Nach der ersten theoretischen Auseinandersetzung innerhalb der Konzeptphase, sollen angedachte Funktionalitäten innerhalb der Proof of Concepts getestet werden. Während dieser Zeit werden Anforderungen durch MCI Modelle genauer spezifiziert und Gestaltungslösungen zur Umsetzung erarbeitet. Um eine optimierte Variante der Anwendung zu erhalten, sollen Iterationen innerhalb des Prototypings, sowie Evaluationen mit realen Benutzern durchgeführt werden. 
+
 
 \subsubsection{Minimal Ziele}
-Schwerpunkt des Projektes liegt auf der Kommunikation der Mieter und Vermieter. Das Minimal Ziel ist das Finden eines eingetragenen Vermieters, das Stellen einer Anfrage und die daraus resultierende Kontaktaufnahme. Zusätzlich der damit verbundene Austausch der Benutzerdaten. Die Anfrage soll anhand von Matchingkriterien nur an relevante Anbieter weitergeleitet werden.
+Schwerpunkt des Projektes liegt auf der Kommunikation der Mieter und Vermieter. Das Minimal Ziel ist die Lokation des Anwenders per GPS, das Finden eines eingetragenen Vermieters, das Stellen einer Anfrage und die daraus resultierende Kontaktaufnahme. Zusätzlich der damit verbundene Austausch und das Anlegen von Benutzerdaten. Die Anfrage soll anhand von Matchingkriterien nur an relevante Anbieter weitergeleitet werden.
 
 \subsubsection{Optionale Ziele}
-Optionales Projektziel ist die Vertiefung des Matchingalgorithmen. Die grundlegende Funktionalität sollte das Minimalziel sein, die Feinheit und Komplexität der Kriterien, kann jedoch (voraussichtlich) nur in einem einfacheren Rahmen betrachtet werden.
-
-
-
+Optionales Projektziel ist die Vertiefung des Matchingalgorithmus. Die grundlegende Funktionalität sollte das Minimalziel sein, die Feinheit und Komplexität der Kriterien, kann jedoch (voraussichtlich) nur in einem einfacheren Rahmen betrachtet werden.
+Dazu kommt die Möglichkeit einer Userbewertung. Die Anbindung an einen Zahlungsanbieter wird innerhalb dieses Projekt nicht realisiert werden können, diese Schritte werden lediglich prototypisch eingebunden.

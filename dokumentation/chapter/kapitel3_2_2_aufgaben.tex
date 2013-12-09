@@ -1,0 +1,404 @@
+%!TEX root = ../dokumentation.tex
+
+\section{Aufgabenmodellierung}
+
+Was sind die Aufgaben die sie erreichen wollen?\\
+Was benötigen sie vom System und wie sollte das organisiert sein?\\
+
+use case methoden: allistar cockburn template \\
+concrete use case, lockwood\\
+
+
+-> User Role/ Use Cases speziell für usage centered	\\
+task model essentiell use cases, use case map ale aufeinander\\
+
+task Model: struktur der Aufgaben\\
+
+
+\subsection{Essentiel Use Cases}
+Funktionale Anforderungsermittlung, interaktion zwischen Anwender und System, sehr abstrakt, grober Überblick, technologie frei\\
+Formal und an Reichhaltigkeit orientiert an Software for Use S. 105
+
+\begin{table}[H]
+\caption{\#1 Anwender bekanntmachen }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Aktion auswählen 			& 											\\[1ex]
+							& Optionen bekanntmachen, Wahl ermöglichen	\\[1ex]
+Informationen angeben 		& 											\\[1ex] 
+							& Informationen aufnehmen					\\[1ex]
+							& Informationen präsentieren				\\[1ex]
+Informationen bestätigen	& 											\\[1ex]
+							& Bestätigung anbieten, bei Wahl akzeptieren \\[1ex]
+
+
+\hline
+\end{tabular}
+\label{tab:anmelden}
+\end{table}
+
+\begin{table}[H]
+\caption{\#2 Benutzerprofil verwalten }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Aktion auswählen 			& 											 \\[1ex]
+							& Optionen bekanntmachen, Wahl ermöglichen	 \\[1ex]
+Identität bestätigen		& 											 \\[1ex]
+							& Identität prüfen							 \\[1ex]
+							& vorhandene Informationen präsentieren      \\[1ex] 
+Informationen ändern 		& 											 \\[1ex] 
+							& neue Informationen aufnehmen				 \\[1ex]
+							& alte Informationen entfernen				 \\[1ex]
+Informationen bestätigen	& 											 \\[1ex]
+							& Bestätigung anbieten, bei Wahl akzeptieren \\[1ex]
+\hline
+\end{tabular}
+\label{tab:profilbearbeiten}
+\end{table}
+
+\begin{table}[H]
+\caption{\#3 Mietauftrag erstellen }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Aktion auswählen 			& 											 \\[1ex]
+							& Optionen bekanntmachen, Wahl ermöglichen	 \\[1ex]
+Identität bestätigen		& 											 \\[1ex]
+							& Identität prüfen							 \\[1ex]
+Informationen anlegen 		& 											 \\[1ex] 
+							& neue Informationen aufnehmen				 \\[1ex]
+							& Informationen präsentieren				 \\[1ex]
+Informationen bestätigen	& 											 \\[1ex]
+							& Bestätigung anbieten, bei Wahl akzeptieren \\[1ex]
+
+\hline
+\end{tabular}
+\label{tab:mietauftrag}
+\end{table}
+
+\begin{table}[H]
+\caption{\#4 Mietobjekt finden }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Aktion auswählen 			& 											 \\[1ex]
+							& Optionen bekanntmachen, Wahl ermöglichen	 \\[1ex]
+Mietauftrag bekanntmachen	& 											 \\[1ex]
+							& vorhandene Mietaufträge präsentieren		 \\[1ex]
+							& Option für neuen Mietauftrag anbieten      \\[1ex]
+Anfrage bestätigen   		& 											 \\[1ex] 
+							& Anfrage akzeptieren						 \\[1ex]
+							& Anfrage bearbeiten \\[1ex]
+Antwort erhalten			& 											 \\[1ex]
+							& Akteur über Antwort informieren			 \\[1ex]
+
+\hline
+\end{tabular}
+\label{tab:mietobjekt}
+\end{table}
+
+\begin{table}[H]
+\caption{\#5 Mietanfrage beantworten }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Mietanfrage bekommen 		& 											 \\[1ex]
+							& neue Mietanfrage präsentieren				 \\[1ex]
+Mietanfrage einsehen		& 											 \\[1ex]
+							& Informationen präsentieren				 \\[1ex]
+Mietanfrage beantworten  	& 											 \\[1ex] 
+							& Auswahl anbieten							 \\[1ex]
+							& nächsten Schritt anbieten					 \\[1ex]
+Informationen mitteilen		& 											 \\[1ex]
+							& vorhandene Informationen anzeigen			 \\[1ex]
+							& Informationen vermitteln					 \\[1ex]
+
+
+\hline
+\end{tabular}
+\label{tab:mietanfrage}
+\end{table}
+
+\begin{table}[H]
+\caption{\#6 Bezahlung }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Aktion auswählen	 		& 											 \\[1ex]
+							& Option anbieten							 \\[1ex]
+Identität bestätigen		& 											 \\[1ex]
+							& Identität prüfen							 \\[1ex]
+Mietauftrag wählen		  	& 											 \\[1ex] 
+							& Mietaufträge präsentieren, Wahl ermöglichen\\[1ex]
+Bezahlauftrag starten		& 											 \\[1ex]
+							& relevante Informationen präsentieren		 \\[1ex]
+							& Informationsaufnahme anbieten	     		 \\[1ex]
+Auftrag bestätigen			&	     									 \\[1ex]
+							& Bestätigung anbieten				   		 \\[1ex]
+							& Ergebnis präsentieren			    		 \\[1ex]
+
+\hline
+\end{tabular}
+\label{tab:statuscodes}
+\end{table}
+
+\newpage
+\subsection{Concrete Use Case}
+Ein use case erfasst eine Beziehung zwischen stakeholder und dem technischen Subsystem bzgl. des Verhaltens des technischen Subsys- tems. Es beschreibt das Verhalten des technischen Subsystems unter bestimmten Rahmenbedingungen als Antwort auf eine Anfrage des stakeholders (primary actor). Der primary actor iniziiert die Interak- tion, um ein Ziel zu erreichen.
+
+\begin{table}[H]
+\caption{Use Case\#1 Benutzer registrieren }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Funktion zur Neuanmeldung auswählen 				& 												\\[1ex]
+													& Funktion bereitstellen, die dies ermöglicht	\\[1ex]
+													& Über Richtlinien hinweisen 					\\[1ex]
+Kenntnissnahme zu Richtlinien bestätigen			& 												\\[1ex]
+													& Bestätigung ermöglichen						\\[1ex]
+Informationen eingeben 								& 												\\[1ex] 
+Personeninformationen Name, Vorname, Gebdat etc. 	& 												\\[1ex] 
+													& Eingabefelder bereitstellen, Informationen    \\[1ex]
+													& aufnehmen, weitere Schritte ermöglichen		\\[1ex]
+Korrektheit der Daten prüfen und bestätigen			& 												\\[1ex]
+													& Funktion zur Bestätigung anbieten 			\\[1ex]
+													& weitere Funktionalitäten anbieten, Mietobjekt \\[1ex]
+													& anlegen oder Mietauftrag anlegen				\\[1ex]
+													& Informationen zur Verifizierung senden		\\[1ex]
+Profil verifizieren									& 												\\[1ex]
+													& TODO verifizierungsschritte (extra Use Case?)	\\[1ex]
+
+
+\hline
+\end{tabular}
+\label{tab:anmeldenUC}
+\end{table}
+
+\begin{table}[H]
+\caption{Use Case\#2 Benutzerprofil verwalten }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Funktion zur Verwaltung auswählen  	& 												 	\\[1ex]
+									& Funktion bereitstellen, die dies ermöglicht	 	\\[1ex]
+Identität bestätigen				& 											     	\\[1ex]
+									& Identitätsabfrage einleiten und mit Eingabe    	\\[1ex]
+									& prüfen, anschließend bereits vorhandene 		 	\\[1ex] 
+									& Informationen anzeigen     				     	\\[1ex] 
+Neuen Informationen eingeben 		& 											     	\\[1ex] 
+									& neue Informationen über Eingabefelder aufnehmen, 	\\[1ex]
+									& auf syntaktische Korrektheit prüfen				\\[1ex]
+Neue Informationen abspeichern		& 											 		\\[1ex]
+									& Funktion zum abspeichern anbieten					\\[1ex]
+\hline
+\end{tabular}
+\label{tab:profilbearbeitenUC}
+\end{table}
+
+\begin{table}[H]
+\caption{Use Case\#3 Mietauftrag erstellen }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Funktion zum neuen Mietauftrag wählen 		& 												\\[1ex]
+											& Funktion bereitstellen, die dies ermöglicht	\\[1ex]
+Profil des Reisenden auswählen über den		& 												\\[1ex]
+gemietet werden soll          				& 												\\[1ex]
+											& Anmeldung mit Benutzerdaten ermöglichen		\\[1ex]
+Organisatorische Informationen eintragen	& 											 	\\[1ex] 
+											& Eingabefelder bereitstellen und 				\\[1ex]
+											& Informationen aufnehmen 						\\[1ex]
+Gewünschte Austattung auswählen				& 					 							\\[1ex]
+											& Austattungsmerkmale anzeigen und 				\\[1ex]
+											& Auswahl über Menü ermöglichen 				\\[1ex]
+Informationen bestätigen und abspeichern 	& 												\\[1ex]
+										 	& Funktion zum abspeichern anbieten 			\\[1ex]
+
+\hline
+\end{tabular}
+\label{tab:mietauftragUC}
+\end{table}
+
+\begin{table}[H]
+\caption{Use Case\#4 Mietobjekt finden }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Funktion zur neuen Suchanfrage starten 	& 											 	\\[1ex]
+										& Funktion bereitstellen, die dies ermöglicht	\\[1ex]
+Passenden Mietauftrag zur Reise wählen	& 												\\[1ex]
+										& Vorhandene angelegte Mietaufträge anzeigen	\\[1ex]
+										& und Auswahl ermöglichen, Option zum anlegen   \\[1ex]
+										& eines neuen Auftrags anzeigen					\\[1ex]
+Suchanfrage ausführen 					& 												\\[1ex] 
+										& Ausgewählten Auftrag anzeigen	und Suchanfrage	\\[1ex]
+										& funktional ermöglichen, nach Bestätigung 		\\[1ex]
+										& GPS Daten bestimmen und Anfrage weiterleiten.	\\[1ex]
+										& Benutzer über getätigte Suche informieren		\\[1ex]
+Rückmeldung zu vorhandenen Angeboten	& 												\\[1ex]
+erhalten								& 												\\[1ex]
+										& Wenn kein Angebot vorhanden ist, direkte		\\[1ex]
+										& Rückmeldung. Ansonsten regelmäßige Abfrage 	\\[1ex]
+										& an Server, ob Vermieter angenommen hat.		\\[1ex]
+										& Meldung an Benutzer schicken bei Treffer 		\\[1ex]
+										& nach Ablauf einer kritischen Zeit.				\\[1ex]
+\hline
+\end{tabular}
+\label{tab:mietobjektUC}
+\end{table}
+
+\begin{table}[H]
+\caption{Use Case\#5 Mietanfrage beantworten }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Meldung über relevante Mietanfrage 	& 												\\[1ex]
+erhalten 							& 												\\[1ex]
+									& Mietauftrag empfangen und lokal matchen		\\[1ex]
+									& bei Bestätigung Meldung mit Informationen		\\[1ex]
+									& auf dem Display hervorheben, Benachrichtigen	\\[1ex]
+Mieterdaten ansehen					& 											 	\\[1ex]
+									& Reisedaten anzeigen: Datum Gruppengröße		\\[1ex]
+									& Preisvorstellung, Anfragezeit					\\[1ex]
+Mietanfrage beantworten  			& 												\\[1ex] 
+									& Funktion anbieten zur Annahme oder Ablehnung 	\\[1ex]
+									& der Anfrage, Meldung an Mieter schicken      	\\[1ex]
+Annahme des Auftrags erhalten		& 											 	\\[1ex]
+									& Bestätigung des Mieters empfangen, Auswahl	\\[1ex]
+									& dem Vermieter anzeigen und ggf. weitere 		\\[1ex]
+									& Funktion zum Senden der Objektinformationen	\\[1ex]
+Objektinformationen verschicken		& 											 	\\[1ex]
+Funktionsausführung					& 											 	\\[1ex]
+
+
+
+\hline
+\end{tabular}
+\label{tab:mietanfrageUC}
+\end{table}
+
+\begin{table}[H]
+\caption{Use Case\#6 Mietobjekt anlegen }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Funktion zur Objektverwaltung auswählen		& 												\\[1ex]
+											& Funktion bereitstellen, die dies ermöglicht	\\[1ex]
+Auswahl ob altes Objekt bearbeiten oder		& 												\\[1ex]
+neues Anlegen         						& 												\\[1ex]
+											& Funktion bereitstellen, die dies ermöglicht	\\[1ex]
+Neues Mietobjekt registrieren				& 											 	\\[1ex] 
+Besitzer festlegen							& 											 	\\[1ex] 
+											& Verifizierung des Besitzers durch Accountdaten \\[1ex]
+											& Eingabefelder bereitstellen und prüfen 		\\[1ex]
+Objektstandort bestimmten					& 					 							\\[1ex]
+											& Funktion zur Standortbestimmung bereitstellen  \\[1ex]	
+											& Kartenanbindung mit Stecknadel?			     \\[1ex]	
+Objektmerkmale wie Größe, Preis eingeben	& 					 							\\[1ex]
+											& Eingabefelder anzeigen und Eingabe über  		\\[1ex]
+											& vordefinierte Optionen ermöglichen			\\[1ex]
+Gewünschte Austattung auswählen				& 					 							\\[1ex]
+											& Austattungsmerkmale anzeigen und 				\\[1ex]
+											& Auswahl über Menü ermöglichen 				\\[1ex]
+Informationen kontrollieren, bearbeiten 	& 												\\[1ex]
+und abspeichern 							& 												\\[1ex]
+										 	& Funktionalität zur Navigation bereitstellen	\\[1ex]
+										 	& eingegebene Daten zeigen und speichern 		\\[1ex]
+										 	& funktional ermöglichen						\\[1ex]
+
+
+
+\hline
+\end{tabular}
+\label{tab:mietobjektAUC}
+\end{table}
+
+
+\subsection{HTA?}
+
