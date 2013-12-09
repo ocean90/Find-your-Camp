@@ -245,10 +245,10 @@ public class SmackCcsClient {
     config.setSocketFactory(SSLSocketFactory.getDefault());
 
     // NOTE: Set to true to launch a window with information about packets sent and received
-    config.setDebuggerEnabled(true);
+    //config.setDebuggerEnabled(true);
 
     // -Dsmack.debugEnabled=true
-    XMPPConnection.DEBUG_ENABLED = true;
+    //XMPPConnection.DEBUG_ENABLED = true;
 
     connection = new XMPPConnection(config);
     connection.connect();
@@ -348,8 +348,8 @@ public class SmackCcsClient {
     }
 
     // Send a sample hello downstream message to a device.
-    String toRegId = "APA91bGd6IEz6NUE7g3cOVwl3wYgwEdJ4T6OnqNRMVF44e-2ZBq7pursxmMhLf6OAp14yBqMITkDseLm8qJxY4EE0tswc4E9AinJdGLtOe7DrM8RPb5rqHGqoQy3hATn3S6c3px4os1ka1-WmfwTdtFmDGbVeku86Dznj-_E-52rXFfkwDaMyFk";
-    //String toRegId = "APA91bEr69PjA9OFkGVA0Zpe052X61SrNylP5WBR_AYydjPf7rbBg1Kb5f-DfpYK1lcuAguYqNCQyzsrLsObMzBSgVFzt1z14nG4gUM1NxS4TstJZPATnF8a0YE0wuUyJQ7tR79ln461YymMH43Gv0w5cCZFuF-IZerKkS6unPm1Ep0snOk5M-w";
+    //String toRegId = "APA91bGd6IEz6NUE7g3cOVwl3wYgwEdJ4T6OnqNRMVF44e-2ZBq7pursxmMhLf6OAp14yBqMITkDseLm8qJxY4EE0tswc4E9AinJdGLtOe7DrM8RPb5rqHGqoQy3hATn3S6c3px4os1ka1-WmfwTdtFmDGbVeku86Dznj-_E-52rXFfkwDaMyFk";
+    String toRegId = "APA91bH2ZHtS1RNFYwWetjCReWdok5uky8Oe2ppAXw0B6fE-wwUiJ926yp8TDq90l2o3JlxrR9quSlYnn-QJTHkge5LTqQELztFKiDO90u5pRiDIvQBo2fVamJHo7dRq_pVAiYrmo5AfAGwknT8o534m8ltxEOPWsQ";
     String messageId = ccsClient.getRandomMessageId();
     Map<String, String> payload = new HashMap<String, String>();
     payload.put("Hello", "World");
@@ -360,5 +360,7 @@ public class SmackCcsClient {
     Boolean delayWhileIdle = true;
     ccsClient.send(createJsonMessage(toRegId, messageId, payload, collapseKey,
         timeToLive, delayWhileIdle));
+
   }
+
 }
