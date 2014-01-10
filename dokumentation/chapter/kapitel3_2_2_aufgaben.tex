@@ -33,13 +33,14 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion initiieren			& 											\\[1ex]
-							& Aktion anbieten							\\[1ex]
-Informationen angeben 		& 											\\[1ex] 
-							& Informationen aufnehmen					\\[1ex]
-							& Informationen präsentieren				\\[1ex]
-Informationen bestätigen	& 											\\[1ex]
+Registrierung initiieren	& 											\\[1ex]
+							& Aktion anbieten und bei Wahl ausführen	\\[1ex]
+Userinformationen angeben 	& 											\\[1ex] 
+							& Usernformationen aufnehmen					\\[1ex]
+							& Usernformationen präsentieren				\\[1ex]
+eingegebene Informationen bestätigen	& 											\\[1ex]
 							& Bestätigung anbieten, bei Auswahl akzeptieren  \\[1ex]
+							& Registrierung durchführen, Aktion beenden	\\[1ex]
 
 
 \hline
@@ -59,27 +60,27 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion initiieren			& 											 \\[1ex]
-							& Aktion anbieten							 \\[1ex]
+Verwaltung initiieren		& 											 \\[1ex]
+							& Aktion anbieten und bei Wahl ausführen     \\[1ex]
 Profilart wählen			& 											 \\[1ex]
-							& Auswahl anbieten							 \\[1ex]							
-eingetragene Informationen	& 											 \\[1ex]
-anzeigen					& 											 \\[1ex]
+							& Auswahl anbieten und bei Wahl ausführen	 \\[1ex]					
+vorhandene Informationen	& 											 \\[1ex]
+angezeigt bekommen			& 											 \\[1ex]
 							& vorhandene Informationen präsentieren      \\[1ex] 
 Informationen ändern 		& 											 \\[1ex] 
 							& Aufnahme neuer Informationen ermöglichen	 \\[1ex]
-							& alte Informationen entfernen				 \\[1ex]
 Änderungen bestätigen		& 											 \\[1ex]
-							& Bestätigung anbieten, bei Wahl akzeptieren \\[1ex]
+							& Bestätigung anbieten, bei Wahl ausführen   \\[1ex]
+							& neue Informationen sichern, Aktion beenden \\[1ex]
+
 \hline
 \end{tabular}
 \label{tab:profilbearbeiten}
 \end{table}
 
 
-
 \begin{table}[H]
-\caption{Essential Use Case \#4 erstelleReiseprofil }
+\caption{Essential Use Case \#3 erstelleReiseprofil }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -90,15 +91,14 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen 			& 											 \\[1ex]
-							& Optionen bekanntmachen, Wahl ermöglichen	 \\[1ex]
-Identität bestätigen		& 											 \\[1ex]
-							& Identität prüfen							 \\[1ex]
-Informationen anlegen 		& 											 \\[1ex] 
-							& neue Informationen aufnehmen				 \\[1ex]
-							& Informationen präsentieren				 \\[1ex]
-Informationen bestätigen	& 											 \\[1ex]
+Erstellung initiieren 		& 											 \\[1ex]
+							& Aktion anbieten und bei Wahl ausführen	 \\[1ex]
+Reiseinformationen anlegen 	& 											 \\[1ex] 
+							& neue Reiseinformationen aufnehmen				 \\[1ex]
+							& Reiseinformationen präsentieren				 \\[1ex]
+eingegebene Informationen bestätigen	& 											 \\[1ex]
 							& Bestätigung anbieten, bei Wahl akzeptieren \\[1ex]
+							& Reiseprofil sichern, Aktion beenden 		 \\[1ex]
 
 \hline
 \end{tabular}
@@ -106,7 +106,7 @@ Informationen bestätigen	& 											 \\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Essential Use Case \#5 sucheMietobjekt }
+\caption{Essential Use Case \#4 sucheMietobjekt }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -117,16 +117,20 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen 			& 											 \\[1ex]
-							& Optionen bekanntmachen, Wahl ermöglichen	 \\[1ex]
-Mietauftrag bekanntmachen	& 											 \\[1ex]
-							& vorhandene Mietaufträge präsentieren		 \\[1ex]
-							& Option für neuen Mietauftrag anbieten      \\[1ex]
-Anfrage bestätigen   		& 											 \\[1ex] 
-							& Anfrage akzeptieren						 \\[1ex]
-							& Anfrage bearbeiten \\[1ex]
-Antwort erhalten			& 											 \\[1ex]
-							& Akteur über Antwort informieren			 \\[1ex]
+Suche initiieren 			& 											 \\[1ex]
+							& Aktion anbieten und bei Wahl ausführen	 \\[1ex]
+Mietanfrage spezifizieren	& 											 \\[1ex]
+							& vorhandene Mietanfrage präsentieren		 \\[1ex]
+							& und Option für neuen Mietanfrage anbieten  \\[1ex]
+Option auswählen     		& 											 \\[1ex] 
+							& gewählte Option ausführen					 \\[1ex]
+							& Mietanfrage präsentieren 					 \\[1ex]
+Anfrage starten     		& 											 \\[1ex] 
+							& Aktion ausführen und Anfrage bearbeiten	 \\[1ex]
+Rückmeldung erhalten		& 											 \\[1ex]
+							& Ergebnis präsentieren						 \\[1ex]
+							& weitere Aktionen anbieten					 \\[1ex]
+
 
 \hline
 \end{tabular}
@@ -134,9 +138,8 @@ Antwort erhalten			& 											 \\[1ex]
 \end{table}
 
 
-
 \begin{table}[H]
-\caption{Essential Use Case \#6 beantworteMietanfrage }
+\caption{Essential Use Case \#5 beantworteMietanfrage }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -147,25 +150,23 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Mietanfrage bekommen 		& 											 \\[1ex]
+Mietanfrage erhalten 		& 											 \\[1ex]
 							& neue Mietanfrage präsentieren				 \\[1ex]
-Mietanfrage einsehen		& 											 \\[1ex]
-							& Informationen präsentieren				 \\[1ex]
 Mietanfrage beantworten  	& 											 \\[1ex] 
-							& Auswahl anbieten							 \\[1ex]
-							& nächsten Schritt anbieten					 \\[1ex]
-Informationen mitteilen		& 											 \\[1ex]
-							& vorhandene Informationen anzeigen			 \\[1ex]
-							& Informationen vermitteln					 \\[1ex]
-
+							& Reiseprofil präsentieren					 \\[1ex]
+							& Aktionen anbieten und ausführen			 \\[1ex]
+Rückmeldung erhalten		& 											 \\[1ex]
+							& über Ausführung informieren				 \\[1ex]
+							& Aktion beenden							 \\[1ex]
 
 \hline
 \end{tabular}
 \label{tab:mietanfrage}
 \end{table}
 
+
 \begin{table}[H]
-\caption{Essential Use Case \#7 bezahleMiete }
+\caption{Essential Use Case \#6 bezahleMiete }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -176,18 +177,20 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen	 		& 											 \\[1ex]
-							& Option anbieten							 \\[1ex]
-Identität bestätigen		& 											 \\[1ex]
-							& Identität prüfen							 \\[1ex]
+Bezahlung initiieren	 	& 											 \\[1ex]
+							& Aktion anbieten und bei Wahl ausführen	 \\[1ex]
 Mietauftrag wählen		  	& 											 \\[1ex] 
-							& Mietaufträge präsentieren, Wahl ermöglichen\\[1ex]
-Bezahlauftrag starten		& 											 \\[1ex]
-							& relevante Informationen präsentieren		 \\[1ex]
+							& Mietaufträge präsentieren und Wahl ermöglichen \\[1ex]
+Bezahlung durchführen		& 											 \\[1ex]
+							& Auftragsinformationen präsentieren		 \\[1ex]
 							& Informationsaufnahme anbieten	     		 \\[1ex]
 Auftrag bestätigen			&	     									 \\[1ex]
-							& Bestätigung anbieten				   		 \\[1ex]
-							& Ergebnis präsentieren			    		 \\[1ex]
+							& Zusammenfassung der Informationen präsentieren \\[1ex]
+							& Optionen anbieten	und ausführen			 \\[1ex]
+Rückmeldung erhalten		& 		    		                         \\[1ex]
+							& Ergebnis präsentieren		    		     \\[1ex]
+							& weitere Aktionen anbieten	    		     \\[1ex]
+
 
 \hline
 \end{tabular}
@@ -195,7 +198,7 @@ Auftrag bestätigen			&	     									 \\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Essential Use Case \#8 bewerteUser }
+\caption{Essential Use Case \#7 bewerteUser }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -206,18 +209,16 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen	 		& 											 \\[1ex]
-							& Option anbieten							 \\[1ex]
-Identität bestätigen		& 											 \\[1ex]
-							& Identität prüfen							 \\[1ex]
+Bewertung initiieren	 	& 											 \\[1ex]
+							& Aktion anbieten und bei Wahl ausführen	 \\[1ex]
 Mietauftrag wählen		  	& 											 \\[1ex] 
-							& Mietaufträge präsentieren, Wahl ermöglichen\\[1ex]
-Bezahlauftrag starten		& 											 \\[1ex]
-							& relevante Informationen präsentieren		 \\[1ex]
-							& Informationsaufnahme anbieten	     		 \\[1ex]
-Auftrag bestätigen			&	     									 \\[1ex]
-							& Bestätigung anbieten				   		 \\[1ex]
-							& Ergebnis präsentieren			    		 \\[1ex]
+							& Mietaufträge präsentieren und Wahl ermöglichen \\[1ex]
+Bewertung abgeben    		& 											 \\[1ex]
+							& Bewertungsinformationen aufnehmen 		 \\[1ex]
+							& Aktion durchführen						 \\[1ex]
+Rückmeldung erhalten		&	     									 \\[1ex]
+							& Ergebnis präsentieren				   		 \\[1ex]
+							& Aktion beenden				    		 \\[1ex]
 
 \hline
 \end{tabular}
@@ -225,7 +226,7 @@ Auftrag bestätigen			&	     									 \\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Essential Use Case \#9 kontaktiereUser }
+\caption{Essential Use Case \#8 kontaktiereUser }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -236,18 +237,19 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen	 		& 											 \\[1ex]
-							& Option anbieten							 \\[1ex]
-Identität bestätigen		& 											 \\[1ex]
-							& Identität prüfen							 \\[1ex]
-Mietauftrag wählen		  	& 											 \\[1ex] 
-							& Mietaufträge präsentieren, Wahl ermöglichen\\[1ex]
-Bezahlauftrag starten		& 											 \\[1ex]
-							& relevante Informationen präsentieren		 \\[1ex]
-							& Informationsaufnahme anbieten	     		 \\[1ex]
-Auftrag bestätigen			&	     									 \\[1ex]
-							& Bestätigung anbieten				   		 \\[1ex]
+Kontaktaufnahme initiieren	& 											 \\[1ex]
+							& Aktion anbieten und bei Wahl ausführen	 \\[1ex]
+relevanten Mietauftrag    	& 											 \\[1ex] 
+anzeigen					& 											 \\[1ex] 
+							& vorhandene Mietaufträge präsentieren 		 \\[1ex]
+							& gewählten Auftrag präsentieren			 \\[1ex]
+Nachricht verfassen			& 											 \\[1ex]
+							& Nachrichtenaufnahme anbieten				 \\[1ex]
+							& Aktion durchführen			     		 \\[1ex]
+Rückmeldung erhalten		&	     									 \\[1ex]
 							& Ergebnis präsentieren			    		 \\[1ex]
+							& weitere Aktionen anbieten			    	 \\[1ex]
+
 
 \hline
 \end{tabular}
