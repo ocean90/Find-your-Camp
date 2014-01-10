@@ -33,19 +33,19 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Registrierung initiieren	& 											\\[1ex]
-							& Aktion anbieten und bei Wahl ausführen	\\[1ex]
-Userinformationen angeben 	& 											\\[1ex] 
-							& Usernformationen aufnehmen					\\[1ex]
-							& Usernformationen präsentieren				\\[1ex]
+Registrierung initiieren				& 											\\[1ex]
+										& Aktion anbieten und bei Wahl ausführen	\\[1ex]
+Userinformationen angeben 				& 											\\[1ex] 
+										& Userinformationen aufnehmen				\\[1ex]
+										& Userinformationen präsentieren			\\[1ex]
 eingegebene Informationen bestätigen	& 											\\[1ex]
-							& Bestätigung anbieten, bei Auswahl akzeptieren  \\[1ex]
-							& Registrierung durchführen, Aktion beenden	\\[1ex]
+										& Bestätigung abfragen, bei Auswahl akzeptieren  \\[1ex]
+										& Registrierung durchführen, Aktion beenden	\\[1ex]
 
 
 \hline
 \end{tabular}
-\label{tab:anmelden}
+\label{tab:registrieren}
 \end{table}
 
 \begin{table}[H]
@@ -69,14 +69,16 @@ angezeigt bekommen			& 											 \\[1ex]
 							& vorhandene Informationen präsentieren      \\[1ex] 
 Informationen ändern 		& 											 \\[1ex] 
 							& Aufnahme neuer Informationen ermöglichen	 \\[1ex]
+							& löschen des Profils ermöglichen			 \\[1ex]
 Änderungen bestätigen		& 											 \\[1ex]
 							& Bestätigung anbieten, bei Wahl ausführen   \\[1ex]
 							& neue Informationen sichern, Aktion beenden \\[1ex]
 
 \hline
 \end{tabular}
-\label{tab:profilbearbeiten}
+\label{tab:profilverwalten}
 \end{table}
+
 
 
 \begin{table}[H]
@@ -94,15 +96,15 @@ user intention & system responsibility
 Erstellung initiieren 		& 											 \\[1ex]
 							& Aktion anbieten und bei Wahl ausführen	 \\[1ex]
 Reiseinformationen anlegen 	& 											 \\[1ex] 
-							& neue Reiseinformationen aufnehmen				 \\[1ex]
-							& Reiseinformationen präsentieren				 \\[1ex]
+							& neue Reiseinformationen aufnehmen			 \\[1ex]
+							& Reiseinformationen präsentieren			 \\[1ex]
 eingegebene Informationen bestätigen	& 											 \\[1ex]
 							& Bestätigung anbieten, bei Wahl akzeptieren \\[1ex]
 							& Reiseprofil sichern, Aktion beenden 		 \\[1ex]
 
 \hline
 \end{tabular}
-\label{tab:mietauftrag}
+\label{tab:reiseprofil}
 \end{table}
 
 \begin{table}[H]
@@ -194,7 +196,7 @@ Rückmeldung erhalten		& 		    		                         \\[1ex]
 
 \hline
 \end{tabular}
-\label{tab:statuscodes}
+\label{tab:bezahlung}
 \end{table}
 
 \begin{table}[H]
@@ -222,7 +224,7 @@ Rückmeldung erhalten		&	     									 \\[1ex]
 
 \hline
 \end{tabular}
-\label{tab:statuscodes}
+\label{tab:bewertung}
 \end{table}
 
 \begin{table}[H]
@@ -246,14 +248,54 @@ anzeigen					& 											 \\[1ex]
 Nachricht verfassen			& 											 \\[1ex]
 							& Nachrichtenaufnahme anbieten				 \\[1ex]
 							& Aktion durchführen			     		 \\[1ex]
+\hline
+\end{tabular}
+\label{tab:kontaktaufnahme}
+\end{table}
+
+\begin{table}[H]
+\caption{Essential Use Case \#9 userAusloggen }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Ausloggen initiieren		& 											 \\[1ex]
+							& Aktion anbieten und bei Wahl ausführen	 \\[1ex]
 Rückmeldung erhalten		&	     									 \\[1ex]
 							& Ergebnis präsentieren			    		 \\[1ex]
-							& weitere Aktionen anbieten			    	 \\[1ex]
-
+							& Aktion beenden					    	 \\[1ex]
 
 \hline
 \end{tabular}
-\label{tab:statuscodes}
+\label{tab:ausloggen}
+\end{table}
+
+\begin{table}[H]
+\caption{Essential Use Case \#10 wähleAktion }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+mögliche Aktion finden			& 											\\[1ex]
+								& vorhandene Aktionen präsentieren			\\[1ex]
+Aktion ausführen 				& 											\\[1ex] 
+								& Auswahl der Aktion ermöglichen			\\[1ex]
+								& Aktion initiieren							\\[1ex]
+\hline
+\end{tabular}
+\label{tab:aktionen}
 \end{table}
 
 \newpage
@@ -489,6 +531,7 @@ Qualitätsattribute an Funktionen\\
 Anforderungen an implementiertes System als Ganzes\\
 
 
-
+\subsection{Content Model}
+Anschließend wurde auf Grundlage der Essentiell Models das content modeling durchgeführt. Nach Prinzip des Software for Use Prinzips, wurde mit Hilfe des Abstract Prototyping ein
 
 
