@@ -39,20 +39,20 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
 		switch (item.getItemId()) {
-		case R.id.action_settings:
-			intent = new Intent(this, SettingsActivity.class);
-			startActivity(intent);
-			return true;
-		case R.id.action_insert_rental_property:
-			intent = new Intent(this, InsertRentalPropertyActivity.class);
-			startActivity(intent);
-			return true;
-		case R.id.action_request_rental_property:
-			intent = new Intent(this, RequestRentalPropertyActivity.class);
-			startActivity(intent);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+			case R.id.action_settings:
+				intent = new Intent(this, SettingsActivity.class);
+				startActivity(intent);
+				return true;
+			case R.id.action_insert_rental_property:
+				intent = new Intent(this, InsertRentalPropertyActivity.class);
+				startActivity(intent);
+				return true;
+			case R.id.action_request_rental_property:
+				intent = new Intent(this, RequestRentalPropertyActivity.class);
+				startActivity(intent);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 

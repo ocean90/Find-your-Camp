@@ -34,6 +34,16 @@
 	<string name="rental_property_campfire_allowed">Lagerfeuer gestattet</string>
 	<string name="rental_property_save">Speichern</string>
 
+	<string name="menu_show_only_request">Mietanfragen</string>
+	<string name="menu_show_only_searches">Suchanfragen</string>
+
+	<string name="action_bar_rental_property_requests">Mietanfragen</string>
+	<string name="action_bar_search_requests">Mietanfragen</string>
+
+	<string-array name="action_bar_dropdown">
+        <item>@string/action_bar_rental_property_requests</item>
+        <item>@string/action_bar_search_requests</item>
+    </string-array>
 
     <string-array name="rental_property_group_size_array">
         <item>1</item>

@@ -156,7 +156,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/rental_property_save" />
+            android:text="@string/rental_property_save"
+            android:onClick="onButtonClick" />
     </LinearLayout>
 
 </ScrollView>

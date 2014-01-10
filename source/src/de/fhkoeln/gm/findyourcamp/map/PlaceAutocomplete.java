@@ -36,7 +36,6 @@ public final class PlaceAutocomplete {
 	        sb.append("&language=de");
 	        sb.append("&input=" + URLEncoder.encode(input, "utf8"));
 
-	        Logger.info(sb.toString());
 	        URL url = new URL(sb.toString());
 	        conn = (HttpURLConnection) url.openConnection();
 	        InputStreamReader in = new InputStreamReader(conn.getInputStream());
