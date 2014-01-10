@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RequestRentalPropertyActivity" >
+
+	<EditText
+	    android:id="@+id/rental_property_location_autocomplete"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="@string/rental_property_location_hint"
+	    android:inputType="textAutoComplete" />
+
+	<Spinner
+	    android:id="@+id/rental_property_place_size"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" />
+
+	<fragment
+	  android:id="@+id/rental_property_map"
+	  android:name="com.google.android.gms.maps.MapFragment"
+	  android:layout_width="match_parent"
+	  android:layout_height="match_parent" />
+</LinearLayout>

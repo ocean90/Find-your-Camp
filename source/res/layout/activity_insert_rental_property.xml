@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        tools:context=".InsertRentalPropertyActivity" >
+
+        <TextView
+            android:id="@+id/rental_property_section_title_location"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bottom_border"
+            android:text="@string/rental_property_section_title_location"
+            android:textStyle="bold" />
+
+        <AutoCompleteTextView
+            android:id="@+id/rental_property_location_autocomplete"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/rental_property_location_hint" />
+
+        <TextView
+            android:id="@+id/rental_property_section_title_features"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bottom_border"
+            android:text="@string/rental_property_section_title_features"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/rental_property_toilets_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_toilets_available" />
+
+        <CheckBox
+            android:id="@+id/rental_property_bbq_allowed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_bbq_allowed" />
+
+        <CheckBox
+            android:id="@+id/rental_property_internet_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_internet_available" />
+
+        <CheckBox
+            android:id="@+id/rental_property_carparking_possible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_carparking_possible" />
+
+        <CheckBox
+            android:id="@+id/rental_property_children_allowed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_children_allowed" />
+
+        <CheckBox
+            android:id="@+id/rental_property_supermarket_nearby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_supermarket_nearby" />
+
+        <CheckBox
+            android:id="@+id/rental_property_public_transport_nearby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_public_transport_nearby" />
+
+        <CheckBox
+            android:id="@+id/rental_property_shower_bath_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_shower_bath_available" />
+
+        <CheckBox
+            android:id="@+id/rental_property_water_provided"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_water_provided" />
+
+        <CheckBox
+            android:id="@+id/rental_property_tents_provided"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_tents_provided" />
+
+        <CheckBox
+            android:id="@+id/rental_property_power_provided"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_power_provided" />
+
+        <CheckBox
+            android:id="@+id/rental_property_dogs_allowed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_dogs_allowed" />
+
+        <CheckBox
+            android:id="@+id/rental_property_caravan_parking_possible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_caravan_parking_possible" />
+
+        <CheckBox
+            android:id="@+id/rental_property_campfire_allowed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rental_property_campfire_allowed" />
+
+        <TextView
+            android:id="@+id/rental_property_section_title_group_size"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bottom_border"
+            android:text="@string/rental_property_section_title_group_size"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/rental_property_group_size"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/rental_property_section_title_place_size"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bottom_border"
+            android:text="@string/rental_property_section_title_place_size"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/rental_property_place_size"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/rental_property_save"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/rental_property_save" />
+    </LinearLayout>
+
+</ScrollView>
