@@ -22,7 +22,7 @@ Funktionale Anforderungsermittlung, interaktion zwischen Anwender und System, se
 Formal und an Reichhaltigkeit orientiert an Software for Use S. 105
 
 \begin{table}[H]
-\caption{\#1 Anwender bekanntmachen }
+\caption{Essential Use Case \#1 registriereUser }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -33,13 +33,13 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen 			& 											\\[1ex]
-							& Optionen bekanntmachen, Wahl ermöglichen	\\[1ex]
+Aktion initiieren			& 											\\[1ex]
+							& Aktion anbieten							\\[1ex]
 Informationen angeben 		& 											\\[1ex] 
 							& Informationen aufnehmen					\\[1ex]
 							& Informationen präsentieren				\\[1ex]
 Informationen bestätigen	& 											\\[1ex]
-							& Bestätigung anbieten, bei Wahl akzeptieren \\[1ex]
+							& Bestätigung anbieten, bei Auswahl akzeptieren  \\[1ex]
 
 
 \hline
@@ -48,7 +48,7 @@ Informationen bestätigen	& 											\\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{\#2 Benutzerprofil verwalten }
+\caption{Essential Use Case \#2 verwalteProfil }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -59,23 +59,27 @@ user intention & system responsibility
 \\ [1.5ex]
 \hline
 \\ [-0.5ex]
-Aktion auswählen 			& 											 \\[1ex]
-							& Optionen bekanntmachen, Wahl ermöglichen	 \\[1ex]
-Identität bestätigen		& 											 \\[1ex]
-							& Identität prüfen							 \\[1ex]
+Aktion initiieren			& 											 \\[1ex]
+							& Aktion anbieten							 \\[1ex]
+Profilart wählen			& 											 \\[1ex]
+							& Auswahl anbieten							 \\[1ex]							
+eingetragene Informationen	& 											 \\[1ex]
+anzeigen					& 											 \\[1ex]
 							& vorhandene Informationen präsentieren      \\[1ex] 
 Informationen ändern 		& 											 \\[1ex] 
-							& neue Informationen aufnehmen				 \\[1ex]
+							& Aufnahme neuer Informationen ermöglichen	 \\[1ex]
 							& alte Informationen entfernen				 \\[1ex]
-Informationen bestätigen	& 											 \\[1ex]
+Änderungen bestätigen		& 											 \\[1ex]
 							& Bestätigung anbieten, bei Wahl akzeptieren \\[1ex]
 \hline
 \end{tabular}
 \label{tab:profilbearbeiten}
 \end{table}
 
+
+
 \begin{table}[H]
-\caption{\#3 Mietauftrag erstellen }
+\caption{Essential Use Case \#4 erstelleReiseprofil }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -102,7 +106,7 @@ Informationen bestätigen	& 											 \\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{\#4 Mietobjekt finden }
+\caption{Essential Use Case \#5 sucheMietobjekt }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -129,8 +133,10 @@ Antwort erhalten			& 											 \\[1ex]
 \label{tab:mietobjekt}
 \end{table}
 
+
+
 \begin{table}[H]
-\caption{\#5 Mietanfrage beantworten }
+\caption{Essential Use Case \#6 beantworteMietanfrage }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -159,7 +165,67 @@ Informationen mitteilen		& 											 \\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{\#6 Bezahlung }
+\caption{Essential Use Case \#7 bezahleMiete }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Aktion auswählen	 		& 											 \\[1ex]
+							& Option anbieten							 \\[1ex]
+Identität bestätigen		& 											 \\[1ex]
+							& Identität prüfen							 \\[1ex]
+Mietauftrag wählen		  	& 											 \\[1ex] 
+							& Mietaufträge präsentieren, Wahl ermöglichen\\[1ex]
+Bezahlauftrag starten		& 											 \\[1ex]
+							& relevante Informationen präsentieren		 \\[1ex]
+							& Informationsaufnahme anbieten	     		 \\[1ex]
+Auftrag bestätigen			&	     									 \\[1ex]
+							& Bestätigung anbieten				   		 \\[1ex]
+							& Ergebnis präsentieren			    		 \\[1ex]
+
+\hline
+\end{tabular}
+\label{tab:statuscodes}
+\end{table}
+
+\begin{table}[H]
+\caption{Essential Use Case \#8 bewerteUser }
+\centering
+\begin{tabular}{l l}
+\\ [-0.5ex]
+
+\hline\hline
+\\ [-0.5ex]
+user intention & system responsibility
+\\ [1.5ex]
+\hline
+\\ [-0.5ex]
+Aktion auswählen	 		& 											 \\[1ex]
+							& Option anbieten							 \\[1ex]
+Identität bestätigen		& 											 \\[1ex]
+							& Identität prüfen							 \\[1ex]
+Mietauftrag wählen		  	& 											 \\[1ex] 
+							& Mietaufträge präsentieren, Wahl ermöglichen\\[1ex]
+Bezahlauftrag starten		& 											 \\[1ex]
+							& relevante Informationen präsentieren		 \\[1ex]
+							& Informationsaufnahme anbieten	     		 \\[1ex]
+Auftrag bestätigen			&	     									 \\[1ex]
+							& Bestätigung anbieten				   		 \\[1ex]
+							& Ergebnis präsentieren			    		 \\[1ex]
+
+\hline
+\end{tabular}
+\label{tab:statuscodes}
+\end{table}
+
+\begin{table}[H]
+\caption{Essential Use Case \#9 kontaktiereUser }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -193,7 +259,7 @@ Auftrag bestätigen			&	     									 \\[1ex]
 Ein use case erfasst eine Beziehung zwischen stakeholder und dem technischen Subsystem bzgl. des Verhaltens des technischen Subsys- tems. Es beschreibt das Verhalten des technischen Subsystems unter bestimmten Rahmenbedingungen als Antwort auf eine Anfrage des stakeholders (primary actor). Der primary actor iniziiert die Interak- tion, um ein Ziel zu erreichen.
 
 \begin{table}[H]
-\caption{Use Case\#1 Benutzer registrieren }
+\caption{Use Case\#1 registriereUser }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -228,7 +294,7 @@ Profil verifizieren									& 												\\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Use Case\#2 Benutzerprofil verwalten }
+\caption{Use Case\#2 verwalteBenutzerprofil }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -256,7 +322,7 @@ Neue Informationen abspeichern		& 											 		\\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Use Case\#3 Mietauftrag erstellen }
+\caption{Use Case\#3 erstelleReiseprofil }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -287,7 +353,7 @@ Informationen bestätigen und abspeichern 	& 												\\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Use Case\#4 Mietobjekt finden }
+\caption{Use Case\#4 findeMietobjekt }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -322,7 +388,7 @@ erhalten								& 												\\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Use Case\#5 Mietanfrage beantworten }
+\caption{Use Case\#5 beantworteMietanfrage }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -359,7 +425,7 @@ Funktionsausführung					& 											 	\\[1ex]
 \end{table}
 
 \begin{table}[H]
-\caption{Use Case\#6 Mietobjekt anlegen }
+\caption{Use Case\#6 registriereMietobjekt }
 \centering
 \begin{tabular}{l l}
 \\ [-0.5ex]
@@ -405,9 +471,9 @@ und abspeichern 							& 												\\[1ex]
 \subsection{HTA?}
 
 zu Nutzungskontext\\
-die Ziele und Arbeitsaufgaben der Benutzer. Die Beschreibung sollte Gesamtziele fu ̈r die Verwendung des Systems enthalten. Die Merkmale jener Aufgaben, die Gebrauchstauglichkeit be- einflussen ko ̈nnen, sollten beschrieben werden ebenso wie ggf. vorhandene Auswirkungen auf die Gesundheit und Sicherheit. Beschreibung sollte die Verteilung der Aktivita ̈ten und Arbeits- schritte zwischen Mensch und technischen Hilfsmitteln einsch- liessen. Die Aufgaben sollten nicht nur bzgl. Funktionen oder Leistungsmerkmale beschrieben werden,\\
+die Ziele und Arbeitsaufgaben der Benutzer. Die Beschreibung sollte Gesamtziele für die Verwendung des Systems enthalten. Die Merkmale jener Aufgaben, die Gebrauchstauglichkeit be- einflussen können, sollten beschrieben werden ebenso wie ggf. vorhandene Auswirkungen auf die Gesundheit und Sicherheit. Beschreibung sollte die Verteilung der Aktivitäten und Arbeits- schritte zwischen Mensch und technischen Hilfsmitteln einsch- liessen. Die Aufgaben sollten nicht nur bzgl. Funktionen oder Leistungsmerkmale beschrieben werden,\\
 
-die Umgebung, in der die Benutzer das System benutzen sollen. Die Umgebung schliesst die hardware, software und die zu ver- wendenden Materialien ein. Deren Beschreibung kann eine Aus- wahl von Produkten darstellen, von denen eines oder mehre-re den Schwerpunkt der menschzentrierten Spezifikation oder Beur- teilung bilden kann, oder sie kann aus einer Auswahl von Merk- malen oder Leistungseigenschaften der Hardware, Software oder sonstiger Materialien bestehen. Daru ̈ber hinaus geho ̈ren zu der Umgebung die physischen, organisatorischen und sozialen Rah- menbedingungen und Einflussgro ̈ssen.\\
+die Umgebung, in der die Benutzer das System benutzen sollen. Die Umgebung schliesst die hardware, software und die zu ver- wendenden Materialien ein. Deren Beschreibung kann eine Aus- wahl von Produkten darstellen, von denen eines oder mehre-re den Schwerpunkt der menschzentrierten Spezifikation oder Beur- teilung bilden kann, oder sie kann aus einer Auswahl von Merk- malen oder Leistungseigenschaften der Hardware, Software oder sonstiger Materialien bestehen. Darüber hinaus gehören zu der Umgebung die physischen, organisatorischen und sozialen Rah- menbedingungen und Einflussgrössen.\\
 
 
 Anforderungsdokument:\\
