@@ -1,3 +1,124 @@
 %!TEX root = ../dokumentation.tex
 
-\section{Bearbeitung der Proof of Concepts}
+\section{Bearbeitung der Proof-of-Concepts}
+
+Die im Konzept definierten Proof-of-Concepts\footnote{Konzeptkapitel 7.1 Seite 41} bieten eine Basis, um elementare Funktionen des Systems vorab prototypisch umzusetzen um so den Realisierungsaufwand zu schätzen.
+
+\subsection{PoC 1: „Hello World“ Android-App}
+
+In diesem Proof-of-Concept wurde hautpsächlich auf die mögliche Entwicklungsumgebung eingegangen. Wie angesprochen, wird das System zunächst für das mobile Betriebssystem Android von Google entwickelt. Android basiert auf der Programmiersprache Java und dem zugehörigen Software Development Kit (SDK)\footnote{http://developer.android.com/sdk/index.html}.
+
+Als mögliche Entwicklungsumgebung bietet Google zum einen ein Plugin für die Eclipse an sowie eine eigens für Android entwickelte Umgebung names „Android Studio“\footnote{http://developer.android.com/sdk/installing/studio.html}. Letztere befindet sich zu diese Zeitpunkt (Version 0.3.2) noch im Alpha Entwicklungsstadium. Vorteil dieser Umgebung ist die feste Integrierung des SDKs sowie der eingebaute Support für die Google Cloud Services, welche für unser Produkt benötigt werden.
+
+In unseren ersten Tests war jedoch das frühe Entwicklungsstadium durch häufige Programmabstürze bemerkbar, sodass der Entschluss gezogen wurde, auf die bereits bekannte Entwicklungsumgebung Eclipse zu setzen. Dies benötigte allerdings Mehraufwand im Bezug auf die Installation der Plugins und des SDKs, welches allerdings durch die Stabilität im späteren Projektverlauf zum Vorteil sein wird.
+
+Im Verlauf der Realisierungs dieses Proof-of-Concepts wurden verschiedene Punkte festgestellt, auf welche bei der Entwicklung des Systems eingegangen werden müssen. Die wichtigsten Punkte sind in folgender Liste dokumentiert:
+
+\begin{itemize}
+	\item \textbf{Android Version und API Level:} Der aktuelle Zweig von Android ist die Version 4.4. Jeder Version ist ein API Level zugeordnet\footnote{http://developer.android.com/guide/topics/manifest/uses-sdk-element.html\#ApiLevels}. Je nach API Level stehen nicht immer alle Features bzw Schnittstellen zur Verfügung. Bei der Entwicklung unseren Systems wird deswegen als Minimum der API Level 14 vorrausgesetzt, welches der Version 4.0 und aufwärts entspricht. Dies bringt uns den Vorteil auf umständliche Support Bibliotheken für ältere Version verzichten zu können. Gleichzeitig entfallen damit auch Tests auf älteren Geräten, welche unter Umständen eine reduzierte Hardware anbieten. Mit Stand 8. Januar 2014 würden wird damit 77,4\%\footnote{http://developer.android.com/about/dashboards/index.html\#Platform} aller aktuell genutzten Geräte unterstützen können.
+	\item \textbf{String Ressourcen:} Bei der Verwendung von Texten im User-Interface gibt es unter Android eine Besonderheit. Android setzt vorraus, dass die Texte vom eigentlichen Programmcode extrahiert werden. Die eigentlichen Texte werden in einer XML Datei ausgelagert und über eine ID referenziert.\footnote{http://developer.android.com/training/basics/firstapp/building-ui.html\#Strings}.
+	\item \textbf{User Interface:} Für das Designen eines User Interfaces wird durch das Eclipse Plugin und dem SDK eine Editor angeboten, über welchem per Drag\&Drop das User Interface aufgebaut werden kann. Dahinter liegt eine Datei im XML Format, welche ebenfalls editierbar ist und eine detailierte Anpassung ermöglicht. Die dritte Variante ist die Elemente programmatisch einem Layout hinzuzufügen. Diese Variante ergab allerdings keinen größeren Vorteil bei der Realiserung des Prototypen und sollte in Zukunft, sofern möglich, vermieden werden.
+	\item \textbf{Testing:} Für das Testen der Applikation können Emulatoren erstellt werden, welche eine Android Device emulieren. Allerdings mit gewissen Einschränkungen, hauptsächlich die Performance was in unseren ersten Tests immer weider ein Problem. Deswegen wurde ein „echtes“ Testgerät organisiert. Dieses wird ebenfalls vom SDK unterstützt und erleichtert das spätere Testen ungemein.
+\end{itemize}
+
+
+Dieser Proof-of-Concept konnte erfolgreich abgeschlossen werden. Die oben aufgeführten Punkte wurden im nächsten Proof-of-Concept bereits umgesetzt.
+
+\subsection{PoC 2: GCM HTTP Connection Server}
+
+Wie im Konzept bereits aufgeführt\footnote{Konzeptkapitel 4.2.1 Seite 30f} bestehen zwei Möglichkeiten die geplante Architektur umzusetzen. Die HTTP Variante diente als Fallback für den Fall, die CCS(XMPP) Variante nicht für uns freigeschaltet wird. Da die Freischaltung jedoch zeitnah erfolgte, wurde dieser Proof-of-Concept als nicht mehr relevant eingestuft.
+
+\subsection{PoC 3: GCM Cloud Connection Server}
+
+In diesem Proof-of-Concept wird der erste Kontakt mit Google Cloud Messaging (GCM)\footnote{http://developer.android.com/google/gcm/index.html} hergestellt. Würde dieser Prototyp fehlschlagen, müsste das gesamte System überdacht werden.
+
+Die wichtigste Eigenschaft der CCS Variante ist das Senden von Nachrichten vom Device an den Server. Dies wurde im ersten Teil des Prototyps als \textit{Client} umgesetzt. Hierfür musste allerdings zunächst ein weiteres SDK installiert werden, welches an der genutzten Enticklungsumgebung liegt (vgl. PoC 1). „Google Play Services SDK“\footnote{http://developer.android.com/google/play-services/index.html} ist ein Framework mit weiteren Klassen, welches die Verwendung von Google Services, wie GCM ermöglicht. Eine Alternative diesbezüglich ist nicht vorhanden.
+
+Die Installation des SDKs beanspruchte eine gewisse Zeit, da es nicht direkt out-of-the-box funktionieren wollte. Das SDK musste als Bibliothek im selben Workspace wie der Sourcecode der Applikation liegen.
+
+Desweiteren musste ein Meta-Tag (siehe Code \ref{ls:gpc-metatag}) im eingefügt werden, welcher leider noch nicht bei der Realisierung des PoC in der Anleitung\footnote{http://developer.android.com/google/play-services/setup.html} stand. Mittlerweile wurde dieser aber nachgetragen.
+
+\begin{lstlisting}[label=ls:gpc-metatag,caption=Meta-Tag für Google Play Services in AndroidManifest.xml,language=XML]
+<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+\end{lstlisting}
+
+Bei der Entwicklung sind wir auf eine weitere Eigenschaft von Android gestoßen: „System Permissions“\footnote{http://developer.android.com/guide/topics/security/permissions.html}. Das Berechtigungssystem bietet dem Nutzer eine gewisse Sicherheit. Muss eine Applikation sich mit dem Internet verbinden, so muss sie dies anfragen. Für die Nutzung von unserem GCM System waren daher verschiedene Berechtigungen nötig, siehe Code \ref{ls:android-permissions}.
+
+\begin{lstlisting}[label=ls:android-permissions,caption=Meta-Tag für Google Play Services in AndroidManifest.xml,language=XML]
+<!-- Google Services benoetigen das Internet. -->
+<uses-permission android:name="android.permission.INTERNET" />
+
+<!-- Ein Google Account muss vorhanden sein.  -->
+<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+<!-- CPU aufwecken, wenn eine Nachricht empfangen wird. -->
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+
+<!-- Eigene Berechtigung um nur unsere Nachrichten zu empfangen. -->
+<permission android:name="de.fhkoeln.gm.poc3_client.app.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+<uses-permission android:name="de.fhkoeln.gm.poc3_client.app.permission.C2D_MESSAGE" />
+
+<!-- Nachrichten empfangen und senden duerfen. -->
+<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+\end{lstlisting}
+
+
+Der Client sendete von nun an Nachrichten an einen Google Server. Um diese wieder auszulesen, mussten wir den zweiten Teil des PoC realisieren, die spätere Serverandwendung.
+
+Diese Verbindung zum Google Server muss über XMPP\footnote{http://developer.android.com/google/gcm/ccs.html} laufen, der dafür gelieferte Endpoint ist \textit{http://gcm.googleapis.com:5235}. Da die Serveranwendung ebenfalls unter Java laufen soll, ist eine XMPP Bibliothek nötig gewesen, welche die Verbindungsaufnahme sowie das spätere Empfangen und Senden von Nachrichten unterstützt. Die weit verbreiteste ist hierbei die „Smack API“\footnote{http://www.igniterealtime.org/projects/smack/}. Aufgrund der schon bestehenden Erfahrung mit dieser Bibliothek aus WBA 2 wurde für die Realisierung auf diese gesetzt.
+
+Auch dieser Proof-of-Concept konnte nach anfänglichen Schwierigkeiten erfolgreich abgeschlossen werden und bietet nun eine gute Basis für das spätere Gesamtsystem.
+
+\subsection{PoC 4: Lokale Datenbankanbindung}
+
+Für diesen PoC musste geprüft werden, welche Möglichkeiten bestehen, Daten lokal abzuspeichern. Die Anforderungen dabei waren, dass die Daten nur von der lokalen Anwendung lesbar sind, persistent speicherbar sind und grundlegende Datenoperationen nach dem CRUD Paradigma unterstützen muss.
+
+Android bietet drei Möglichkeiten:
+
+\begin{itemize}
+	\item \textbf{Shared Preferences:} Sollten die Daten nur aus Key-Value-Paaren bestehen kann „Shared Preferences“ genutzt werden. Google rät allerdings dies Art von Speicherung nur für programmspezifische Einstellungen zu nutzen und nicht für komplexe Datenstrukturen.
+	\item \textbf{Dateien:} Daten können auch dateibasiert gespeichert werden. Allerdings müsste hierfür eine eigene Architektur entwickelt werden, wie die Daten abgespeichert werden sollen. NoSQL und/oder XML wären hier Gedankenansätze, die fortgeführt werden müssten.
+	\item \textbf{SQLite Datenbank:} Android bietet allerdings auch eine API für ein relationales Datenbanksystem an, in diesem Fall SQLite. Die API unterstützt dabei die gängigen Operationen nach CRUD. Ein weiterer Punkt der für die Datenbank Schnittstelle spricht, ist, dass die Daten wirklich nur von der Anwendung selbst gelesen werden können.
+\end{itemize}
+
+Da somit erstmal nur die SQLite Datenbank in Frage kam, wurde dieser PoC mit eben dieser Speicherart realisiert. Bei der Entwicklung wurde schnell deutlich, dass die Arbeit mit der API und erstellen der Datenbanktabelle Zeit in Anspruch werden wird, sodass dieser Punkt relativ zu Beginn der Systemrealisierung gesetzt werden muss.\\
+
+Eine besondere Eigenschaft der Android API ist die Verarbeitung von ausgelesen Daten. Es kann keine objektrelationale Abbildung ausgeben werden, sondern muss über einen sogegannten „Cursor“\footnote{http://developer.android.com/reference/android/database/Cursor.html} die Daten auslesen. Am Beispiel einer User-Tabelle (siehe Code \ref{ls:user-table-cursor}) ist der Rückgabetyp der Abfrage vom Typ \textit{Cursor}. Über eine while-Schleife kann dann das Ergebnis ausgelesen werden und zum Beispiel mit Hilfe einer Model-Klasse, in dem Fall \textit{User}, in ein Objekt umgewandelt werden.
+
+\begin{lstlisting}[label=ls:user-table-cursor,caption=Auslesen aller Benutzer aus einer User-Tabelle]
+private void updateNameList() {
+	Cursor userCursor = userDatabase.query("user", null, null, null, null, null, "name");
+
+	final List<User> users = new ArrayList<User>();
+
+	userCursor.moveToFirst();
+	while (!userCursor.isAfterLast()) {
+		User user = cursorToUser(userCursor);
+		users.add(user);
+		userCursor.moveToNext();
+	}
+	userCursor.close();
+
+	// ...
+}
+
+private User cursorToUser(Cursor cursor) {
+	User user = new User();
+	user.setId(cursor.getInt(0));
+	user.setName(cursor.getString(1));
+	return user;
+}
+\end{lstlisting}
+
+Mit diesem Ergebnis konnte dieser Proof-of-Concept erfolgreich abgeschlossen werden.
+
+\subsection{PoC 5: Datenfreigabe über GCM}
+
+Nachdem das Senden von Nachrichten und das Anlegen von Daten funktionierte, konnte mit diesem Proof-of-Concept begonnen werden. Das Ziel war es, die Daten, welche von einem Device zum anderen Device geschickt wurden, zu empfangen.
+
+Dabei stand die Frage im Raum, wie kann eine Anwendung im Hintergrund weiterarbeiten, nachdem diese bereits geschlossen wurde. Android bietet die Möglichkeit Hintergrunddiesnte über sogegannte „IntentServices“\footnote{http://developer.android.com/training/run-background-service/create-service.html}. Zusätzlich muss ein Receiver implementiert werden, welcher die Nachrichten über GCM empfängt und den Prozesser des Gerätes aktiviert.
+
+Der Demo-Code\footnote{http://developer.android.com/google/gcm/client.html\#sample-receive} erklärt das Vorgehen sehr genau, sodass an dieser Stelle nicht weiter drauf eingegangen wird.
+
+Die Datenfreigabe funktionierte mit dem gegeben Beispiel ebenfalls, sodass nun alle Proof-of-Concept erfolgreich abgeschlossen werden konnten.
+
