@@ -1,0 +1,86 @@
+%!TEX root = ../dokumentation.tex
+
+\section{Nutzungsanforderungen}
+TODO
+
+\subsection{Funktionale Anforderungen}        	
+Im Vergleich zu obigem Beispiel sollte dabei beachtet werden, dass die Software auf einem Smartphone läuft und von dem Kontext ausgegangen wird, dass ein Benutzer auf seiner Strecke die entsprechenden Suchfunktionen nutzt. Zusätzlich dazu wurden auch Grundfunktionalitäten betrachtet, die nicht mit dem direkten Suchen zusammenhängen.
+
+\begin{itemize}
+   \item 
+   Registrierung der Anwender und Speichern von relevanten Informationen.
+   \item
+   Erstellung und Bearbeitung eines Benutzerprofils/ Camp Profils.
+   \item
+   Erstellen eines Reiseprofils: geplante Reisezeit, gewünschte Ausstattung und Gruppengröße, anhand dessen das Matching stattfindet.
+   \item
+   Lokalisierung über GPS.
+   \item 
+   Suchen nach vorhanden Grundstücksanbietern und Rückmeldung über Suchtreffer.
+   \item 
+   Anzeige der Anfrage beim potentiellen Vermieter.
+   \item
+   Kontaktaufnahme und Kommunikation des Mieters und Vermieters (Google Cloud Messaging) über Nachrichten.
+   \item
+   Übersenden von Kontaktinformationen: Reiseinformationen des Mieters, sowie Grundstücksinformationen des Vermieters. 
+   \item 
+   Matchingfunktion anhand derer relevante Anfragen gefiltert werden.
+   \item 
+   (Eventuell) Lokale Speicherung der Kontaktinformationen zur GPS Benutzung oder bei Verbindungsabbruch.
+   \item
+   Bezahlfunktion über Applikation.
+   \item
+   Bewertung des Benutzers.
+   \item
+   Einblenden von Werbeaktionen
+
+\end{itemize}
+
+\newpage 
+
+\subsection{Qualitative Anforderungen} 
+Neben den funktionalen Anforderungen, ergaben sich auch erste nonfunktionale Anforderungen an das System.
+
+
+Qualitätsattribute der gewünschten Funktionen,
+Anforderungen an das implementierte System als 
+Ausführungsverhalten (Verarbeitung unter Echtzeitbedingungen, Auslastung von Ressourcen, Genauigkeit, Antwortzeiten, Durchsatz, Speicherbedarf)
+
+\begin{itemize}
+   \item 
+   \textbf{Zuverlässigkeit}: Funktionen müssen zuverlässig arbeiten und die Aktivitäten zielgerichtet unterstützen. Dazu gehört vorallem die genaue GPS Ortung, ein passendes Matchingsystem und die effektive Nachrichtenweiterleitung. Auch der Bezahlvorgang sollte problemlos funktionieren, da hierbei nachhaltiger Schaden bei Fehlern entstehen kann. 
+
+   \item
+   \textbf{Ausfallsicherheit}: Da die Anwendung verstärkt im freien Verwendung findet, muss die Anwendung auf Verbindungsausfälle reagieren. Dazu kann bei leerem Akku eine Unterbrechung während einer Aktivität stattfinden. In folge dessen, mussen die Information weiterhin unversehr bleiben.
+
+   \item
+   \textbf{Robustheit}: Die Anwendung muss, speziell für das Matching, sehr robust bei fehlerhaften Eingaben des Anwenders sein. Bei fehlerhafter Benutzung (z.B. durch Unerfahrenheit oder durch Auswahl einer falschen Option aufgrund von Sonneneinstrahlung/Sichteinschränkung), sollen für den Anwender keine Folgeschäden auftreten.
+
+   \item
+   \textbf{Usability}: Geforderte Funktionen müssen ausführbar sein und möglichst effektiv zum Ziel führen. Dabei sollte auch das physikalische Umfeld betrachtet werden, da der Anwender sich verstärkt im freien Aufhalten wird und unter zeitlichen Faktoren stehen kann.
+   
+   \item 
+   \textbf{Effiziens}: Funktionen müssen die Suche gezielt unterstützen und eine sinnvolle Allokation der Arbeitsschritte muss vorhanden sein, um dem Benutzer möglichst viel Arbeit abzunehmen. (Mit möglichst geringem Aufwand an gewünschtes Ziel führen.)
+   Die einzelnen Aktivitäten müssen möglichst schnell durchgeführt und Daten schnell weitergeleitet werden. Da mit Verbindungsabbrüchen zu rechnen ist, sollen einzelne Schritte während der Kommunikation zwischen Mieter und Vermieter zwischengespeichert werden.
+   
+   \item
+   \textbf{Sicherheit}: Permanent gespeicherte Daten müssen sicher gespeichert und übertragen werden. 
+
+   \item
+   \textbf{Barrierefrei und Zugänglichkeit}: Applikation sollte so gestaltet sein, dass eine möglichst große Interessentengruppe angesprochen wird. Sie sollte daher einfach und effizient zu benutzen sein, leicht erlernbar und den User unterstützen. Von der  Gestaltung sollten auch Anwender mit visuellen Beeinträchtigungen unterstützt werden.
+\end{itemize}
+
+
+
+\subsection{Organisatorische Anforderungen}          
+\begin{itemize}
+   \item
+   \textbf{TODO 1}
+
+   \item 
+   \textbf{TODO 2}
+
+   \item
+   \textbf{TODO 3}
+
+\end{itemize}
