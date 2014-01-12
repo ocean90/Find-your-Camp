@@ -4,7 +4,7 @@
 
 Die Projekte für „Client“ und „Server“ liegen jeweils als Eclipse Projekt vor.\\
 
-\textbf{Client - Entwicklungsumgebung}
+\paragraph{Client - Entwicklungsumgebung}
 
 \begin{enumerate}
 	\item Für die Entwicklungsumgebung der „Client“ Anwendung muss zunächst Eclipse IDE for Java Developers\footnote{http://www.eclipse.org/downloads/moreinfo/java.php} installiert werden.
@@ -25,4 +25,21 @@ Die Projekte für „Client“ und „Server“ liegen jeweils als Eclipse Proje
 		\caption{AVD auf Basis des Nexus One}
 		\label{fg:android-adv}
 	\end{figure}
+	\item Die Applikation kann über das Kontextmenü des Projektes unter \textit{Run As -> Android Application} ausgeführt werden.
+\end{enumerate}
+
+
+\paragraph{Client - Device}
+
+\begin{enumerate}
+	\item Nachdem das Projekt einmal als Android-Anwendung im Emulator oder auf dem Testgerät ausgeführt wurde, befindet sich im \textit{bin} Verzeichnis des Projekts die Datei \textit{FindYourCamp.apk}. Diese kann kopiert werden und beispielsweise über Dropbox auf das Gerät kopiert werden
+	\item Die APK kann dann auf dem Endgerät installiert werden. Zunächst muss dazu, falls nicht schon aktiviert, die Funktion zur manuellen Installation aktiviert werden. Dazu im Menu Einstellungen unter den Punkt \textit{Sicherheit} den Haken hinter \textit{Unbekannte Herkunft} setzen.
+	\item Hinweis: Der Server muss für die vollständige Funktionalität laufen.
+\end{enumerate}
+
+\paragraph{Server}
+
+\begin{enumerate}
+	\item Für die Serveranwendung muss die \textit{Main.java} im \textit{de.fhkoeln.gm.findyourcamp.server} Paket als Java-Anwendung ausgeführt werden.
+	\item Hinweis: Die Anwendung ist ohne GUI konzipiert. Die Ausgabe wird über die Konsole gesteuert.
 \end{enumerate}

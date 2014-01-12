@@ -287,24 +287,33 @@ public class Main {
 		Main ccsClient = new Main();
 
 		try {
-		  ccsClient.connect(CSS_USERNAME + "@gcm.googleapis.com", CSS_PASSWORD);
-		} catch (XMPPException e) {
-		  e.printStackTrace();
-		}
 
-		// Send a sample hello downstream message to a device.
-		//String toRegId = "APA91bGd6IEz6NUE7g3cOVwl3wYgwEdJ4T6OnqNRMVF44e-2ZBq7pursxmMhLf6OAp14yBqMITkDseLm8qJxY4EE0tswc4E9AinJdGLtOe7DrM8RPb5rqHGqoQy3hATn3S6c3px4os1ka1-WmfwTdtFmDGbVeku86Dznj-_E-52rXFfkwDaMyFk";
-		String toRegId = "APA91bH2ZHtS1RNFYwWetjCReWdok5uky8Oe2ppAXw0B6fE-wwUiJ926yp8TDq90l2o3JlxrR9quSlYnn-QJTHkge5LTqQELztFKiDO90u5pRiDIvQBo2fVamJHo7dRq_pVAiYrmo5AfAGwknT8o534m8ltxEOPWsQ";
-		String messageId = ccsClient.getRandomMessageId();
-		Map<String, String> payload = new HashMap<String, String>();
-		payload.put("Hello", "World");
-		payload.put("CCS", "Dummy Message");
-		payload.put("EmbeddedMessageId", messageId);
-		String collapseKey = "sample";
-		Long timeToLive = 10000L;
-		Boolean delayWhileIdle = true;
-		ccsClient.send(createJsonMessage(toRegId, messageId, payload, collapseKey,
-			timeToLive, delayWhileIdle));
+			try {
+			  ccsClient.connect(CSS_USERNAME + "@gcm.googleapis.com", CSS_PASSWORD);
+			} catch (XMPPException e) {
+			  e.printStackTrace();
+			}
+
+			// Send a sample hello downstream message to a device.
+			//String toRegId = "APA91bGd6IEz6NUE7g3cOVwl3wYgwEdJ4T6OnqNRMVF44e-2ZBq7pursxmMhLf6OAp14yBqMITkDseLm8qJxY4EE0tswc4E9AinJdGLtOe7DrM8RPb5rqHGqoQy3hATn3S6c3px4os1ka1-WmfwTdtFmDGbVeku86Dznj-_E-52rXFfkwDaMyFk";
+			String toRegId = "APA91bH2ZHtS1RNFYwWetjCReWdok5uky8Oe2ppAXw0B6fE-wwUiJ926yp8TDq90l2o3JlxrR9quSlYnn-QJTHkge5LTqQELztFKiDO90u5pRiDIvQBo2fVamJHo7dRq_pVAiYrmo5AfAGwknT8o534m8ltxEOPWsQ";
+			String messageId = ccsClient.getRandomMessageId();
+			Map<String, String> payload = new HashMap<String, String>();
+			payload.put("Hello", "World");
+			payload.put("CCS", "Dummy Message");
+			payload.put("EmbeddedMessageId", messageId);
+			String collapseKey = "sample";
+			Long timeToLive = 10000L;
+			Boolean delayWhileIdle = true;
+			ccsClient.send(createJsonMessage(toRegId, messageId, payload, collapseKey,
+				timeToLive, delayWhileIdle));
+
+			System.out.println( "Press any key to stop the service" );
+	        System.in.read();
+	} catch ( Exception e ) {
+	} finally {
+	        System.out.println( "Service killed" );
+	}
 
 	}
 
