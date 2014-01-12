@@ -32,7 +32,17 @@
 	<string name="rental_property_dogs_allowed">Hunde erlaubt</string>
 	<string name="rental_property_caravan_parking_possible">Wohnwagenplatz vorhanden</string>
 	<string name="rental_property_campfire_allowed">Lagerfeuer gestattet</string>
+
+	<string name="rental_property_section_title_price">Preis</string>
+	<string name="rental_property_section_title_price_range_feedback">Zwischen %1$s und %2$s pro Tag</string>
+	<string name="rental_property_section_title_price_feedback">%1$s pro Tag</string>
+
 	<string name="rental_property_save">Speichern</string>
+
+	<string name="insert_rental_property_success_dialog_title">Mietobjekt erfolgreich angelegt.</string>
+	<string name="insert_rental_property_success_dialog_message">Mietobjekt jetzt aufrufen?</string>
+	<string name="insert_rental_property_success_dialog_yes">Ja</string>
+	<string name="insert_rental_property_success_dialog_back">Zurück</string>
 
 	<string name="menu_show_only_request">Mietanfragen</string>
 	<string name="menu_show_only_searches">Suchanfragen</string>

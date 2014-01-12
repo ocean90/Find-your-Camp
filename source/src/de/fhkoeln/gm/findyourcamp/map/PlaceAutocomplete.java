@@ -67,7 +67,6 @@ public final class PlaceAutocomplete {
 	        resultList = new ArrayList<String>(predsJsonArray.length());
 	        for (int i = 0; i < predsJsonArray.length(); i++) {
 	            String value = predsJsonArray.getJSONObject(i).getString("description");
-	            Logger.info(value);
 	        	resultList.add( value);
 	        }
 	    } catch (JSONException e) {

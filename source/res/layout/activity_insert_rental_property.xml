@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <LinearLayout
+   <LinearLayout
+       	android:id="@+id/insert_rental_propery_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -25,7 +26,8 @@
             android:id="@+id/rental_property_location_autocomplete"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/rental_property_location_hint" />
+            android:hint="@string/rental_property_location_hint"
+            android:inputType="textNoSuggestions"/>
 
         <TextView
             android:id="@+id/rental_property_section_title_features"
@@ -136,20 +138,30 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/rental_property_section_title_place_size"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:id="@+id/rental_property_price_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/bottom_border"
-            android:text="@string/rental_property_section_title_place_size"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/rental_property_place_size"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+	            android:id="@+id/rental_property_section_title_price_range"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="5dp"
+	            android:layout_marginTop="15dp"
+	            android:background="@drawable/bottom_border"
+	            android:text="@string/rental_property_section_title_price"
+	            android:textStyle="bold" />
+
+           <TextView
+	            android:id="@+id/rental_property_section_title_price_range_feedback"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="5dp"
+	            android:layout_marginBottom="15dp"
+	            android:text="@string/rental_property_section_title_price_range_feedback" />
+         </LinearLayout>
 
         <Button
             android:id="@+id/rental_property_save"
@@ -158,6 +170,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/rental_property_save"
             android:onClick="onButtonClick" />
+
     </LinearLayout>
 
 </ScrollView>
