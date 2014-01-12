@@ -45,7 +45,7 @@
 	\setcounter{table}{1}
 	\setcounter{figure}{1}
  	%Einbinden des ersten Kapitels
-	
+
 	%Überarbeitungen des Konzeptes jetzt in Kapitel 3.1
 	%\include{chapter/kapitel2_konzeptueber}
 
@@ -54,7 +54,7 @@
 	\setcounter{table}{1}
 	\setcounter{figure}{1}
 	%Einbinden des zweiten Kapitels
-	
+
 	%Prozessdokumentation
 	\include{chapter/kapitel3_prozessdoku}
 
@@ -63,7 +63,7 @@
 	\setcounter{table}{1}
 	\setcounter{figure}{1}
 	%Einbinden des zweiten Kapitels
-	
+
 	%Systemdokumentation
 	\include{chapter/kapitel4_systemdoku}
 
@@ -72,7 +72,7 @@
 	\setcounter{table}{1}
 	\setcounter{figure}{1}
 	%Einbinden des zweiten Kapitels
-	
+
 	%Installationsdokuemntation
 	\include{chapter/kapitel5_installationsdoku}
 
@@ -85,21 +85,31 @@
 	%Fazit
 	\include{chapter/kapitel6_fazit}
 
+	\setcounter{table}{1}
+	\setcounter{figure}{1}
+
 	%Fazit
 	\include{chapter/kapitel7_literatur}
- 
+
+
 %Zeilenabstand 1 fach für die Verzeichnisse
 \singlespacing
 %Einbindne der Verzeichnisse
 \include{inc/verzeichnisse}
 
+
+\begin{appendices}
+	%Konzept als Anhang einbinden
+	\include{inc/anhang}
+\end{appendices}
+
+
 %Zeilenabstand 1,5 fach für den Eid
-\onehalfspacing
+%\onehalfspacing
 %Einbinden des Eides
 %\include{inc/eid}
 
-%Konzept als Anhang einbinden
-\include{inc/anhang}
+
 
 
 \end{document}
