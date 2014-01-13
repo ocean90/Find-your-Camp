@@ -2,7 +2,6 @@
 
 \section{Entwickeltes System}
 
-
 \subsection{Android Client}
 
 \subsubsection{Activities}
@@ -14,7 +13,28 @@
 	\label{fg:activitiesoverview}
 \end{figure}
 
-Activities sind die Komponenten, die dem Benutzer visuell Interaktionen anbieten können. Die Activities sollten untereinander verbunden werden, um so einen gewissen Workflow zu garantieren und „Sackgassen“ zu vermeiden.
+Activities sind die Komponenten, die dem Benutzer visuell Interaktionen anbieten können. Die Activities sollten untereinander verbunden werden, um so einen gewissen Workflow zu garantieren und „Sackgassen“ zu vermeiden. Die mit Android 3.0 eingeführte „Action Bar“ liefert eine gute Grundlage. Für die erste Version wurde die „Up Navigation“ implementiert. In der „Action Bar“ wird bei Aufruf einer untergeordneten Activity ein Pfeil neben dem Appicon angezeigt. Hierb ist es notwendig beim Deklarieren der Activity im Manifest die übergeordnete Activity mit anzugeben (Code \ref{ls:activities}).
+
+\begin{lstlisting}[label=ls:activities,caption=Deklaration zweier Activities mit Referenz zu einer übergeordneten Activity,language=xml]
+<application>
+    <activity
+        android:name="de.fhkoeln.gm.findyourcamp.app.SettingsActivity"
+        android:label="@string/action_settings"
+        android:parentActivityName="de.fhkoeln.gm.findyourcamp.app.MainActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="de.fhkoeln.gm.findyourcamp.app.MainActivity" />
+    </activity>
+    <activity
+        android:name="de.fhkoeln.gm.findyourcamp.app.InsertRentalPropertyActivity"
+        android:label="@string/action_insert_rental_property"
+        android:parentActivityName="de.fhkoeln.gm.findyourcamp.app.MainActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="de.fhkoeln.gm.findyourcamp.app.MainActivity" />
+    </activity>
+</application>
+\end{lstlisting}
 
 \subsubsection{Datenbank}
 
