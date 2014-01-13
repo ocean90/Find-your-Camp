@@ -241,11 +241,12 @@ Da der Zeitfaktor doch eine große Rolle in unserem System spielt, wurde entschi
 In Konzept wurde bereits kurz darauf eingegangen: Um den Vermieter vor einer Flut an Mietanfragen zu schützen, bekommt dieser nur eine Benachrichtigung bei relevanten Anfragen. Wann ist eine Anfrage releveant?
 
 \begin{enumerate}
-	\item Nachdem das Projekt einmal als Android-Anwendung im Emulator oder auf dem Testgerät ausgeführt wurde, befindet sich im \texttt{bin} Verzeichnis des Projekts die Datei \texttt{FindYourCamp.apk}. Diese kann kopiert werden und beispielsweise über Dropbox auf das Gerät kopiert werden
-	\item Die APK kann dann auf dem Endgerät installiert werden. Zunächst muss dazu, falls nicht schon aktiviert, die Funktion zur manuellen Installation aktiviert werden. Dazu im Menu Einstellungen unter den Punkt \textit{Sicherheit} den Haken hinter \textit{Unbekannte Herkunft} setzen.
-	\item Hinweis: Der Server muss für die vollständige Funktionalität laufen.
+	\item \textbf{Ort:} Der Ort wird über einen serverseitigen Abgleich auf Relevanz geprüft. Zur Erinnerung: In den Datenbanken auf dem Server werden nur die Orte mit der jeweiligen Vermieter ID gespeichert. Entspricht ein Ort der Anfrage so wird dem Device des Vermieters die Anfrage weitergeleitet.
+	\item \textbf{Gruppengröße:} Die Gruppengröße dient als Grundlage für den nächsten Abgleich. Ist die geforderte Gruppengröße kleiner oder gleich der verfügbaren Größe, ist das Objekt als relevant zu betrachten.
+	\item \textbf{Preis:} Bevor die Ausstattung geprüft wird, wird zunächst ein Abgleich zwischen gewünschter und geforderter Preis durchgeführt. Das Objekt ist weiterhin relevant, wenn der gewünschte Preis dem des Vermieters entspricht.
+	\item \textbf{Ausstattung:} Die Ausstattungsmerkmale werden als Boolean Werte verarbeitet. Dadurch ergeben sich nur die Werte 1 und 0.
+	Die Relevanz kann daher auf Basis des Skalarproduktes ermittelt werden. Vektor A entspricht dabei den Daten des Vermieters, Vektor B dem des potentiellen Mieters. Wünscht der Mieter 4 Ausstattungsmerkmale und das Skalarprodukt ergibt zwei oder mehr, so ist das Objekt relevant und der Vermieter wird endgültig über die Anfrage benachrichtigt.
 \end{enumerate}
 
-
-Erst Location, dann gruppengröße, dann preis, dann BooleanFeatures
+Der relevante Code hierfür befindet sich in der Klasse \texttt{LocationMatch} im Paket \texttt{de.fhkoeln.gm.findyourcamp.server.matching} für das Server-Matching und das Client-Matching wird in der Klasse \texttt{RentalPropertyMatch} im Paket \texttt{de.fhkoeln.gm.findyourcamp.app.matching} sichtbar.
 
