@@ -3,3 +3,87 @@
 \section{Entwickeltes System}
 
 
+\subsection{Android Client}
+
+SQLite
+
+\subsection{Serveranwendung}
+
+
+\subsection{Datenbank}
+
+Für die Speicherung von Daten wurden die Datenbanksysteme SQLite, MySQL und MongoDB in Erwägung gezogen. Die Einbindung in Java geschieht dabei über Treiber. Der zugehörige Treiber  muss dafür geladen werden und dem Projekt als Bibliothek zugewiesen werden.
+
+Bei der Implementierung ist auf einen Fehler einzugehen: Das Laden des Laden des Treibers wird über einen dynamischen Klassenaufruf gesteuert. In den jeweiligen Anleitungen war folgender Schnipsel (Code \ref{ls:wrongdriveruse}) zu sehen (vgl. Verbindung mit MySQL über die Schnittstelle DriverManager\footnote{http://dev.mysql.com/doc/refman/5.1/de/connector-j-usagenotes-basic.html\#connector-j-usagenotes-connect-drivermanager})
+
+\begin{lstlisting}[label=ls:wrongdriveruse,caption=Fehlerhafter dynamischer Klassenaufruf]
+try {
+	Class.forName("com.mysql.jdbc.Driver").newInstance();
+} catch (Exception ex) {
+	// Fehler behandeln
+}
+\end{lstlisting}
+
+Die Nutzung des Schnipsels gab jedoch nicht das gewünschte Ergebnis aus, genauer gesagt gar nichts. Die Lösung des Problems bestand darin, den Aufruf \textit{.newInstance()} zu entfernen (Code \ref{ls:correctdriveruse}).
+
+\begin{lstlisting}[label=ls:correctdriveruse,caption=Korrekter dynamischer Klassenaufruf]
+try {
+	Class.forName("com.mysql.jdbc.Driver")
+} catch (Exception ex) {
+	// Fehler behandeln
+}
+\end{lstlisting}
+
+In der folgenden Übersicht werden die drei Datenbanksysteme anhand eines Beispiels - anlegen einer Tabelle und einfügen eines Wertes - gegenübergestellt:
+
+\subsubsection{SQLite}
+
+Treiber: \url{https://bitbucket.org/xerial/sqlite-jdbc}
+\begin{lstlisting}[label=ls:mysqlexample,caption=Exemplarische Darstellung der Nutzung des SQLite Treibers]
+Class.forName("org.sqlite.JDBC");
+Connection connection = DriverManager.getConnection("jdbc:sqlite:findyourcamp.db");
+Statement statement = con.createStatement();
+statement.executeUpdate("drop table if exists users");
+statement.executeUpdate("create table users (id integer, name string)");
+statement.executeUpdate("insert into person values(1, 'max')");
+\end{lstlisting}
+
+\subsubsection{MySQL}
+
+Treiber: \url{http://dev.mysql.com/downloads/connector/j/}
+\begin{lstlisting}[label=ls:mysqlexample,caption=Exemplarische Darstellung der Nutzung des MySQL Treibers]
+Class.forName("com.mysql.jdbc.Driver");
+Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/findyourcamp", "username", "password");
+Statement statement = con.createStatement();
+statement.executeUpdate("drop table if exists users");
+statement.executeUpdate("create table users (id int, name text)");
+statement.executeUpdate("insert into person values(1, 'max')");
+\end{lstlisting}
+
+\subsubsection{MongoDB}
+
+Treiber: \url{http://docs.mongodb.org/ecosystem/drivers/java/}
+\begin{lstlisting}[label=ls:mongoexample,caption=Exemplarische Darstellung der Nutzung des MongoDB Treibers]
+MongoClient mongoClient = new MongoClient();
+DB db = mongoClient.getDB("findyourcamp");
+DBCollection collection = db.getCollection("users");
+collection.insert(new BasicDBObject("name", "max"));
+\end{lstlisting}
+
+SQLite kennen wir schon aus der Entwicklung der Android Applikation. Als weiteres relationales Datenbanksystem ist MySQL gewählt worden. Der Unterschied zwischen beiden System liegt darin, dass MySQL auf eine exterene Datenbasis setzt, wo SQLite sich direkt in die Anwendungen integrieren lässt. MongoDB hingegen kommt aus der NoSQL Sparte. Die Daten werden im JSON Format hinterlegt, wodurch das System gut skalierbar ist. Die Nachteile liegen allerdings in der fehlenden Relationen oder einer Volltext-Suche.
+
+In den Tests (Code \ref{ls:performancetest}) zeigte sich außerdem, dass NoSQL, sowie auch SQLite, um 50\% langsamer als die MySQL Implementation war.
+
+\begin{lstlisting}[label=ls:performancetest,caption=Perfomancetest zwischen MySQL und SQLite,language=bash]
+$ time java -jar test_sqlite.jar
+java -jar test_sqlite.jar 2,24s user 0,46s system  97% cpu 2,760 total
+$ time java -jar test_mysql.jar
+java -jar test_mysql.jar  1,47s user 0,17s system 133% cpu 1,225 total
+\end{lstlisting}
+
+Da der Zeitfaktor doch eine große Rolle in unserem System spielt, wurde entschieden für die Serveranwendung auf MySQL zu setzen. Jedoch sollte, sofern es die Zeit zulässt, eine gewisse Abstraktion geschaffen werden, wodurch ein späteres Ändern des Datenbanksystems durchführbar ist.
+
+\subsection{Matching Algorithmus}
+
+Erst Location, dann gruppengröße, dann preis, dann BooleanFeatures
+

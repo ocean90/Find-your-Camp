@@ -7,5 +7,7 @@
 	<classpathentry kind="lib" path="libs/smack/smackx-debug.jar"/>
 	<classpathentry kind="lib" path="libs/smack/smackx-jingle.jar"/>
 	<classpathentry kind="lib" path="libs/smack/smackx.jar"/>
+	<classpathentry kind="lib" path="libs/mysql/mysql-connector-java-bin.jar"/>
+	<classpathentry kind="lib" path="libs/sqlite/sqlite-jdbc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
