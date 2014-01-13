@@ -1,34 +1,24 @@
 %!TEX root = ../dokumentation.tex
 
 \section{Task Modeling}
-TODO
-Text
+Nach Abschluss der Benutzermodellierung ging es darum, sich mit den vorhandenen Aufgaben der Anwender zu beschäftigen. Das bedeutet, sie zu identifizieren, die Struktur zu verstehen und die Beziehungen der einzelnen Aufgaben in einem konkreten Zusammenhang zu bringen.\\
 
-use case methoden: allistar cockburn template \\
-concrete use case, lockwood\\
+Die Mensch Computer Interaktion bietet im Bereich der Aufgabenmodellierung unterschiedlichste Methodiken an, die entsprechend der Modellierungsziele und des Vorgehensmodells abgewogen wurden.\\
+Im usage centered Design wird dieser Aufgabenbereich als Task Modeling bezeichnet und setzt sich aus der Entwicklung von essential use cases mit zugehöriger use case map zusammen.\\
+Wie an vorheriger Stelle erläutert, sieht das Konzept des usage centered Design vor, die Modelle auf einer abstrakteren Ebene zu entwickeln, da der allgemeinere Fokus sich nicht in Details verirrt und zu viele Abhängigkeiten formuliert. Der Vorteil für das Projekt besteht darin, dass sich erarbeitet Aufgabenstrukturen nicht zu sehr an technische Details verhaften und damit bei Rückfällen oder Änderungen der Systemstruktur weiterhin benutzbar bleiben. \\
+Ein Ansatz der Aufgabenmodellierung ist das szenarienbasierte Vorgehen, bei dem durch die Entwicklung konkreter Szenarien einzelne Interaktionssbeispiele nachvollziehbar dargestellt werden. Dies eignet besonders dann, wenn der Fokus auf den Benutzer liegt und beschrieben wird, wie und warum sie mit dem System agieren. Speziell im user centered Design ist diese Methode von relevanz, spielt aber in geplantem Vorgehensmodell keine konkretere Rolle.\\
 
-
--> User Role/ Use Cases speziell für usage centered   \\
-task model essentiell use cases, use case map ale aufeinander\\
-
-task Model: struktur der Aufgaben\\
-
-Task Modeling HTA speziell für sehr komplexe Aufgaben, work breakdown charts
-
-Szenario auch möglich, verweis zu teil 1
-Nachteil im Design durch detailierungsgrad S. 101 allgemeine organisation vernachlässigen
-
-In kurzer Form wie Beispiel Software for Use Seite 100 unter Einbezug der Persona
+Zur Darlegung der Aufgabenstrukturen gibt es unterschiedliche Darstellungsarten. Die Hierarchical Task Analysis eignet sich gerade bei komplexen Aufgaben, da kognitive Entscheidungen nachvollziehbar dargestellt sind. Ein ähnlicher Ansatz, der meist am Anfang der Aufgabenmodellierung erfolgt, ist die Entwicklung von Work Breakdown Charts, welche einzelne Aufgabenstufen durch hierachische Zusammenhänge veranschaulichen. In Bezug auf die anfängliche Anforderungsanalyse\footnote{Konzeptseite 24} der funktionalen Aspekte, konnte der Eindruck gewonnen werden, dass auftretende Aufgaben keine komplexeren Strukturen aufweisen, die durch eine grafische Darstellung nachvollziehbarer gemacht werden müssten. Daher wurden essential use cases als erster Methode der Aufgabenmodellierung entwickelt.
 
 \newpage
+\subsection{Essential Use Cases}
+Essential use cases liefern einen grober Überblick über die Struktur der Aufgabe und ist dabei in der Formulierung frei von Annahmen und Technologiebehaftungen.\\
+Orientiert am Aufbau der Beispiele in der Publikum von Constantine \& Lockwood\footnote{Constantine \& Lockwood: Software for Use S.105} wurden die funktionalen Anforderungen\footnote{Konzeptseite 34}, die zu diesem Zeitpunkt vorhanden waren, umgesetzt.
+Eine Herausforderung stellte dabei die Wahl einer geeigneten Sprache und der Detailierungsgrad dar. Daher wurden sie innerhalb des Projektverlaufes mehrfach überarbeitet und erweitert. Im weiteren Verlauf der ersten Iterationsphase der MCI Auseinandersetzung, führte die Evaluation des ersten abstract prototype (wird im nächsten Kapitel 3.4 genauer beschrieben), dazu, dass die vorhandene nessential use cases einer erneuten Überarbeitung unterzogen werden mussten, da sie nicht alle funktionalen Aspekte berücksichtigten.\\
 
-\subsection{Essential Use Cases 1 }
-Funktionale Anforderungsermittlung, interaktion zwischen Anwender und System, sehr abstrakt, grober Überblick, technologie frei\\
-Formal und an Reichhaltigkeit orientiert an Software for Use S. 105
-Iterationsphase 1 aufbauend auf erste funktionalen Anforderungen im Konzept\footnote{Konzeptseite 34}
+Im Folgenden sind die erarbeiteten use cases dargestellt. Diese Übersicht stellt dabei noch keine Gewährleistung auf Vollständigkeit dar, da im späteren Projektverlauf neue Anforderungen erkannt wurden, die aus zeitlichen Gründen keiner weiteren Iterationsphase unterstanden.\\ 
 
-Form wie S 105 Purpose or intention of user
-
+Essential Use Case \#1 (Tabelle \ref{tab:registrieren}) sieht die Registrierung eines Anwenders vor, welcher beim erstmaligen Start der Anwendung ein Benutzeraccount anlegen muss.
 \begin{table}[H]
 \caption{Essential Use Case \#1 registriereUser }
 \centering
@@ -56,6 +46,7 @@ eingegebene Informationen bestätigen   &                                \\[1ex]
 \label{tab:registrieren}
 \end{table}
 
+Essential Use Case \#2 (Tabelle \ref{tab:profilverwalten}) befasst sich mit dem Anwenderziel, sein bereits angelegtes Profil zu verwalten, indem angegeben Funktionen geändert oder das Profil gelöscht wird.
 \begin{table}[H]
 \caption{Essential Use Case \#2 verwalteProfil }
 \centering
@@ -87,8 +78,8 @@ Informationen ändern       &                                 \\[1ex]
 \label{tab:profilverwalten}
 \end{table}
 
-
-
+\newpage
+Essential Use Case \#3 (Tabelle \ref{tab:reiseprofil}) beschreibt die Erstellung eines "Reiseprofils". Im Rahmen des Projektes wurde diese Bezeichnung dafür vergeben, wenn der Reisende für eine Suchanfrage die gewünschte Ausstattung des Grundstückes und relevante Informationen zur Gruppengröße, Reisezeit und Preisvorstellung angibt.
 \begin{table}[H]
 \caption{Essential Use Case \#3 erstelleReiseprofil }
 \centering
@@ -114,6 +105,10 @@ eingegebene Informationen bestätigen   &                                 \\[1ex
 \end{tabular}
 \label{tab:reiseprofil}
 \end{table}
+
+
+\newpage
+Essential Use Case \#4 (Tabelle \ref{tab:mietobjekt}) beschreibt die Durchführung einer neuen Suchanfrage des Reisenden, um einen passenden Unterkunftsanbieter zu finden.
 
 \begin{table}[H]
 \caption{Essential Use Case \#4 sucheMietobjekt }
@@ -147,7 +142,8 @@ Rückmeldung erhalten    &                                 \\[1ex]
 \label{tab:mietobjekt}
 \end{table}
 
-
+\newpage
+Essential Use Case \#5 (Tabelle \ref{tab:mietanfrage}) beschreibt die Aufgabe des Vermieters, auf eine erhaltene Mietanfrage zu reagieren und sie zu anzunehmen oder abzulehnen.
 \begin{table}[H]
 \caption{Essential Use Case \#5 beantworteMietanfrage }
 \centering
@@ -175,6 +171,8 @@ Rückmeldung erhalten    &                                 \\[1ex]
 \end{table}
 
 
+\newpage
+Essential Use Case \#6 (Tabelle \ref{tab:bezahlung}) stellt die Aufgabe dar, die Bezahlung eines getätigten Mietauftrages durchzuführen. Diese Aufgabe sollte spätestens vor Weiterreise geschehen.
 \begin{table}[H]
 \caption{Essential Use Case \#6 bezahleMiete }
 \centering
@@ -207,6 +205,9 @@ Rückmeldung erhalten    &                                       \\[1ex]
 \label{tab:bezahlung}
 \end{table}
 
+
+\newpage
+Essential Use Case \#7 (Tabelle \ref{tab:bewertung}) beschreibt die Absicht des Benutzers, den Verleihpartner nach durchgeführtem Vermietprozess zu bewerten.
 \begin{table}[H]
 \caption{Essential Use Case \#7 bewerteUser }
 \centering
@@ -235,6 +236,9 @@ Rückmeldung erhalten    &                                 \\[1ex]
 \label{tab:bewertung}
 \end{table}
 
+
+\newpage
+Essential Use Case \#8 (Tabelle \ref{tab:kontaktaufnahme}) sieht die Kontaktaufnahme zweier Anwender vor, nachdem eine Mietanfrage erfolgreich durchgeführt und angenommen wurde. Hierbei sind Textnachrichten zur Kommunikation zwischen Vermieter und Mieter gemeint.
 \begin{table}[H]
 \caption{Essential Use Case \#8 kontaktiereUser }
 \centering
@@ -261,6 +265,9 @@ Nachricht verfassen        &                                 \\[1ex]
 \label{tab:kontaktaufnahme}
 \end{table}
 
+
+\newpage
+Essential Use Case \#9 (Tabelle \ref{tab:ausloggen}) beschreibt das Ausloggen vom verbundenen Account eines Nutzers.
 \begin{table}[H]
 \caption{Essential Use Case \#9 userAusloggen }
 \centering
@@ -284,6 +291,10 @@ Rückmeldung erhalten    &                                 \\[1ex]
 \label{tab:ausloggen}
 \end{table}
 
+
+
+Essential Use Case \#10 (Tabelle \ref{tab:aktionen}) beschreibt das Ziel des Anwenders, eine der vorhandenen Funktionen wie  "Suchanfrage starten" zu finden und auszuführen. Dieser use case entstand im Rahmen der letzten Überarbeitung, als Ergebnis der Auswertung des ersten abstrakten Prototypen. Die Tätigkeit die innerhalb dieses Anwendungsfall dargestellt ist, stellt den ersten Schritt jedes vorherigen use cases dar, wurde für ein weiteres content model jedoch in Betracht gezogen.
+
 \begin{table}[H]
 \caption{Essential Use Case \#10 wähleAktion }
 \centering
@@ -306,17 +317,27 @@ Aktion ausführen           &                                \\[1ex]
 \label{tab:aktionen}
 \end{table}
 
-
-\newpage
-\subsection{Essential Use Cases 2}
-
 \newpage
 \subsection{Use Case Map}
+Die zuvor dargestellten use cases, stehen bei der Verwendung des Systems in unmittelbarem Zusammenhang. Die Beziehung untereinander ist in der use case map (ref) gezeigt. Dieses Modell stellte für weitere Ausarbeitungen den Vorteil dar, dass beim Prototyping Verbindungen zwischen den Funktionen und den möglichen Working Spaces der Anwendung veranschaulicht werden.
+
+TODO Einbindung Use Case Map
 
 \newpage
 \subsection{Concrete Use Case}
+
+Zusätzlich dazu konnte der abstrakte Charakter nicht immer zum genauen Verständnis der Struktur führen.
+use case methoden: allistar cockburn template \\
+concrete use case, lockwood\\
+
+Szenario auch möglich, verweis zu teil 1
+Nachteil im Design durch detailierungsgrad S. 101 allgemeine organisation vernachlässigen
+
+In kurzer Form wie Beispiel Software for Use Seite 100 unter Einbezug der Persona
 Ein use case erfasst eine Beziehung zwischen stakeholder und dem technischen Subsystem bzgl. des Verhaltens des technischen Subsys- tems. Es beschreibt das Verhalten des technischen Subsystems unter bestimmten Rahmenbedingungen als Antwort auf eine Anfrage des stakeholders (primary actor). Der primary actor iniziiert die Interak- tion, um ein Ziel zu erreichen.
 
+
+Use Case \#1 (Tabelle \ref{tab:anmeldenUC})
 \begin{table}[H]
 \caption{Use Case\#1 registriereUser }
 \centering
@@ -352,6 +373,8 @@ Profil verifizieren                          &                                  
 \label{tab:anmeldenUC}
 \end{table}
 
+
+Use Case \#2 (Tabelle \ref{tab:profilBearbeitenUC})
 \begin{table}[H]
 \caption{Use Case\#2 verwalteBenutzerprofil }
 \centering
@@ -380,6 +403,8 @@ Neue Informationen abspeichern      &                                      \\[1e
 \label{tab:profilbearbeitenUC}
 \end{table}
 
+
+Use Case \#3 (Tabelle \ref{tab:mietauftragUC})
 \begin{table}[H]
 \caption{Use Case\#3 erstelleReiseprofil }
 \centering
@@ -411,6 +436,8 @@ Informationen bestätigen und abspeichern  &                                   \
 \label{tab:mietauftragUC}
 \end{table}
 
+\newpage
+Use Case \#4 (Tabelle \ref{tab:mietobejktUC})
 \begin{table}[H]
 \caption{Use Case\#4 findeMietobjekt }
 \centering
@@ -446,6 +473,8 @@ erhalten                      &                                   \\[1ex]
 \label{tab:mietobjektUC}
 \end{table}
 
+\newpage
+Use Case \#5 (Tabelle \ref{tab:mietanfrageUC})
 \begin{table}[H]
 \caption{Use Case\#5 beantworteMietanfrage }
 \centering
@@ -482,6 +511,10 @@ Funktionsausführung              &                                   \\[1ex]
 \end{tabular}
 \label{tab:mietanfrageUC}
 \end{table}
+
+
+\newpage
+Use Case \#6 (Tabelle \ref{tab:mietobjektAUC})
 
 \begin{table}[H]
 \caption{Use Case\#6 registriereMietobjekt }
@@ -527,32 +560,9 @@ und abspeichern                     &                                   \\[1ex]
 \end{table}
 
 
+
 \subsection{Szenarien aus Concrete durch Alternativen}
-
-zu Nutzungskontext\\
-die Ziele und Arbeitsaufgaben der Benutzer. Die Beschreibung sollte Gesamtziele für die Verwendung des Systems enthalten. Die Merkmale jener Aufgaben, die Gebrauchstauglichkeit be- einflussen können, sollten beschrieben werden ebenso wie ggf. vorhandene Auswirkungen auf die Gesundheit und Sicherheit. Beschreibung sollte die Verteilung der Aktivitäten und Arbeits- schritte zwischen Mensch und technischen Hilfsmitteln einsch- liessen. Die Aufgaben sollten nicht nur bzgl. Funktionen oder Leistungsmerkmale beschrieben werden,\\
-
-die Umgebung, in der die Benutzer das System benutzen sollen. Die Umgebung schliesst die hardware, software und die zu ver- wendenden Materialien ein. Deren Beschreibung kann eine Aus- wahl von Produkten darstellen, von denen eines oder mehre-re den Schwerpunkt der menschzentrierten Spezifikation oder Beur- teilung bilden kann, oder sie kann aus einer Auswahl von Merk- malen oder Leistungseigenschaften der Hardware, Software oder sonstiger Materialien bestehen. Darüber hinaus gehören zu der Umgebung die physischen, organisatorischen und sozialen Rah- menbedingungen und Einflussgrössen.\\
-
-
-Anforderungsdokument:\\
-Funktionale Anforderungen\\
-Eingaben und deren Einschränkungen\\
-Funktionen\\
-Ausgabe\\
-
-Nichtfunktionale Anforderungen\\
-Qualitätsattribute an Funktionen\\
-Anforderungen an implementiertes System als Ganzes\\
-
-
-Szenarios\\
--> konzeptuelle Szenarios: keine funktionalen Informationen, generelle ideen und anforderungen\\
--> konkrete Szenarios\\
-Problemszenarien\\
-Informationsszenarien\\
-Aktivitätsszenarien\\
-Interaktionsszenarien
+TODO
 
 
 
