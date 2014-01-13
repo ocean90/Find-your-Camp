@@ -96,43 +96,36 @@ Da die Benutzer sowohl in der Rolle des Mieters und Vermieters auftreten können
 
 Aufbauend darauf wurde eine überarbeitete Version des Prototypen entwickelt, bei dem vorallem die Hauptseite, dargestellt in Abb. \ref{mainneu}, von Grund auf neu angelegt wurde. Menübuttons werden hierbei mit Hilfe von Icons unter dem Ziel dargestellt, vorhandene Metaphern zu triggern. Eine tiefergehende Auseinandersetzung mit diesen mentalen Modellen, wurde im Projektverlauf herausgenommen, sollte jedoch als direkter Gegensatz zur textuellen Beschreibung in einer weiteren Evaluationsphase getestet werden. \\
 
- Die Gestaltung fand unter Einbezug der Grundsätze der Dialoggestaltung statt\footnote{Nach ISO 9241-110, in Prof. Hartmann Draftzur MCI ab S. 514}. Die Beschäftigung damit, war die letzte MCI Auseinandersetzung im Rahmen dieses Projektes und konnte bisher nur sehr oberflächlich betrachtet werden. \\
+ Die Gestaltung fand unter Einbezug der Grundsätze der Dialoggestaltung statt\footnote{Nach ISO 9241-110, in Prof. Hartmann Draftzur MCI ab S. 514}. Die Beschäftigung damit, war die letzte MCI Auseinandersetzung im Rahmen dieses Projektes und konnte bisher nur sehr oberflächlich betrachtet werden. 
+
 
 \newpage
 
 \subsection{Grundsätze der Dialoggestaltung}
- ISO 9241 Teil 110
- Gestaltungsempfehlungen ISO Teil 12-17
-\\
- 1. Aufgabenangemessenheit\\
- 	Fokus auf Aufgabe, nicht auf Technik\\
- 	Dialogsystem: nur Informationen für Aufgabe, Hilfefunktion, \\automatische Ausführung, Eingabe Cursor im ersten Eingabe Widget, bei wiederkehrenden Aufgaben unterstützen = Speichern von aufeinander folgenden Interaktionsschritten, Standartwerte als Vorgabewerte\\
-\\
- 2. Selbstbeschreibungsfähigkeit\\
-    Verständnis zum aktuellen Standpunkt im Dialog, was gemacht werden kann, wie man es ausführt\\
-    Rückmeldung durch unmittelbares Anzeigen der Eingaben, bei schwerwiegenden Folgen Bestätigung einbauen, keine Fachterminologie, Begriffe erläutern und Benutzerhandbuch, Informationen zum aktuellen Stand, zB prozentualer Beabreitungsstand, Überblick über zukünftige Dialogschritte, Informationen zum Eingabedatentyp
+ In Vorbereitung auf die weitere Interface Gestaltung, stand eine Auseinandersetzung mit den Grundsätzen der Dialoggestaltung entsprechend der ISO 9241 Teil 110 an. \\
+ Aus zeitlichen Gründen konnte diese Beschäftigung nur noch oberflächlich betrachtet werden. Dabei entstanden zu folgenden Grundsätzen erste Ansätze wie diese innerhalb der Anwendung realisierbar wären:
 
- 3. Steuerbarkeit\\
- 	Geschwindigkeit unter der Kontrolle des Benutzers, Dialogsystem setzt immer auf nächsten Eingabecursor, sollte aber freie Interaktion ermöglichen. Interaktionsschritte sollten zurücknehmbar sein, auch auf das zurückgreifen zuvor gelöschter Objekte, Short Cuts?
+\begin{itemize}
+\item
+\textbf{Aufgabenangemessenheit}\\
+ 	Das System sollte eine Hilfefunktion anbieten, die jederzeit erreichbar ist. Da auch unerfahrene Benutzer mit dieser Anwendung arbeiten sollen und Anfangsschwierigkeiten durch fehlende Kenntnisse innerhalb der Domäne auftreten können. Bei der Suchanfrage wird mit wiederkehrenden Formularen gearbeitet. Standartwerte zum zuvor gespeicherten Reiseprofil könnten erneut Verwendung finden und Orts- und Datumsangabe werden durch mit der aktuellen Systemzeit und Position belegt.
+ 	 
+\item
+\textbf{Selbstbeschreibungsfähigkeit}\\
+	Die aktuelle Position innerhalb der Anwendung soll durch eine Menüpunkt Beschreibung erreicht werden und dort wo es sich anbietet, erhält der Anwender eine direkte Rückmeldung über den Erfolg der Aktion. (Beispielsweise bei der Suchanfrage) Zusätzlich dazu sollten kritische Vorgänge, wie Löschen eines Accounts oder Profil, sowie Bezahlungsvorgänge vor der Ausführung bestätigt werden.
 
- 4. Erwartungskonformität\\
- 	konsistent, Merkmalen der Benutzern entsprechend, Zustandsmeldungen immer an der selben Stelle, Interaktionssequenz wird immer durch selbe Taste beendet, ähnlichkeiten, Antwortzeiten mitteilen, zB über ladebalken, status widget, prozentsatz des datenvolumens
+\item
+\textbf{Fehlertoleranz}\\
+ 	Bei Eingaben von Freitexten des Users, sollte an geeigneter Stelle eine Syntaxprüfung erfolgen. Zu nennen wäre hierbei speziell die Registrierung. 
 
- 5. Fehlertoleranz\\
- 	testen des Datentypens nach Eingabe, Fehler erläutern mit Fehlermeldung, farbige hervorhebung 
+ \item
+\textbf{Individualisierbarkeit}\\
+ 	Die Hauptseite lässt sich nach Anforderungen der Rollen individuell Anpassen, sodass der User entscheiden kann welche Funktionalitäten er angezeigt bekommt.
 
- 6. Individualisierbarkeit\\
- 	Anpassung an individuelle Fähigkeit und Bedürfnisse, Schriftgröße und Farbe, Sprache
-
- 7. Lernförderlichkeit\\
- 	Fehlerbeschreibung, learning by doing durch hohe Fehlertoleranz, Übungsszenarien\\
-
- 	in weiteren Iso nachschauen
- 	das Erkennen und Spezifizieren von Dialoganforderungen auf der Grundlage der verschiedenen Dialogtechniken, die in den Teilen der Norm ISO 9241-14 bis ISO 9241-17 beschrieben sind;
- den Entwurf von Gestaltungslösungen unter Einhaltung von ISO 9241-12 bis ISO 9241-17\\
-
-
- 
+ \item
+\textbf{Lernförderlichkeit}\\
+	Zur Einführung in die Anwendung, kann ein Tutorial eingebaut werden das wesentliche Funktionsweisen beispielhaft an Szenarien erklärt. Das Starten einer Suchanfrage oder die Navigation durch die Anwendung wären dabei zwei Ansätze.
+ \end{itemize}
 
 
 
