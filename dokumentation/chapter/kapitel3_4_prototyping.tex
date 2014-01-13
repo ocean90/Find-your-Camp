@@ -1,30 +1,17 @@
 %!TEX root = ../dokumentation.tex
 
 \section{Content Modeling}
+Der Gestaltungsprozess unter Anwendung verschiedener Techniken der MCI hat zum Ziel, eine Designlösung zu erarbeiten, welche die Gebrauchstauglichkeit eines System im Vergleich zu vorhandenen Optionen steigert. Die vorherigen Kapitel beschrieben die Auseinandersetzung mit vorhandenen Benutzern und ihren zu erledigenden Aufgaben und Strukturen. Im Anschluss an das role model und task model, sieht das Vorgehensmodell die Entwicklung des content models vor.
+Hierbei handelt es darum einen ersten Schritt in Richtung Interfacedesign zu machen und den abstrakten Aufbau der gesamten  Interface Architektur zu modellieren. Im Projektverlauf dient dieses Modell dazu den Designprozess zu beschleunigen, indem vorerst die reine Struktur der Interaktion Contexts innerhalb des Systems analysiert wird und darauf aufbauend getestet werden kann, inwiefern die Systemkomponten bisher in Beziehung zueinander stehen.
+Anhand des Ergebnisses, lässt sich mit Usern, in unserem Fall im Projektteam, in einem sehr frühen Punkt der Projektphase über den Systementwurf sprechen, indem die reine Struktur fokusiert werden kann. Dieser Vorgang wird auch als Rapid Abstract Prototyping bezeichnet und die anschließende Evaluation sollte dazu dienen, vorherige Ausarbeitungen aus Systemsicht zu evaluieren.
 
+\newpage
 \subsection{Abstract Prototype 1}
+Nach Vorgehensbeschreibung von Constantine \& Lockwood\footnote{Unter Verwendung von http://www.foruse.com/articles/abstractprototypes.htm und L. Constantine \& L. Lockwood: Software for use, 2003 ab Seite 125}, wurde der erste Prototyp entwickelt. 
 
-User environment design Schaffen eines Architekturmodells, das zeigt, wie die einzelnen Systemkomponenten zusammen in Beziehung stehen. Repräsentieren der Struktur- und der Funktions- Cluster des Systems unabhängig von Aspekten des Benutzerinterfaces 
-oder der Implementierung
-
-Sicherstellen, dass der Arbeitsfluss innerhalb des Systems die Arbeit unterstützt wird. Unterstützen der Designer in der Konzentration auf Arbeitsfluss und Funktion in dem System anstelle der Betrachtung von Benutzer Interface und Implementierung. Schaffen von System-Repräsentationen, die Planung unterstützen
-
- Abstract Prototyping\\
- content of user interface ohne zu zeigen wie es aussieht\\
-
- Content Modeling \\
- inhalte des user interface ohne details zum aussehen
- content model = sammlung von material (was den user interessiert zu sehen oder zu ändern), tools (ermöglichen den user dies zu tun) und working spaces(teile die tools und materials verbinden)\\
-
- Papier = working spaces (post it = tools and materials)
- content model + navigation map
-
- conceptual scenarios£
-
-\subsubsection{Interface Contexts 1}
-
-Hartmann S442
-Abb. \ref{interfaceContents1}
+\subsubsection{Interaction Contexts }
+Auf Basis der essentiell use cases in der ersten Version, wurden die interface contexts erstellt. Jedem use case wurde dabei ein eigener working space gewidmet und anschließend tools und materials bestimmt. Einzelne use cases ließen sich dabei nicht zusammenfassen.
+Beispielhaft sind die beiden Interface Contexte in Abbildung \ref{interfaceContents1} dargestellt und zeigen den einfachen Aufbau dieses Prototyps.\footnote{Gesamtes Bilderset im Anhang Teil A}
 
 \begin{figure}[H]
 \centering
@@ -37,24 +24,37 @@ Abb. \ref{interfaceContents1}
 \label{interfaceContents1}
 \end{figure}
 
-\subsubsection{Context Navigation Map 1}
+Während der Ausarbeitung der einzelnen interaction context, machte das allgemeine Verständnis zu tools und materials noch Probleme und das Ausarbeiten auf Grundlage der essential use cases war, zumindest nach eigenen Einschätzungen, nicht immer so konkret, wie es die Entwickler gedenken. Auch das Nachlesen in weiteren Quellen konnte keine komplett sichere Erkenntnis liefern, was die genauen Details des Models angeht. Die entstandenen Modelle basieren daher auf einen Kompromiss aus eigenen Vorstellungen und Vorgaben, wobei das grundlegende Ziel dieser Modellierung klar war.
 
-Abb. \ref{fig:navigationmap1}
+\newpage
+\subsubsection{Context Navigation Map}
+Anhand der einzelnen Interface Contexts, wurde die Navigation Map in Abbildung \ref{fig:navigationmap1} entwickelt und verdeutlicht, wie die einzelnen Interfaceseiten konzeptionell zusammenhängen. Diese Grafik beschränkt sich dabei noch auf die Bezeichnung der Kontexte und die einzelnen Aktionen, welche den Kontextwechsel triggern. Eine genauere Darstellung sollte erst in der überarbeiteten Version (Abbildung \ref{interfaceContents2}) erreicht werden.
+
 \begin{figure}[H]
 \includegraphics[width=1\textwidth]{./images/navigationmap1.png}
 \caption{Context Navigation Map Version 1}
 \label{fig:navigationmap1}
 \end{figure}
 
+\subsubsection{Evaluation}
+Mit dieser Navigation Map fand innerhalb des Projektteams eine erste Evaluation der Interface Architektur statt. Mit einer, an das cognitive walkthrough erinnernde Methode, wurden verschiedene Anwendungsfälle durchgespielt und dabei mit einfachen Mockups visualisiert. Dabei wurde ermittelt, dass es die zuvor entwickelte use case map deutlicher mit einbezogen werden sollte. Speziell durch den Anwendungsfall "aktionAuswählen", ergab sich eine Interfacestruktur, die von einem zentralen Working Space ausging und keine direkten Bezüge zwischen use cases darstellt, die eigentlich im direkten Zusammenhang stehen sollten. Wie beispielsweise, dass sowohl die Bezahlung, Bewertung und Kontaktaufnahme an einen einzelnen Mietauftrag gebunden sind.\\
 
 \newpage
-\subsubsection{Evaluation}
-
 \subsection{Abstract Prototype 2}
+Im Anschluss an die Evaluation des ersten Abstract Prototype (Kapitel 2.4.1), wurde es als notwendig erachtet, die bisherigen Ergebnisse in einer Iteration zu überarbeiten. Bereits während der vorherigen Kapitel wurde erwähnt, dass die einzelnen Abschnitte nicht zeitlich aufeinander folgend entstanden sind. \\
+Um ein besseres Verständnis zum Projektverlauf bis an diesem Punkt zu vermitteln, zeigt die Abbildung \ref{fig:navigationmap3}, welche MCI Auseinandersetzung stattfanden, um an den derzeitigen Punkte der Prozessdokumentation anzugelangen.
 
+\begin{figure}[H]
+\includegraphics[width=1\textwidth]{./images/position.png}
+\caption{Projektverlauf bis zu diesem Dokumentationspunkt}
+\label{fig:navigationmap3}
+\end{figure}
 
-\subsubsection{Interface Contexts 2}
-Abb. \ref{interfaceContents2}
+Die Aufgabenmodellierung wurde demnach einer kompletten Überarbeitung unterzogen und lieferte die Ergebnisse die im Vorfeld dargelegt waren. Anschließend folgte die zweite Version des Abstract Prototype.
+
+\newpage
+\subsubsection{Interaction Contexts }
+Nach ähnlichem Prinzip wie im ersten Anlauf, wurden anhand der essentiell use cases interaction contexts erarbeitet. Abbildung \ref{interfaceContents2} zeigt dabei Entwürfe des zweiten Ansatzes.\footnote{Gesamtes Bilderset im Anhang Teil B}. Was sich am Vorgehen im Vergleich zur ersten Variante geändert hat, war unter anderem der Gestaltungsansatz. Orientiert am Format des Smartphonedisplays, wurden die neuen Seiten stärker mit Bezug zum Interface gestaltet. Auch wenn hierbei weiterhin ein minimalistischer Ansatz verfolgt wird, sollte die Positionierung der tools und materials einen ersten Aufwand über mögliche Plazierungen der Inhalte vermitteln. Vorteilhaft erwies sich hierbei der verstärkte Einbezug der Use Case Map, wobei zusätzlich angedachte Anwendungsfälle bereits mitverarbeitet wurden.
 
 \begin{figure}[H]
 \centering
@@ -67,16 +67,16 @@ Abb. \ref{interfaceContents2}
 \label{interfaceContents2}
 \end{figure}
 
-\subsubsection{Context Navigation Map 2}
-
-Abb. \ref{fig:navigationmap2}
+\newpage
+\subsubsection{Context Navigation Map}
+Aus den Ergebnissen wurde erneut eine Navigation Map, zu sehen in Abbildung \ref{fig:navigationmap2}, abgleitet und diesmal mit angemessener Notation dargestellt.
 \begin{figure}[H]
 \includegraphics[width=1\textwidth]{./images/navigationmap2.png}
 \caption{Context Navigation Map Version 2}
 \label{fig:navigationmap2}
 \end{figure}
 
-\newpage
-\subsubsection{Evaluation}
+Die Version 2 der Navigation Map, und somit das Content Model, wurden einer erneuten Evaluation unterzogen, bei der verschiedene Anwendungsfälle gedanklich durchgespielt wurden. Im Vergleich zum ersten Prototyp zeigte sich hierbei eine stark verbesserte Struktur, die den Aufgabenfluss im Gegensatz zur ersten Variante deutlich optimiert. Die erneute Auseinandersetzung führte im Projektverlauf dazu, dass Gestaltungslösungen erst später betrachtet wurden als ursprünglich geplant, jedoch lieferte das überarbeitete Content Model eine bedeutend bessere Vorlage.
+
 
 
