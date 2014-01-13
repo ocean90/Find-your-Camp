@@ -6,10 +6,76 @@
 \subsection{Android Client}
 
 \subsection{Activities}
-Wie im Proof-of-Concept
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./images/activitiesoverview.png}
+	\caption{Übersicht der Activities und Navigationselementen}
+	\label{fg:activitiesoverview}
+\end{figure}
+
 
 \subsection{Datenbank}
-Wie im Proof-of-Concept
+
+Wie im Proof-of-Concept „Lokale Datenbankanbindung“ (vgl Kapitel 3.2.4) bereits dokumentiert, wird das System mit dem Datenbanksystem SQLite arbeiten. Im Folgenden wird nun auf die endgültige Implementierung im System eingegangen.
+
+Zunächst wurde eine abstrakte Klasse „Table“ entwickelt (Code \ref{ls:abstracttableclass}), welches nichts anders macht, als den Datenbanknamen sowie die aktuelle Datenbankversion beinhaltet. Die Klasse erweitert die Klasse „SQLiteOpenHelper“.
+
+\begin{lstlisting}[label=ls:abstracttableclass,caption=Abstrakte Klasse „Table“]
+public abstract class Table extends SQLiteOpenHelper {
+	private static final String DATABASE_NAME = "data.db";
+	private static final int DATABASE_VERSION = 1;
+
+	public Table(Context context) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	}
+}
+\end{lstlisting}
+
+Der Ausschnitt (Code \ref{ls:userstableclass}) der Implementation der „UserTable“ demonstriert die Vererbung der Klasse „Table“.
+
+\begin{lstlisting}[label=ls:userstableclass,caption=Ausschnitt aus der Klasse „UsersTable“]
+public class UsersTable extends Table {
+
+	public static final String TABLE_NAME = "users";
+	public static final String COLUMN_NAME_ID = "id";
+	public static final String COLUMN_NAME_USER_NAME = "name";
+
+	private static final String TABLE_CREATE =
+		"CREATE TABLE " + TABLE_NAME + " (" +
+			COLUMN_NAME_ID + " integer primary key autoincrement," +
+			COLUMN_NAME_USER_NAME + " text NOT NULL" +
+		");";
+
+	private static final String TABLE_DROP =
+		"DROP TABLE IF EXISTS " + TABLE_NAME;
+
+	public UsersTable(Context context) {
+		super(context);
+	}
+
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(TABLE_CREATE);
+	}
+}
+\end{lstlisting}
+
+Hierbei hat sich als hilfreich erwiesen, Tabellenspezifische Angaben wie Tabellenname oder Spaltenamen in Konstanten auszulagern, um diese wiederverwertbar zu gestalten. Dies spiegelt sich zum Beispiel bei einem Insert-Befehl wieder (Code \ref{ls:userstableinsert}) .
+
+\begin{lstlisting}[label=ls:userstableinsert,caption=Exemplarisches Insert in die „UsersTable“]
+UsersTable usersTable = new UsersTable(this);
+SQLiteDatabase usersTableDb = usersTable.getWritableDatabase();
+
+ContentValues values = new ContentValues();
+values.put(UsersTable.COLUMN_NAME_ID, id);
+values.put(UsersTable.COLUMN_NAME_USER_NAME, username);
+
+long userId = usersTableDb.insert(
+	UsersTable.COLUMN_NAME_ID,
+	UsersTable.COLUMN_NAME_USER_NAME,
+	values);
+\end{lstlisting}
 
 \subsection{Serveranwendung}
 
