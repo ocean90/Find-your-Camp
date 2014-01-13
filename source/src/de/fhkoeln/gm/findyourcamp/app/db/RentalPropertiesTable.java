@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp.db;
+package de.fhkoeln.gm.findyourcamp.app.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

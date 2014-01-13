@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp;
+package de.fhkoeln.gm.findyourcamp.app;
 
 import android.app.ActionBar;
 import android.app.Activity;

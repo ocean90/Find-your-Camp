@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp.model;
+package de.fhkoeln.gm.findyourcamp.app.model;
 
 public class RentalProperty {
 

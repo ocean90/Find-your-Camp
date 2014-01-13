@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp.gcm;
+package de.fhkoeln.gm.findyourcamp.app.gcm;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import android.os.AsyncTask;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import de.fhkoeln.gm.findyourcamp.utils.Logger;
-import de.fhkoeln.gm.findyourcamp.utils.PreferencesStorage;
+import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
+import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
 public class Client {
 

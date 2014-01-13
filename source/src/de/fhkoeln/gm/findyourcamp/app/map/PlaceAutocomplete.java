@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp.map;
+package de.fhkoeln.gm.findyourcamp.app.map;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.fhkoeln.gm.findyourcamp.utils.Logger;
+import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
 /**
  * Places API https://developers.google.com/places/documentation/autocomplete

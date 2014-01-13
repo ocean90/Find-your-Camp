@@ -1,13 +1,14 @@
-package de.fhkoeln.gm.findyourcamp;
+package de.fhkoeln.gm.findyourcamp.app;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import de.fhkoeln.gm.findyourcamp.gcm.Client;
-import de.fhkoeln.gm.findyourcamp.utils.GooglePlayServices;
-import de.fhkoeln.gm.findyourcamp.utils.Logger;
+import de.fhkoeln.gm.findyourcamp.R;
+import de.fhkoeln.gm.findyourcamp.app.gcm.Client;
+import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
+import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
 public class MainActivity extends Activity {
 

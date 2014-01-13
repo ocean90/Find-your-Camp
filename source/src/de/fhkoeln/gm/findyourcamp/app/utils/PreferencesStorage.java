@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp.utils;
+package de.fhkoeln.gm.findyourcamp.app.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp.map;
+package de.fhkoeln.gm.findyourcamp.app.map;
 
 import java.util.ArrayList;
 

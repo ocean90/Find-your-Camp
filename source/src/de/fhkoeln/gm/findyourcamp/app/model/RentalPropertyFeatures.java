@@ -1,10 +1,10 @@
-package de.fhkoeln.gm.findyourcamp.model;
+package de.fhkoeln.gm.findyourcamp.app.model;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.fhkoeln.gm.findyourcamp.utils.Logger;
+import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
 public class RentalPropertyFeatures {
 	final public static String TOILETS_AVAILABLE_KEY = "toilets_available";
