@@ -1,6 +1,6 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
-import de.fhkoeln.gm.findyourcamp.R;
+import de.fhkoeln.gm.findyourcamp.app.R;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;

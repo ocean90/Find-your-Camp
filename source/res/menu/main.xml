@@ -3,19 +3,19 @@
 	<item
 		android:id="@+id/action_insert_rental_property"
 		android:orderInCategory="100"
-		android:showAsAction="ifRoom|withText"
+		android:showAsAction="never"
 		android:title="@string/action_insert_rental_property"/>
 
 	<item
 		android:id="@+id/action_request_rental_property"
 		android:orderInCategory="100"
-		android:showAsAction="ifRoom|withText"
+		android:showAsAction="never"
 		android:title="@string/action_request_rental_property"/>
 
-		<item
+	<item
 		android:id="@+id/action_settings"
 		android:orderInCategory="100"
-		android:showAsAction="ifRoom|withText"
+		android:showAsAction="never"
 		android:title="@string/action_settings"
 		/>
 

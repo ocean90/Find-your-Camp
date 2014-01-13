@@ -32,5 +32,9 @@ public class UsersTable extends Table {
 		db.execSQL(TABLE_DROP);
 		onCreate(db);
 	}
+	
+	public void insert() {
+		SQLiteDatabase db = getWritableDatabase();
+	}
 
 }

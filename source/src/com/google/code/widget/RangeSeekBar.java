@@ -2,7 +2,7 @@ package com.google.code.widget;
 
 import java.math.BigDecimal;
 
-import de.fhkoeln.gm.findyourcamp.R;
+import de.fhkoeln.gm.findyourcamp.app.R;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

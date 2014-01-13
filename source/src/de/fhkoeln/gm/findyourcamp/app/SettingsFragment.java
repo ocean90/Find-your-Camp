@@ -1,6 +1,6 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
-import de.fhkoeln.gm.findyourcamp.R;
+import de.fhkoeln.gm.findyourcamp.app.R;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 

@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.google.code.widget.RangeSeekBar;
 import com.google.code.widget.RangeSeekBar.OnRangeSeekBarChangeListener;
 
-import de.fhkoeln.gm.findyourcamp.R;
+import de.fhkoeln.gm.findyourcamp.app.R;
 import de.fhkoeln.gm.findyourcamp.app.map.PlaceAutocompleteAdapter;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalPropertyFeatures;

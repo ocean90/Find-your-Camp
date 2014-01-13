@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.fhkoeln.gm.findyourcamp"
+    package="de.fhkoeln.gm.findyourcamp.app"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -77,6 +77,24 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAfBe9q55CiWwm6l31fhuJYpH_d6zkQxFI" />
+
+        <!--
+          WakefulBroadcastReceiver that will receive intents from GCM
+          services and hand them to the custom IntentService.
+
+          The com.google.android.c2dm.permission.SEND permission is necessary
+          so only GCM services can send data messages for the app.
+        -->
+        <receiver
+            android:name="de.fhkoeln.gm.findyourcamp.app.gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="de.fhkoeln.gm.findyourcamp.app" />
+            </intent-filter>
+        </receiver>
+        <service android:name="de.fhkoeln.gm.findyourcamp.app.gcm.GcmIntentService" />
     </application>
 
 </manifest>

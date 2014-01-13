@@ -1,10 +1,12 @@
 package de.fhkoeln.gm.findyourcamp.app.gcm;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Bundle;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -18,6 +20,7 @@ public class Client {
 
 	private GoogleCloudMessaging gcm;
 	private Context appContext;
+	AtomicInteger msgId = new AtomicInteger();
 
 	/**
 	 * Constructor.
@@ -93,6 +96,38 @@ public class Client {
 				Logger.info(msg);
 			}
 		}.execute(null, null, null);
+	}
+
+	public void sendMessage() {
+
+
+		//showToast(message);
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                try {
+
+            		String message = "test";
+
+                    Bundle data = new Bundle();
+                    data.putString("my_message", message);
+                    data.putString("my_action", "de.fhkoeln.gm.findyourcamp.app.ECHO_NOW");
+                    String id = Integer.toString(msgId.incrementAndGet());
+                    gcm.send(SENDER_ID + "@gcm.googleapis.com", id, data);
+                    msg = "Sent message";
+                    Logger.info("RegID " + getRegistrationId());
+                } catch (IOException ex) {
+                    msg = "Error :" + ex.getMessage();
+                }
+                return msg;
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+            	 Logger.error(msg);
+            }
+        }.execute(null, null, null);
 	}
 
 	/**
