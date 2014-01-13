@@ -4,8 +4,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
-
 public class RentalPropertyFeatures {
 	final public static String TOILETS_AVAILABLE_KEY = "toilets_available";
 	final public static String BBQ_ALLOWED_KEY = "bbq_allowed";
