@@ -13,7 +13,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
-public class Client {
+public class GcmClient {
 
 	private final String API_ENDPOINT = "@gcm.googleapis.com";
 	private final String SENDER_ID = "474445016109";
@@ -25,7 +25,7 @@ public class Client {
 	/**
 	 * Constructor.
 	 */
-	public Client(Context context) {
+	public GcmClient(Context context) {
 		this.appContext = context;
 		this.gcm = GoogleCloudMessaging.getInstance(context);
 	}
@@ -98,10 +98,14 @@ public class Client {
 		}.execute(null, null, null);
 	}
 
-	public void sendMessage() {
+	/**
+	 * Send a message to GCM service.
+	 *
+	 * @param message
+	 * @return
+	 */
+	public void sendMessage( GcmMessage message ) {
 
-
-		//showToast(message);
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
@@ -128,16 +132,6 @@ public class Client {
             	 Logger.error(msg);
             }
         }.execute(null, null, null);
-	}
-
-	/**
-	 * Send a message to GCM service.
-	 *
-	 * @param message
-	 * @return
-	 */
-	public Response send(Message message) {
-		return null;
 	}
 
 }

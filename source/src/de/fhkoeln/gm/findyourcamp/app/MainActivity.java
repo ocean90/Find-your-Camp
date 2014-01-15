@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import de.fhkoeln.gm.findyourcamp.app.R;
 import de.fhkoeln.gm.findyourcamp.app.actionbar.adapter.TitleNavigationAdapter;
 import de.fhkoeln.gm.findyourcamp.app.actionbar.model.SpinnerNavItem;
-import de.fhkoeln.gm.findyourcamp.app.gcm.Client;
+import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
@@ -29,6 +29,7 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_main);
 
 		actionBar = getActionBar();
@@ -55,12 +56,9 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 		if (!GooglePlayServices.check(this)) {
 			finish();
 		} else {
-			Client client = new Client(this);
+			GcmClient client = new GcmClient(this);
 			if (client.hasRegistrationId()) {
 				Logger.info("reg id exists " + client.getRegistrationId() );
-
-				client.sendMessage();
-
 			} else {
 				Logger.error("no reg id");
 				client.register();
