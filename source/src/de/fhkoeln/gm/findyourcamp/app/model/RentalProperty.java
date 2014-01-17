@@ -63,7 +63,7 @@ public class RentalProperty {
 		map.put("group_size", groupSize);
 		map.put("min_price", minPrice);
 		map.put("max_price", maxPrice);
-		map.put("features", features.toJson());
+		map.put("features", features.toMap());
 
 		return map;
 	}

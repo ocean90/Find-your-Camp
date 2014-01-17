@@ -2,9 +2,6 @@ package de.fhkoeln.gm.findyourcamp.app.model;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONObject;
 
 public class RentalPropertyFeatures {
 	final public static String TOILETS_AVAILABLE_KEY = "toilets_available";
@@ -49,8 +46,4 @@ public class RentalPropertyFeatures {
 		return this.features;
 	}
 
-	public String toJson() {
-		JSONObject json = new JSONObject(features);
-		return json.toString();
-	}
 }

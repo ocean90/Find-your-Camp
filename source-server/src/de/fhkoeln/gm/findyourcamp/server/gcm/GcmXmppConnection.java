@@ -101,7 +101,7 @@ public class GcmXmppConnection {
 				// Umwandlung des JSON Packets in XML zur XMPP Uebertragung
 				Logger.log( "Nachricht empfangen:" + packet.toXML() );
 				Message incomingMessage = (Message) packet;
-				
+
 				// Umwandlung in JSON zur Weiterverarbeitung
 				GcmPacketExtension gcmPacket = (GcmPacketExtension) incomingMessage
 						.getExtension(GcmPacketExtension.GCM_NAMESPACE);
@@ -116,9 +116,6 @@ public class GcmXmppConnection {
 					Object messageType = jsonObject.get("message_type");
 
 					if (null == messageType) {
-						// Datennachricht
-						handleIncomingDataMessage(jsonObject);
-
 						// ACK an CCS senden
 						String messageId = jsonObject.get("message_id")
 								.toString();
@@ -126,6 +123,8 @@ public class GcmXmppConnection {
 						String ack = createJsonAck(from, messageId);
 						sendPacket(ack);
 
+						// Datennachricht
+						handleIncomingDataMessage(jsonObject);
 					} else if ("ack".equals(messageType.toString())) {
 						//  ACK
 						handleAckReceipt(jsonObject);
@@ -206,6 +205,7 @@ public class GcmXmppConnection {
 	 */
 	public void sendPacket(String jsonRequest) {
 		Packet request = new GcmPacketExtension(jsonRequest).toPacket();
+
 		connection.sendPacket(request);
 	}
 }

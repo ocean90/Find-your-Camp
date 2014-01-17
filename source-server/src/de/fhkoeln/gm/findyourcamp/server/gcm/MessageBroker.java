@@ -1,10 +1,12 @@
 package de.fhkoeln.gm.findyourcamp.server.gcm;
 
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
+import de.fhkoeln.gm.findyourcamp.server.matching.LocationMatch;
 import de.fhkoeln.gm.findyourcamp.server.model.Device;
 import de.fhkoeln.gm.findyourcamp.server.model.User;
 import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
@@ -50,7 +52,7 @@ public class MessageBroker {
 	 */
 	public void handleRequest() {
 
-		if (null == data.get("action")) {
+		if (null == data || null == data.get("action")) {
 			return;
 		}
 
@@ -95,7 +97,10 @@ public class MessageBroker {
 
 	public void handleSearchRequest() {
 		System.out.println("Neue Suchanfrage...");
-		Map<String,Boolean> features = (Map<String, Boolean>) data.get("features");
-		Logger.log(features.toString());
+		String location = (String) data.get("location");
+		Logger.log(location);
+
+		// ToDo
+		List<Integer> users = LocationMatch.getMatches(location);
 	}
 }
