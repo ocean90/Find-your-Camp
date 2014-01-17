@@ -37,11 +37,9 @@ public class MessageBroker {
 
 		switch (action) {
 			case ACTION_USER_REGISTRATION:
-				Logger.log("User Registration");
 				handleUserRegistration();
 				break;
 			case ACTION_SEARCH_REQUEST:
-				Logger.log("Search Request");
 				handleSearchRequest();
 				break;
 			default:
