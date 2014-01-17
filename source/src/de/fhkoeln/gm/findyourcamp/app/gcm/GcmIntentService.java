@@ -29,7 +29,7 @@ public class GcmIntentService extends IntentService {
     public GcmIntentService() {
         super("GcmIntentService");
     }
-    public static final String TAG = "GCM Demo";
+
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -38,7 +38,6 @@ public class GcmIntentService extends IntentService {
         // The getMessageType() intent parameter must be the intent you received
         // in your BroadcastReceiver.
         String messageType = gcm.getMessageType(intent);
-
         if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
             /*
              * Filter messages based on message type. Since it is likely that GCM will be
@@ -54,20 +53,6 @@ public class GcmIntentService extends IntentService {
 
             	MessageBroker mb = new MessageBroker(extras);
             	mb.handleRequest();
-
-                /*for (int i = 0; i < 1; i++) {
-                    Logger.info("Working... " + (i + 1)
-                            + "/5 @ " + SystemClock.elapsedRealtime());
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                    }
-                }
-                Logger.info("Completed work @ " + SystemClock.elapsedRealtime());*/
-
-                // Post notification of received message.
-                //sendNotification("Received: " + extras.toString());
-                Logger.info("Jo: " + extras.toString());
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.

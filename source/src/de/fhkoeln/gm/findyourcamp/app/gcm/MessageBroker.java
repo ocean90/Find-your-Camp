@@ -15,9 +15,7 @@ public class MessageBroker {
 	}
 
 	public void handleRequest() {
-		Logger.info("Jo: " + data.toString());
-
-		int action = (Integer) data.get("action");
+		int action = Integer.parseInt( data.getString("action") );
 
 		switch (action) {
 		case ACTION_RESPONSE_USER_REGISTER:

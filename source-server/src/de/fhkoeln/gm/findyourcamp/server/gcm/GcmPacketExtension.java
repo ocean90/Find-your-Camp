@@ -1,18 +1,23 @@
-package de.fhkoeln.gm.findyourcamp.server;
+package de.fhkoeln.gm.findyourcamp.server.gcm;
 
 import org.jivesoftware.smack.packet.DefaultPacketExtension;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.util.StringUtils;
 
+import de.fhkoeln.gm.findyourcamp.server.Main;
+
 /**
-   * XMPP Packet Extension for GCM Cloud Connection Server.
-   */
-  class GcmPacketExtension extends DefaultPacketExtension {
+  * XMPP Packet Extension for GCM Cloud Connection Server.
+  */
+public class GcmPacketExtension extends DefaultPacketExtension {
+	public static final String GCM_ELEMENT_NAME = "gcm";
+	public static final String GCM_NAMESPACE = "google:mobile:data";
+
     String json;
 
     public GcmPacketExtension(String json) {
-      super(Main.GCM_ELEMENT_NAME, Main.GCM_NAMESPACE);
+      super(GCM_ELEMENT_NAME, GCM_NAMESPACE);
       this.json = json;
     }
 

@@ -8,10 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import de.fhkoeln.gm.findyourcamp.app.R;
 import de.fhkoeln.gm.findyourcamp.app.actionbar.adapter.TitleNavigationAdapter;
 import de.fhkoeln.gm.findyourcamp.app.actionbar.model.SpinnerNavItem;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
+import de.fhkoeln.gm.findyourcamp.app.gcm.GcmMessage;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
@@ -59,6 +59,12 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 			GcmClient client = new GcmClient(this);
 			if (client.hasRegistrationId()) {
 				Logger.info("reg id exists " + client.getRegistrationId() );
+				GcmMessage message = new GcmMessage();
+				message.setMessageId("xcgjhkl");
+				Bundle payload = new Bundle();
+				payload.putString("foo", "bar");
+				message.setPayload(payload);
+				client.sendMessage(message);
 			} else {
 				Logger.error("no reg id");
 				client.register();
