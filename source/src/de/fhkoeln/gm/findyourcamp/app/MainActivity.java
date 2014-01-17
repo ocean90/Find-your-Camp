@@ -8,12 +8,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmMessage;
 import de.fhkoeln.gm.findyourcamp.app.gcm.MessageConstants;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
-import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
-
 
 /**
  * Startpunkt.
@@ -22,16 +21,14 @@ import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
  */
 public class MainActivity extends Activity {
 
-
 	private GcmClient client;
 
-    /**
+	/**
      *
      */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 
 		if (!GooglePlayServices.check(this)) {
 			finish();
@@ -39,10 +36,21 @@ public class MainActivity extends Activity {
 			client = GcmClient.getInstance(this);
 			if (client.hasRegistrationId()) {
 				setContentView(R.layout.activity_main);
-				//Logger.info("reg id exists " + client.getRegistrationId() );
+
+				Intent intent = getIntent();
+				String status = intent.getStringExtra("status");
+				String userName = intent.getStringExtra("user_name");
+
+				if (status != null && status.equals("registered")) {
+					TextView welcomeMessageView = (TextView) findViewById(R.id.main_welcome_message);
+					welcomeMessageView.setText(String.format(getResources()
+							.getString(R.string.main_registerd_message),
+							userName));
+
+				}
 			} else {
-				Logger.error("no reg id");
-				client.register();
+				Intent intent = new Intent(this, RegistrationActivity.class);
+				startActivity(intent);
 			}
 		}
 	}
@@ -57,20 +65,20 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
 		switch (item.getItemId()) {
-			case R.id.action_settings:
-				intent = new Intent(this, SettingsActivity.class);
-				startActivity(intent);
-				return true;
-			case R.id.action_insert_rental_property:
-				intent = new Intent(this, InsertRentalPropertyActivity.class);
-				startActivity(intent);
-				return true;
-			case R.id.action_request_rental_property:
-				intent = new Intent(this, RequestRentalPropertyActivity.class);
-				startActivity(intent);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		case R.id.action_settings:
+			intent = new Intent(this, SettingsActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.action_insert_rental_property:
+			intent = new Intent(this, InsertRentalPropertyActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.action_request_rental_property:
+			intent = new Intent(this, RequestRentalPropertyActivity.class);
+			startActivity(intent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 

@@ -2,17 +2,16 @@
 <resources>
 
     <string name="app_name">Find Your Camp</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Einstellungen</string>
 
-    <string name="pref_notifications">Notifications</string>
-    <string name="pref_notifications_summary">Enable notifications if a match was successful.</string>
+    <string name="pref_notifications">Benachrichtigungen</string>
+    <string name="pref_notifications_summary">Benachrichtigungen aktivieren.</string>
+
+	<string name="action_insert_rental_property">Mietobjekt anlegen</string>
+	<string name="action_request_rental_property">Mietobjekt suchen</string>
+	<string name="action_registration">Registrierung</string>
 
 	<string name="rental_property_location_hint">Location</string>
-	<string name="action_insert_rental_property">Insert Rental Property</string>
-
-	<string name="action_request_rental_property">Request Rental Property</string>
-
 	<string name="rental_property_section_title_location">Ort</string>
 	<string name="rental_property_section_title_features">Ausstattung</string>
 	<string name="rental_property_section_title_place_size">Platzgröße</string>
@@ -38,6 +37,7 @@
 	<string name="rental_property_section_title_price_feedback">%1$s pro Tag</string>
 
 	<string name="rental_property_button_save">Anlegen</string>
+	<string name="rental_property_button_search">Suchen</string>
 
 	<string name="insert_rental_property_success_dialog_title">Mietobjekt erfolgreich angelegt.</string>
 	<string name="insert_rental_property_success_dialog_message">Mietobjekt jetzt aufrufen?</string>
@@ -47,12 +47,15 @@
 	<string name="action_bar_rental_property_requests">Mietanfragen</string>
 	<string name="action_bar_search_requests">Mietanfragen</string>
 
-
-	<string name="registration_hint">Registriere dich jetzt und starte los...</string>
+	<string name="registration_hint">Registriere dich jetzt und starte los…</string>
 	<string name="registration_user_name_hint">Benutzername</string>
 	<string name="registration_user_email_hint">E-Mail Adresse</string>
 	<string name="registration_user_password_hint">Passwort</string>
 	<string name="registration_user_button_register">Registrieren</string>
+
+	<string name="main_welcome_message">Willkommen zurück, starte jetzt eine neue Suche oder leg ein neues Mietobjekt an.</string>
+	<string name="main_registration_message">Hallo, bitte registriere dich!</string>
+	<string name="main_registerd_message">Hallo %$1s, danke für deine Registrierung. Starte jetzt eine neue Suche oder leg ein neues Mietobjekt an.</string>
 
     <string-array name="rental_property_group_size_array">
         <item>1</item>

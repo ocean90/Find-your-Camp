@@ -85,32 +85,10 @@ public class GcmClient {
 
 			@Override
 			protected void onPostExecute(String msg) {
-				Logger.info(msg);
 			}
 		}.execute(null, null, null);
 	}
 
-	public void unregister() {
-		new AsyncTask<Void, Void, String>() {
-			@Override
-			protected String doInBackground(Void... params) {
-				try {
-					gcm.unregister();
-					Logger.info("Device unregistered");
-
-					// @TODO Remove regid from store
-				} catch (IOException ex) {
-					Logger.error(ex.getMessage());
-				}
-				return "0";
-			}
-
-			@Override
-			protected void onPostExecute(String msg) {
-				Logger.info(msg);
-			}
-		}.execute(null, null, null);
-	}
 
 	/**
 	 * Send a message to GCM service.
@@ -130,14 +108,13 @@ public class GcmClient {
                 	gcm.send(SENDER_ID + API_ENDPOINT, message.getMessageId(), message.getData());
                 	feedback = "Nachricht gesendet";
                 } catch (IOException ex) {
-                	feedback = "Error :" + ex.getMessage();
+               	 	Logger.error(ex.getMessage());
                 }
                 return feedback;
             }
 
             @Override
             protected void onPostExecute(String feedback) {
-            	 Logger.error(feedback);
             }
         }.execute(message, null, null);
 	}

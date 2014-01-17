@@ -49,6 +49,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="de.fhkoeln.gm.findyourcamp.app.RegistrationActivity"
+            android:label="@string/action_registration" >
+        </activity>
+        <activity
             android:name="de.fhkoeln.gm.findyourcamp.app.SettingsActivity"
             android:label="@string/action_settings"
             android:parentActivityName="de.fhkoeln.gm.findyourcamp.app.MainActivity" >

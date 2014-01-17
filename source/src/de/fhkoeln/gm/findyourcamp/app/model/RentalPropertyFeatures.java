@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 public class RentalPropertyFeatures {
 	final public static String TOILETS_AVAILABLE_KEY = "toilets_available";
 	final public static String BBQ_ALLOWED_KEY = "bbq_allowed";
@@ -18,7 +20,7 @@ public class RentalPropertyFeatures {
 	final public static String CARAVAN_PARKING_POSSIBLE_KEY = "caravan_parking_possible";
 	final public static String CAMPFIRE_ALLOWED_KEY = "campfire_allowed";
 
-	private Map<String,Boolean> features;
+	private HashMap<String,Boolean> features;
 
 	public RentalPropertyFeatures() {
 		this.features = new HashMap<String,Boolean>();
@@ -41,5 +43,14 @@ public class RentalPropertyFeatures {
 
 	public boolean getFeature(String key) {
 		return this.features.get(key);
+	}
+
+	public HashMap<String, Boolean> toMap() {
+		return this.features;
+	}
+
+	public String toJson() {
+		JSONObject json = new JSONObject(features);
+		return json.toString();
 	}
 }

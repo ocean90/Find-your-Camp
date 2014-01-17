@@ -21,7 +21,7 @@ public class MessageBroker {
 	Map<String, Object> data;
 	private String from;
 
-	
+
 	/**
 	 * Uebergebenes Object wird in JSON Objekt zur weiteren Verarbeitung umgewandelt
 	 * @param object
@@ -29,6 +29,10 @@ public class MessageBroker {
 	@SuppressWarnings("unchecked")
 	public MessageBroker(Map<String, Object> object) {
 		Map<String, Object> rawData = (Map<String, Object>) object.get("data");
+
+		if (null == rawData.get("json")) {
+			return;
+		}
 
 		String json = rawData.get("json").toString();
 		try {
@@ -45,6 +49,11 @@ public class MessageBroker {
 	 * Anfrage wird nach gewuenschtem Wert an Aktion weitergeleitet
 	 */
 	public void handleRequest() {
+
+		if (null == data.get("action")) {
+			return;
+		}
+
 		int action = ((Long) data.get("action")).intValue();
 
 		switch (action) {
@@ -63,13 +72,13 @@ public class MessageBroker {
 	}
 
 	/**
-	 * Registrierung  
+	 * Registrierung
 	 */
 	public void handleUserRegistration() {
 		System.out.println("Neue Registration...");
 		String userName = (String) data.get("user_name");
 		String userEmail = (String) data.get("user_email");
-		
+
 		//DeviceID
 		String regId = this.from;
 
@@ -85,6 +94,8 @@ public class MessageBroker {
 	}
 
 	public void handleSearchRequest() {
-
+		System.out.println("Neue Suchanfrage...");
+		Map<String,Boolean> features = (Map<String, Boolean>) data.get("features");
+		Logger.log(features.toString());
 	}
 }

@@ -1,5 +1,8 @@
 package de.fhkoeln.gm.findyourcamp.app.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RentalProperty {
 
 	private RentalPropertyFeatures features = null;
@@ -51,5 +54,17 @@ public class RentalProperty {
 			return false;
 
 		return true;
+	}
+
+	public HashMap<String, Object> toMap() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("location", location);
+		map.put("group_size", groupSize);
+		map.put("min_price", minPrice);
+		map.put("max_price", maxPrice);
+		map.put("features", features.toJson());
+
+		return map;
 	}
 }
