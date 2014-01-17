@@ -30,10 +30,17 @@ import de.fhkoeln.gm.findyourcamp.app.map.PlaceAutocompleteAdapter;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalPropertyFeatures;
 
+/**
+ * Activity zum Angeben der Ausstattung eines Mietobjektes
+ *
+ */
 public class InsertRentalPropertyActivity extends Activity {
 
 	private RangeSeekBar<Integer> priceRangeSeekBar;
 
+	/**
+	 * Initalisierung
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,7 +51,7 @@ public class InsertRentalPropertyActivity extends Activity {
 		setContentView(R.layout.activity_insert_rental_property);
 
 		/**
-		 * Country autocomplete.
+		 * Autovervollstaendigung der Location (Country)
 		 */
 		AutoCompleteTextView autoCompView = (AutoCompleteTextView) findViewById(R.id.rental_property_location_autocomplete);
 		autoCompView.setAdapter(new PlaceAutocompleteAdapter(this,
@@ -61,7 +68,7 @@ public class InsertRentalPropertyActivity extends Activity {
 		});
 
 		/**
-		 * Spinner for group size.
+		 * Spinner zur Auswahl der Gruppengroeße
 		 */
 		Spinner rentalPropertyGroupSizeSpinner = (Spinner) findViewById(R.id.rental_property_group_size);
 		ArrayAdapter<CharSequence> rentalPropertyGroupSizeAdapter = ArrayAdapter
@@ -74,7 +81,7 @@ public class InsertRentalPropertyActivity extends Activity {
 				.setAdapter(rentalPropertyGroupSizeAdapter);
 
 		/**
-		 * Price range
+		 * Preisspanne von 0 bis 20
 		 */
 		int priceMin = 0;
 		int priceMax = 20;
@@ -118,9 +125,13 @@ public class InsertRentalPropertyActivity extends Activity {
 		rentalPropertyPriceView.addView(priceRangeSeekBar);
 	}
 
+	/**
+	 * Auswahl ueber Menue, bisher Navigationspunkt zurueck (zur Hauptseite)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		// Navigation zur Homeseite
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
@@ -129,6 +140,11 @@ public class InsertRentalPropertyActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Bei Buttonausfuehrung wird Aktion ausgefuehrt (speichern)
+	 * @param view
+	 * @return
+	 */
 	public boolean onButtonClicked(View view) {
 		switch (view.getId()) {
 		case R.id.rental_property_button_save:
@@ -139,19 +155,26 @@ public class InsertRentalPropertyActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Laden des Formulars zur Ausstattung
+	 * @return
+	 */
 	private RentalProperty prepareRentalPropertyData() {
 		RentalProperty rentalPropertyModel = new RentalProperty();
 		RentalPropertyFeatures rentalPropertyFeatures = new RentalPropertyFeatures();
 
+		// Ort
 		final AutoCompleteTextView countryField = (AutoCompleteTextView) findViewById(R.id.rental_property_location_autocomplete);
 		String location = countryField.getText().toString();
 		rentalPropertyModel.setLocation(location);
 
+		// Gruppengroeße
 		final Spinner groupSizeField = (Spinner) findViewById(R.id.rental_property_group_size);
 		int groupSize = Integer.parseInt(groupSizeField.getSelectedItem()
 				.toString());
 		rentalPropertyModel.setGroupSize(groupSize);
 
+		// Preisspanne
 		int priceRangeMin = priceRangeSeekBar.getAbsoluteMinValue();
 		int priceRangeMax = priceRangeSeekBar.getAbsoluteMaxValue();
 		rentalPropertyModel.setPriceRange(priceRangeMin, priceRangeMax);
@@ -227,6 +250,9 @@ public class InsertRentalPropertyActivity extends Activity {
 		return rentalPropertyModel;
 	}
 
+	/**
+	 * Datenmodell der Grundstuecksausstattung wird abgespeichert
+	 */
 	private void saveRentalProperty() {
 		RentalProperty rentalPropery = prepareRentalPropertyData();
 

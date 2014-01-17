@@ -32,6 +32,10 @@ import de.fhkoeln.gm.findyourcamp.app.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalPropertyFeatures;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
+/**
+ * Activity zur Suchanfrage
+ *
+ */
 public class RequestRentalPropertyActivity extends Activity {
 
 	private RangeSeekBar<Integer> priceRangeSeekBar;
@@ -234,10 +238,14 @@ public class RequestRentalPropertyActivity extends Activity {
 		return rentalPropertyModel;
 	}
 
+	/**
+	 * Auswahl ueber Menue, bisher Navigationspunkt zurueck (zur Hauptseite)
+	 */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case android.R.id.home:
+        	// Navigation zur Homeseite
             NavUtils.navigateUpFromSameTask(this);
             return true;
         default:

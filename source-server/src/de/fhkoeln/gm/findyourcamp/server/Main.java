@@ -37,8 +37,7 @@ public class Main {
 	 * Bei Fehler Rueckgabe der Problemstelle.
 	 */
 	public Main() {
-		//TODO?
-		// Add GcmPacketExtension WAS PASSIERT HIER GENAU?
+		// Add GcmPacketExtension 
 		ProviderManager.getInstance().addExtensionProvider(GcmPacketExtension.GCM_ELEMENT_NAME,
 				GcmPacketExtension.GCM_NAMESPACE, new PacketExtensionProvider() {
 
