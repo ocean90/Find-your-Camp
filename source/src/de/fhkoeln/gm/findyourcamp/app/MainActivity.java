@@ -15,6 +15,11 @@ import de.fhkoeln.gm.findyourcamp.app.gcm.GcmMessage;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
+/**
+ * 
+ * 
+ *
+ */
 public class MainActivity extends Activity implements ActionBar.OnNavigationListener {
 
     // action bar
@@ -26,6 +31,9 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
     // Navigation adapter
     private TitleNavigationAdapter adapter;
 
+    /**
+     * 
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
