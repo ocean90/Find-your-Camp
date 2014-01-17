@@ -14,10 +14,22 @@ import de.fhkoeln.gm.findyourcamp.app.gcm.MessageConstants;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
+<<<<<<< HEAD
+/**
+ * 
+ * 
+ *
+ */
+public class MainActivity extends Activity implements ActionBar.OnNavigationListener {
+=======
 public class MainActivity extends Activity {
+>>>>>>> ca49fa458d1d63db77efce52c895b3c8b094ac0a
 
 	private GcmClient client;
 
+    /**
+     * 
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
