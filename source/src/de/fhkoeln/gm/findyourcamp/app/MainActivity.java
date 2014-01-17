@@ -1,6 +1,7 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -8,10 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import de.fhkoeln.gm.findyourcamp.app.actionbar.adapter.TitleNavigationAdapter;
 import de.fhkoeln.gm.findyourcamp.app.actionbar.model.SpinnerNavItem;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmMessage;
+import de.fhkoeln.gm.findyourcamp.app.gcm.MessageConstants;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
@@ -25,6 +28,8 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 
     // Navigation adapter
     private TitleNavigationAdapter adapter;
+
+	private GcmClient client;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +61,9 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 		if (!GooglePlayServices.check(this)) {
 			finish();
 		} else {
-			GcmClient client = new GcmClient(this);
+			client = new GcmClient(this);
 			if (client.hasRegistrationId()) {
 				Logger.info("reg id exists " + client.getRegistrationId() );
-				GcmMessage message = new GcmMessage();
-				message.setMessageId("xcgjhkl");
-				Bundle payload = new Bundle();
-				payload.putString("foo", "bar");
-				message.setPayload(payload);
-				client.sendMessage(message);
 			} else {
 				Logger.error("no reg id");
 				client.register();
@@ -97,6 +96,17 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+	public void onButtonClicked(View view) {
+		GcmMessage message = new GcmMessage();
+		message.setMessageId("m-" + (System.currentTimeMillis() / 1000L));
+		message.setAction(MessageConstants.ACTION_USER_REGISTRATION);
+		HashMap<String, Object> payload = new HashMap<String, Object>();
+		payload.put("user_name", "Max");
+		payload.put("user_email", "Max@mustermann.com");
+		message.setPayload(payload);
+		client.sendMessage(message);
 	}
 
 	@Override

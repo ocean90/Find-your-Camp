@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 public class MessageBroker {
 
-	public static final int ACTION_RESPONSE_USER_REGISTER  = 1;
-	public static final int ACTION_RESPONSE_SEARCH_REQUEST = 2;
 
 	Bundle data;
 
@@ -18,10 +16,10 @@ public class MessageBroker {
 		int action = Integer.parseInt( data.getString("action") );
 
 		switch (action) {
-		case ACTION_RESPONSE_USER_REGISTER:
+		case MessageConstants.ACTION_USER_REGISTRATION:
 			Logger.info("Action: Register");
 			break;
-		case ACTION_RESPONSE_SEARCH_REQUEST:
+		case MessageConstants.ACTION_SEARCH_REQUEST:
 			Logger.info("Action: Search Request");
 			break;
 		default:

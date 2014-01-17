@@ -104,34 +104,28 @@ public class GcmClient {
 	 * @param message
 	 * @return
 	 */
-	public void sendMessage( GcmMessage message ) {
+	public void sendMessage(GcmMessage message) {
 
-        new AsyncTask<Void, Void, String>() {
+        new AsyncTask<GcmMessage, Void, String>() {
             @Override
-            protected String doInBackground(Void... params) {
-                String msg = "";
+            protected String doInBackground(GcmMessage...params) {
+            	GcmMessage message = params[0];
+
+                String feedback = "";
                 try {
-
-            		String message = "test";
-
-                    Bundle data = new Bundle();
-                    data.putString("my_message", message);
-                    data.putString("my_action", "de.fhkoeln.gm.findyourcamp.app.ECHO_NOW");
-                    String id = Integer.toString(msgId.incrementAndGet());
-                    gcm.send(SENDER_ID + "@gcm.googleapis.com", id, data);
-                    msg = "Sent message";
-                    Logger.info("RegID " + getRegistrationId());
+                	gcm.send(SENDER_ID + "@gcm.googleapis.com", message.getMessageId(), message.getData());
+                	feedback = "Nachricht gesendet";
                 } catch (IOException ex) {
-                    msg = "Error :" + ex.getMessage();
+                	feedback = "Error :" + ex.getMessage();
                 }
-                return msg;
+                return feedback;
             }
 
             @Override
-            protected void onPostExecute(String msg) {
-            	 Logger.error(msg);
+            protected void onPostExecute(String feedback) {
+            	 Logger.error(feedback);
             }
-        }.execute(null, null, null);
+        }.execute(message, null, null);
 	}
 
 }

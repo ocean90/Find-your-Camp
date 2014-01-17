@@ -20,6 +20,8 @@ import de.fhkoeln.gm.findyourcamp.server.db.UsersTable;
 import de.fhkoeln.gm.findyourcamp.server.gcm.GcmConfig;
 import de.fhkoeln.gm.findyourcamp.server.gcm.GcmPacketExtension;
 import de.fhkoeln.gm.findyourcamp.server.gcm.GcmXmppConnection;
+import de.fhkoeln.gm.findyourcamp.server.model.Device;
+import de.fhkoeln.gm.findyourcamp.server.model.User;
 import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
 
 /**
@@ -43,9 +45,9 @@ public class Main {
 	private XMPPConnection connection;
 	private ConnectionConfiguration config;
 
-	private DbConnection dbConnection;
+	public DbConnection dbConnection;
 
-	private GcmXmppConnection gmcConnection;
+	public GcmXmppConnection gmcConnection;
 
 	public Main() {
 		// Add GcmPacketExtension
@@ -62,7 +64,7 @@ public class Main {
 				});
 
 		System.out.println("Datenbanverbindung wird aufgebaut...");
-		dbConnection = new DbConnection();
+		dbConnection = DbConnection.getInstance();
 		if ( ! dbConnection.connect() ) {
 			exit(dbConnection.errorMessage);
 		}
@@ -73,7 +75,7 @@ public class Main {
 		System.out.println("App-Check beendet.");
 
 		System.out.println("Verbindung zu CCS wird aufgebaut...");
-		gmcConnection = new GcmXmppConnection();
+		gmcConnection = GcmXmppConnection.getInstance();
 		if ( ! gmcConnection.connect(GcmConfig.CSS_USERNAME, GcmConfig.CSS_PASSWORD) ) {
 			exit( gmcConnection.errorMessage );
 		}
@@ -81,6 +83,10 @@ public class Main {
 
 		System.out.println("Die Anwendung läuft nun...");
 
+		//int userId = User.createUser( "peter", "peter@mail.com");
+
+		//int deviceId = Device.assignDeviceToUser("dfdsjfn", userId);
+		//Logger.log("Device" + deviceId);
 		/*GcmMessage message = new GcmMessage();
 		String toRegId = "APA91bE5GOwn36c8XJzFC0Df0Xa6jNjNlTMAsQgu0JHSNegUK_tpLMVyaclD5n5cpr-BZywqRmKwyNnEHWICVl_NAheVGOiCYevUzv3beBP1fPwmfZKxNiE-p1kGbbtrDaIXnCX7KR8A8fI7KMXce5RN6c81n7x-KdI2pCQsJjyTTs4r5CsJRYI";
 		message.setTo(toRegId);
@@ -106,10 +112,7 @@ public class Main {
 		try {
 			Statement statement = dbConnection.createStatement();
 			// TODO Remove drop calls
-			statement.execute(UsersTable.TABLE_DROP);
-			statement.execute(DevicesTable.TABLE_DROP);
-			statement.execute(RentalPropertiesTable.TABLE_DROP);
-			statement.execute(LocationsTable.TABLE_DROP);
+			// statement.execute(UsersTable.TABLE_DROP);
 			ResultSet tablesResult = statement.executeQuery("SHOW TABLES LIKE '" + UsersTable.TABLE_NAME + "'");
 			boolean tableExists = tablesResult.first();
 			statement.close();
