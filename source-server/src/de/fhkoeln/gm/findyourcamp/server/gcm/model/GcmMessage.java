@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp.server.model;
+package de.fhkoeln.gm.findyourcamp.server.gcm.model;
 
 import java.util.HashMap;
 import java.util.Map;

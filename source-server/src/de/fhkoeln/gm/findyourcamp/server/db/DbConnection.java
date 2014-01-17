@@ -7,10 +7,12 @@ import java.sql.Statement;
 
 public class DbConnection {
 
+	private static DbConnection instance;
+
 	private Connection connection;
 	public String errorMessage = "";
 
-	public DbConnection() {
+	private DbConnection() {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -18,6 +20,20 @@ public class DbConnection {
 			// Fehler: Klasse nicht gefunden.
 		}
 
+	}
+
+	/**
+	 * Singleton.
+	 * Erzeugt genau eine Instanz des Objektes für diese Klasse.
+	 *
+	 * @return
+	 */
+	public static DbConnection getInstance() {
+		if (DbConnection.instance == null) {
+			DbConnection.instance = new DbConnection();
+		}
+
+		return DbConnection.instance;
 	}
 
 	public boolean connect() {

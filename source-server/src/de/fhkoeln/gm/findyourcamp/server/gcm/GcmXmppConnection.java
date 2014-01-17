@@ -16,6 +16,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.json.simple.JSONValue;
 
+import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
 import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
 
 public class GcmXmppConnection {
@@ -23,12 +24,28 @@ public class GcmXmppConnection {
 	public static final String GCM_SERVER = "gcm.googleapis.com";
 	public static final int GCM_PORT = 5235;
 
+	private static GcmXmppConnection instance;
+
 	private XMPPConnection connection;
 	private ConnectionConfiguration config;
 	public String errorMessage = "";
 
-	public GcmXmppConnection() {
+	private GcmXmppConnection() {
 		setConfig();
+	}
+
+	/**
+	 * Singleton.
+	 * Erzeugt genau eine Instanz des Objektes für diese Klasse.
+	 *
+	 * @return
+	 */
+	public static GcmXmppConnection getInstance() {
+		if (GcmXmppConnection.instance == null) {
+			GcmXmppConnection.instance = new GcmXmppConnection();
+		}
+
+		return GcmXmppConnection.instance;
 	}
 
 	private void setConfig() {
@@ -109,6 +126,7 @@ public class GcmXmppConnection {
 
 			private void handleIncomingDataMessage(Map<String, Object> jsonObject) {
 				MessageBroker mb = new MessageBroker(jsonObject);
+				mb.handleRequest();
 				// TODO MessageBroker
 			}
 

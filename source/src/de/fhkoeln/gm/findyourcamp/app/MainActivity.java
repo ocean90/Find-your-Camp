@@ -1,35 +1,31 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import de.fhkoeln.gm.findyourcamp.app.actionbar.adapter.TitleNavigationAdapter;
-import de.fhkoeln.gm.findyourcamp.app.actionbar.model.SpinnerNavItem;
+import android.view.View;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmMessage;
+import de.fhkoeln.gm.findyourcamp.app.gcm.MessageConstants;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
+<<<<<<< HEAD
 /**
  * 
  * 
  *
  */
 public class MainActivity extends Activity implements ActionBar.OnNavigationListener {
+=======
+public class MainActivity extends Activity {
+>>>>>>> ca49fa458d1d63db77efce52c895b3c8b094ac0a
 
-    // action bar
-    private ActionBar actionBar;
-
-    // Title navigation Spinner data
-    private ArrayList<SpinnerNavItem> navSpinner;
-
-    // Navigation adapter
-    private TitleNavigationAdapter adapter;
+	private GcmClient client;
 
     /**
      * 
@@ -40,39 +36,12 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 
 		setContentView(R.layout.activity_main);
 
-		actionBar = getActionBar();
-
-        // Hide the action bar title
-        actionBar.setDisplayShowTitleEnabled(false);
-
-        // Enabling Spinner dropdown navigation
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
-        // Spinner title navigation data
-        navSpinner = new ArrayList<SpinnerNavItem>();
-        navSpinner.add(new SpinnerNavItem("Local", R.drawable.ic_launcher));
-        navSpinner.add(new SpinnerNavItem("My Places", R.drawable.ic_launcher));
-        navSpinner.add(new SpinnerNavItem("Checkins", R.drawable.ic_launcher));
-        navSpinner.add(new SpinnerNavItem("Latitude", R.drawable.ic_launcher));
-
-        // title drop down adapter
-        adapter = new TitleNavigationAdapter(getApplicationContext(), navSpinner);
-
-        // assigning the spinner navigation
-        actionBar.setListNavigationCallbacks(adapter, this);
-
 		if (!GooglePlayServices.check(this)) {
 			finish();
 		} else {
-			GcmClient client = new GcmClient(this);
+			client = new GcmClient(this);
 			if (client.hasRegistrationId()) {
 				Logger.info("reg id exists " + client.getRegistrationId() );
-				GcmMessage message = new GcmMessage();
-				message.setMessageId("xcgjhkl");
-				Bundle payload = new Bundle();
-				payload.putString("foo", "bar");
-				message.setPayload(payload);
-				client.sendMessage(message);
 			} else {
 				Logger.error("no reg id");
 				client.register();
@@ -107,6 +76,17 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 		}
 	}
 
+	public void onButtonClicked(View view) {
+		GcmMessage message = new GcmMessage();
+		message.setMessageId("m-" + (System.currentTimeMillis() / 1000L));
+		message.setAction(MessageConstants.ACTION_USER_REGISTRATION);
+		HashMap<String, Object> payload = new HashMap<String, Object>();
+		payload.put("user_name", "Max");
+		payload.put("user_email", "Max@mustermann.com");
+		message.setPayload(payload);
+		client.sendMessage(message);
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -114,12 +94,6 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 		if (!GooglePlayServices.check(this)) {
 			finish();
 		}
-	}
-
-	@Override
-	public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }
