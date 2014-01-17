@@ -19,6 +19,10 @@ import org.json.simple.JSONValue;
 import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
 import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
 
+/**
+ * Klasse zum Aufbau der Verbindung zum GCM CSS
+ *
+ */
 public class GcmXmppConnection {
 
 	public static final String GCM_SERVER = "gcm.googleapis.com";
@@ -38,7 +42,7 @@ public class GcmXmppConnection {
 	 * Singleton.
 	 * Erzeugt genau eine Instanz des Objektes für diese Klasse.
 	 *
-	 * @return
+	 * @return Verbindungsinstanz
 	 */
 	public static GcmXmppConnection getInstance() {
 		if (GcmXmppConnection.instance == null) {
@@ -48,6 +52,9 @@ public class GcmXmppConnection {
 		return GcmXmppConnection.instance;
 	}
 
+	/**
+	 * ConnectionConfigurationwerte werden gesetzt.
+	 */
 	private void setConfig() {
 		config = new ConnectionConfiguration(GCM_SERVER, GCM_PORT);
 		config.setSecurityMode(SecurityMode.enabled);
@@ -57,14 +64,22 @@ public class GcmXmppConnection {
 		config.setSocketFactory(SSLSocketFactory.getDefault());
 	}
 
+	/**
+	 * Aufbau einer neuen Verbindung
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public boolean connect(String username, String password) {
 
 		// Debug Mode.
 		//config.setDebuggerEnabled(true);
 		//XMPPConnection.DEBUG_ENABLED = true;
 
+		// Verbindung wird als XMPPVerbindung mit configWerte definiert
 		connection = new XMPPConnection(config);
 		try {
+			// Test ob Verbindung aufgebaut werden kann
 			connection.connect();
 		} catch (XMPPException e) {
 			e.printStackTrace();
@@ -83,8 +98,11 @@ public class GcmXmppConnection {
 		connection.addPacketListener(new PacketListener() {
 			@Override
 			public void processPacket(Packet packet) {
+				// Umwandlung des JSON Packets in XML zur XMPP Uebertragung
 				Logger.log( "Nachricht empfangen:" + packet.toXML() );
 				Message incomingMessage = (Message) packet;
+				
+				// Umwandlung in JSON zur Weiterverarbeitung
 				GcmPacketExtension gcmPacket = (GcmPacketExtension) incomingMessage
 						.getExtension(GcmPacketExtension.GCM_NAMESPACE);
 
@@ -124,6 +142,9 @@ public class GcmXmppConnection {
 				}
 			}
 
+			/**
+			 * Eingehende Nachricht wird an MessageBroker uebergeben und verarbeitet
+			 **/
 			private void handleIncomingDataMessage(Map<String, Object> jsonObject) {
 				MessageBroker mb = new MessageBroker(jsonObject);
 				mb.handleRequest();

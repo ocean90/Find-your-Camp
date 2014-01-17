@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Klasse zum Aufbau der Verbindung zur MySQL Datenbank
+ *
+ */
 public class DbConnection {
 
 	private static DbConnection instance;
@@ -12,6 +16,7 @@ public class DbConnection {
 	private Connection connection;
 	public String errorMessage = "";
 
+	
 	private DbConnection() {
 
 		try {
@@ -26,16 +31,19 @@ public class DbConnection {
 	 * Singleton.
 	 * Erzeugt genau eine Instanz des Objektes für diese Klasse.
 	 *
-	 * @return
+	 * @return Instanz der Datenbankverbindung
 	 */
 	public static DbConnection getInstance() {
 		if (DbConnection.instance == null) {
 			DbConnection.instance = new DbConnection();
 		}
-
 		return DbConnection.instance;
 	}
 
+	/**
+	 * Verbindungsaufbau zur Datenbank mit bestikkter URL und Account
+	 * @return Status zum Ergebnis des Verbindungsaufbaus
+	 */
 	public boolean connect() {
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://"
@@ -50,7 +58,12 @@ public class DbConnection {
 
 		return true;
 	}
-
+	
+	/**
+	 * Erstellen eines Statementobjektes zum Senden von SQL Befehlen
+	 * @return Statement
+	 * @throws SQLException
+	 */
 	public Statement createStatement() throws SQLException {
 		return connection.createStatement();
 	}
