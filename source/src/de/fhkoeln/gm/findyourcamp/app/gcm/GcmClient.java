@@ -13,6 +13,10 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
+/**
+ * 
+ *
+ */
 public class GcmClient {
 
 	private final String API_ENDPOINT = "@gcm.googleapis.com";
@@ -23,7 +27,7 @@ public class GcmClient {
 	AtomicInteger msgId = new AtomicInteger();
 
 	/**
-	 * Constructor.
+	 * Konstruktor des GcmClient.
 	 */
 	public GcmClient(Context context) {
 		this.appContext = context;
@@ -34,25 +38,41 @@ public class GcmClient {
 		return ! getRegistrationId().isEmpty();
 	}
 
+	/**
+	 * Pruefen ob regID vorhanden und Ausgabe
+	 * @return
+	 */
 	public String getRegistrationId() {
 		PreferencesStorage preferences = new PreferencesStorage(this.appContext);
 		SharedPreferences settings = preferences.getSettings();
 		String registrationId = settings.getString("registrationId", "");
 
+		// Wenn keine regID vorhanden
 		if ( registrationId.isEmpty() )
 			return "";
 
+		// Rueckgabe vorhandener regID
 		return registrationId;
 
 	}
 
+	/**
+	 * Uebergebene regID wird gespeichert.
+	 * @param registrationId
+	 */
 	public void saveRegisrationId( String registrationId ) {
 		PreferencesStorage preferences = new PreferencesStorage(this.appContext);
+		// Editor zum Modifizieren 
 		SharedPreferences.Editor preferencesEditor = preferences.getEditor();
+		// Neue regID setzen
 		preferencesEditor.putString("registrationId", registrationId);
+		//Speichern des regID zum Objekt
 		preferencesEditor.commit();
 	}
 
+	/**
+	 * Registrierung eines neuen Devices 
+	 */
 	public void register() {
 		new AsyncTask<Void, Void, String>() {
 			@Override
@@ -61,7 +81,8 @@ public class GcmClient {
 				try {
 					registrationId = gcm.register(SENDER_ID);
 					Logger.info("Device registered, registration ID=" + registrationId);
-
+					
+					// neue regID sichern
 					saveRegisrationId(registrationId);
 				} catch (IOException ex) {
 					Logger.error(ex.getMessage());
@@ -76,6 +97,9 @@ public class GcmClient {
 		}.execute(null, null, null);
 	}
 
+	/**
+	 * Registriertes Device wird abgemeldet
+	 */
 	public void unregister() {
 		new AsyncTask<Void, Void, String>() {
 			@Override

@@ -4,6 +4,10 @@ import android.content.Context;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmMessage;
 
+/**
+ * Registrierung eines Accounts
+ *
+ */
 public class AccountRegistration {
 	private Context appContext;
 
