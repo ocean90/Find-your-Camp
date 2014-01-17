@@ -45,6 +45,7 @@ public class GcmMessage {
 	public int getAction() {
 		return action;
 	}
+
 	/**
 	 * @param action the action to set
 	 */
