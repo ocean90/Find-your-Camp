@@ -131,7 +131,7 @@ public class InsertRentalPropertyActivity extends Activity {
 
 	public boolean onButtonClick(View view) {
 		switch (view.getId()) {
-		case R.id.rental_property_save:
+		case R.id.rental_property_button_save:
 			saveRentalProperty();
 			return true;
 		default:

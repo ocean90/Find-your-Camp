@@ -32,14 +32,14 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_main);
 
 		if (!GooglePlayServices.check(this)) {
 			finish();
 		} else {
-			client = new GcmClient(this);
+			client = GcmClient.getInstance(this);
 			if (client.hasRegistrationId()) {
-				Logger.info("reg id exists " + client.getRegistrationId() );
+				setContentView(R.layout.activity_main);
+				//Logger.info("reg id exists " + client.getRegistrationId() );
 			} else {
 				Logger.error("no reg id");
 				client.register();
