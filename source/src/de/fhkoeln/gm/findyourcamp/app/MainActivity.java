@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+<<<<<<< HEAD
 		//  Content der Activity über Layoutresource setzen
 		setContentView(R.layout.activity_main);
 		
@@ -41,8 +42,16 @@ public class MainActivity extends Activity {
 			// Erstellen eines neuen GcmClients, sofern nicht verfuegbar
 			client = new GcmClient(this);
 			// Check ob RegistrierungsID vorhanden
+=======
+
+		if (!GooglePlayServices.check(this)) {
+			finish();
+		} else {
+			client = GcmClient.getInstance(this);
+>>>>>>> 6b0afb7cab32f2e665cf3de84e4cc7994940807c
 			if (client.hasRegistrationId()) {
-				Logger.info("reg id exists " + client.getRegistrationId() );
+				setContentView(R.layout.activity_main);
+				//Logger.info("reg id exists " + client.getRegistrationId() );
 			} else {
 				Logger.error("no reg id");
 				client.register(); // Wenn keine RegID vorhanden, dann neu Einrichten

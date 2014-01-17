@@ -37,7 +37,7 @@
 	<string name="rental_property_section_title_price_range_feedback">Zwischen %1$s und %2$s pro Tag</string>
 	<string name="rental_property_section_title_price_feedback">%1$s pro Tag</string>
 
-	<string name="rental_property_save">Anlegen</string>
+	<string name="rental_property_button_save">Anlegen</string>
 
 	<string name="insert_rental_property_success_dialog_title">Mietobjekt erfolgreich angelegt.</string>
 	<string name="insert_rental_property_success_dialog_message">Mietobjekt jetzt aufrufen?</string>
@@ -46,6 +46,13 @@
 
 	<string name="action_bar_rental_property_requests">Mietanfragen</string>
 	<string name="action_bar_search_requests">Mietanfragen</string>
+
+
+	<string name="registration_hint">Registriere dich jetzt und starte los...</string>
+	<string name="registration_user_name_hint">Benutzername</string>
+	<string name="registration_user_email_hint">E-Mail Adresse</string>
+	<string name="registration_user_password_hint">Passwort</string>
+	<string name="registration_user_button_register">Registrieren</string>
 
     <string-array name="rental_property_group_size_array">
         <item>1</item>

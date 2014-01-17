@@ -5,8 +5,6 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.util.StringUtils;
 
-import de.fhkoeln.gm.findyourcamp.server.Main;
-
 /**
   * XMPP Packet Extension for GCM Cloud Connection Server.
   */
@@ -27,8 +25,8 @@ public class GcmPacketExtension extends DefaultPacketExtension {
 
     @Override
     public String toXML() {
-      return String.format("<%s xmlns=\"%s\">%s</%s>", Main.GCM_ELEMENT_NAME,
-          Main.GCM_NAMESPACE, json, Main.GCM_ELEMENT_NAME);
+      return String.format("<%s xmlns=\"%s\">%s</%s>", GCM_ELEMENT_NAME,
+    		  GCM_NAMESPACE, json, GCM_ELEMENT_NAME);
     }
 
     public Packet toPacket() {

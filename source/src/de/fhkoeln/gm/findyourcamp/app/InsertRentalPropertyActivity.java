@@ -147,8 +147,12 @@ public class InsertRentalPropertyActivity extends Activity {
 	 */
 	public boolean onButtonClick(View view) {
 		switch (view.getId()) {
+<<<<<<< HEAD
 		// Speichern der Ausstattung
 		case R.id.rental_property_save:
+=======
+		case R.id.rental_property_button_save:
+>>>>>>> 6b0afb7cab32f2e665cf3de84e4cc7994940807c
 			saveRentalProperty();
 			return true;
 		default:

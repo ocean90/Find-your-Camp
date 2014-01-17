@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Bundle;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -19,6 +18,7 @@ import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
  */
 public class GcmClient {
 
+	private static GcmClient instance;
 	private final String API_ENDPOINT = "@gcm.googleapis.com";
 	private final String SENDER_ID = "474445016109";
 
@@ -29,13 +29,27 @@ public class GcmClient {
 	/**
 	 * Konstruktor des GcmClient.
 	 */
-	public GcmClient(Context context) {
+	private GcmClient(Context context) {
 		this.appContext = context;
 		this.gcm = GoogleCloudMessaging.getInstance(context);
 	}
 
+	/**
+	 * Singleton.
+	 * Erzeugt genau eine Instanz des Objektes für diese Klasse.
+	 *
+	 * @return
+	 */
+	public static GcmClient getInstance(Context context) {
+		if (GcmClient.instance == null) {
+			GcmClient.instance = new GcmClient(context);
+		}
+
+		return GcmClient.instance;
+	}
+
 	public boolean hasRegistrationId() {
-		return ! getRegistrationId().isEmpty();
+		return !getRegistrationId().isEmpty();
 	}
 
 	/**
@@ -137,7 +151,7 @@ public class GcmClient {
 
                 String feedback = "";
                 try {
-                	gcm.send(SENDER_ID + "@gcm.googleapis.com", message.getMessageId(), message.getData());
+                	gcm.send(SENDER_ID + API_ENDPOINT, message.getMessageId(), message.getData());
                 	feedback = "Nachricht gesendet";
                 } catch (IOException ex) {
                 	feedback = "Error :" + ex.getMessage();
