@@ -13,7 +13,8 @@ import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
 /**
- *
+ * Klasse des GcmClient.
+ * Erstellen eines Clintes, Registrierung eines neuen Devices und Senden einer Nachricht
  *
  */
 public class GcmClient {
@@ -38,7 +39,7 @@ public class GcmClient {
 	 * Singleton.
 	 * Erzeugt genau eine Instanz des Objektes für diese Klasse.
 	 *
-	 * @return
+	 * @return Instanz des GcmClient
 	 */
 	public static GcmClient getInstance(Context context) {
 		if (GcmClient.instance == null) {
@@ -54,7 +55,7 @@ public class GcmClient {
 
 	/**
 	 * Pruefen ob regID vorhanden und Ausgabe
-	 * @return
+	 * @return registrationID
 	 */
 	public String getRegistrationId() {
 		PreferencesStorage preferences = new PreferencesStorage(this.appContext);
@@ -114,7 +115,7 @@ public class GcmClient {
 	 * Send a message to GCM service.
 	 *
 	 * @param message
-	 * @return
+	 * @return feedback
 	 */
 	public void sendMessage(GcmMessage message) {
 

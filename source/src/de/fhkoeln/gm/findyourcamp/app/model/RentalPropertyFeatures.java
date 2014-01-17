@@ -6,6 +6,10 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+/**
+ * Model zur Ausstattung des Mietobjektes
+ *
+ */
 public class RentalPropertyFeatures {
 	final public static String TOILETS_AVAILABLE_KEY = "toilets_available";
 	final public static String BBQ_ALLOWED_KEY = "bbq_allowed";
@@ -27,7 +31,8 @@ public class RentalPropertyFeatures {
 
 		this.setDefaultValues();
 	}
-
+	
+	// Defaultwerte setzen
 	private void setDefaultValues() {
 		for (Field field : RentalPropertyFeatures.class.getDeclaredFields()) {
 			field.setAccessible(true);
@@ -37,10 +42,12 @@ public class RentalPropertyFeatures {
         }
 	}
 
+	// Features hinzufuegen
 	public void setFeature(String key, Boolean value) {
 		this.features.put(key, value);
 	}
 
+	// Features ausgeben
 	public boolean getFeature(String key) {
 		return this.features.get(key);
 	}
@@ -48,6 +55,7 @@ public class RentalPropertyFeatures {
 	public HashMap<String, Boolean> toMap() {
 		return this.features;
 	}
+
 
 	public String toJson() {
 		JSONObject json = new JSONObject(features);
