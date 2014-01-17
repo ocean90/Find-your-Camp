@@ -27,15 +27,6 @@ import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
  */
 public class Main {
 
-	public static final String GCM_SERVER = "gcm.googleapis.com";
-	public static final int GCM_PORT = 5235;
-
-	public static final String GCM_ELEMENT_NAME = "gcm";
-	public static final String GCM_NAMESPACE = "google:mobile:data";
-
-	public static final String CSS_USERNAME = "474445016109";
-	public static final String CSS_PASSWORD = "AIzaSyCCkoUqGUd-O3RI3cf3ZZZme0dIOri5Mf0";
-
 	public DbConnection dbConnection;
 	public GcmXmppConnection gmcConnection;
 
