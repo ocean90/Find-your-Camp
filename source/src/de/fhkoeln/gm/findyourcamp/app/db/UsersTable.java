@@ -3,6 +3,10 @@ package de.fhkoeln.gm.findyourcamp.app.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * Datenbanktabelle zum Mietauftrag
+ *
+ */
 public class UsersTable extends Table {
 
 	public static final String TABLE_NAME = "users";

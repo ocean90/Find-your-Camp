@@ -7,18 +7,21 @@ import org.json.JSONObject;
 
 import android.os.Bundle;
 
+
 public class GcmMessage {
 	private String messageId = null;
 	private HashMap<String, Object> payload = new HashMap<String, Object>();
 	private int action = 0;
 
 	/**
-	 * @return the messageId
+	 * MessageID ausgeben
+	 * @return the messageId to get
 	 */
 	public String getMessageId() {
 		return messageId;
 	}
 	/**
+	 * Neue MessageID setzen
 	 * @param messageId the messageId to set
 	 */
 	public void setMessageId(String messageId) {
@@ -26,13 +29,15 @@ public class GcmMessage {
 	}
 
 	/**
-	 * @return the payload
+	 * Neuen Payload ausgeben
+	 * @return the payload to get
 	 */
 	public Map<String, Object> getPayload() {
 		return payload;
 	}
 
 	/**
+	 * Neuen Payload setzen
 	 * @param payload2 the payload to set
 	 */
 	public void setPayload(HashMap<String, Object> payload) {
@@ -40,13 +45,15 @@ public class GcmMessage {
 	}
 
 	/**
-	 * @return the action
+	 * Neue Action ausgeben
+	 * @return the action to get
 	 */
 	public int getAction() {
 		return action;
 	}
 
 	/**
+	 * Neue Aktion setzen
 	 * @param action the action to set
 	 */
 	public void setAction(int action) {
@@ -60,7 +67,7 @@ public class GcmMessage {
 	 *
 	 * Damit wird das Problem umgangen, dass nicht-String Werte verloren gehen.
 	 *
-	 * @return
+	 * @return data
 	 */
 	public Bundle getData() {
 		payload.put("action", action);
