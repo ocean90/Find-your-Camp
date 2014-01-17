@@ -8,6 +8,10 @@ import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
 import de.fhkoeln.gm.findyourcamp.server.db.UsersTable;
 import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
 
+/**
+ * Anlegen eines neuen Usereintrages bei Registrierung
+ *
+ */
 public class User {
 
 	public User() {
@@ -24,17 +28,21 @@ public class User {
 
 		try {
 			Statement statement = dbConnection.createStatement();
+			// Neuer Usereintrag wird in Tabelle angelegt
 			statement.executeUpdate(
 				"INSERT INTO "+ UsersTable.TABLE_NAME +
 				" (" + UsersTable.COLUMN_NAME_USER_NAME + "," + UsersTable.COLUMN_NAME_USER_EMAIL + ") " +
 				"VALUES ( '" + userName + "', '" + userEmail + "');", Statement.RETURN_GENERATED_KEYS
 			);
 			ResultSet keys = statement.getGeneratedKeys();
+			
+			// ZeilenID
 			keys.next();
 			int userId = keys.getInt(1);
 			statement.close();
 
 			return userId; // ID des Users zurückgeben.
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;

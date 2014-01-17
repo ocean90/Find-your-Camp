@@ -8,6 +8,10 @@ import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
 import de.fhkoeln.gm.findyourcamp.server.db.DevicesTable;
 import de.fhkoeln.gm.findyourcamp.server.db.UsersTable;
 
+/**
+ * In der Datenbank wird die Zuordnung der deviceId mit der userID erstellt.
+ *  
+ */
 public class Device {
 
 	public Device() {
@@ -25,6 +29,7 @@ public class Device {
 
 		try {
 			Statement statement = dbConnection.createStatement();
+			// Zuordnung UserID und DeviceID wird in Tabelle angelegt
 			statement.executeUpdate(
 				"INSERT INTO "+ DevicesTable.TABLE_NAME +
 				" (" + DevicesTable.COLUMN_NAME_REG_ID + "," + DevicesTable.COLUMN_NAME_USER_ID + ") " +

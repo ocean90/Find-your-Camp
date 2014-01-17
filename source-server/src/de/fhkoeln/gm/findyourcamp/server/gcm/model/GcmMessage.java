@@ -5,6 +5,10 @@ import java.util.Map;
 
 import org.json.simple.JSONValue;
 
+/**
+ * Aktionen im Umgang mit GcmMessage. 
+ * Ausgabe und Setzen der Werte sowie Umwandeln in JSON
+ */
 public class GcmMessage {
 
 	private String to = null;
@@ -19,6 +23,7 @@ public class GcmMessage {
 	}
 
 	/**
+	 * Empfaenger ausgeben
 	 * @return the to
 	 */
 	public String getTo() {
@@ -26,6 +31,7 @@ public class GcmMessage {
 	}
 
 	/**
+	 * Empfaenger setzen
 	 * @param to the to to set
 	 */
 	public void setTo(String to) {
@@ -33,6 +39,7 @@ public class GcmMessage {
 	}
 
 	/**
+	 * MessageId ausgaben
 	 * @return the messageId
 	 */
 	public String getMessageId() {
@@ -40,6 +47,7 @@ public class GcmMessage {
 	}
 
 	/**
+	 * MessageIs setzen
 	 * @param messageId the messageId to set
 	 */
 	public void setMessageId(String messageId) {
@@ -47,6 +55,7 @@ public class GcmMessage {
 	}
 
 	/**
+	 * CollapseKey ausgeben
 	 * @return the collapse_key
 	 */
 	public String getCollapseKey() {
@@ -54,6 +63,7 @@ public class GcmMessage {
 	}
 
 	/**
+	 * CollapseKey setzen
 	 * @param collapse_key the collapse_key to set
 	 */
 	public void setCollapseKey(String collapseKey) {
@@ -89,6 +99,7 @@ public class GcmMessage {
 	}
 
 	/**
+	 * Payload der Message ausgeben
 	 * @return the payload
 	 */
 	public Map<String, Object> getPayload() {
@@ -110,6 +121,10 @@ public class GcmMessage {
 		return true;
 	}
 
+	/**
+	 * Message in JSON umwandeln
+	 * @return
+	 */
 	public String toJson() {
 		Map<String, Object> message = new HashMap<String, Object>();
 
