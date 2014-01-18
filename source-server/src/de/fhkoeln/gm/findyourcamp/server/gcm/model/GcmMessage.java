@@ -6,7 +6,7 @@ import java.util.Map;
 import org.json.simple.JSONValue;
 
 /**
- * Aktionen im Umgang mit GcmMessage. 
+ * Aktionen im Umgang mit GcmMessage.
  * Ausgabe und Setzen der Werte sowie Umwandeln in JSON
  */
 public class GcmMessage {
@@ -16,6 +16,7 @@ public class GcmMessage {
 	private String collapseKey = null;
 	private Boolean delayWhileIdle = false;
 	private Integer timeToLive = null;
+	private int action = 0;
 
 	private HashMap<String, Object> payload = new HashMap<String, Object>();
 
@@ -99,6 +100,20 @@ public class GcmMessage {
 	}
 
 	/**
+	 * @return the action
+	 */
+	public int getAction() {
+		return action;
+	}
+
+	/**
+	 * @param action the action to set
+	 */
+	public void setAction(int action) {
+		this.action = action;
+	}
+
+	/**
 	 * Payload der Message ausgeben
 	 * @return the payload
 	 */
@@ -114,7 +129,7 @@ public class GcmMessage {
 	}
 
 	public boolean isValid() {
-		if ( to.isEmpty() || messageId.isEmpty() || payload.isEmpty() ) {
+		if ( action == 0 || to.isEmpty() || messageId.isEmpty() || payload.isEmpty() ) {
 			return false;
 		}
 
@@ -143,6 +158,8 @@ public class GcmMessage {
 		}
 
 		message.put("message_id", messageId);
+
+		payload.put("action", action);
 		message.put("data", payload);
 
 		return JSONValue.toJSONString(message);

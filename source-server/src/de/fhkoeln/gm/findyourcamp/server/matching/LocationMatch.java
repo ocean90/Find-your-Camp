@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
+import de.fhkoeln.gm.findyourcamp.server.db.DevicesTable;
 import de.fhkoeln.gm.findyourcamp.server.db.LocationsTable;
 import de.fhkoeln.gm.findyourcamp.server.db.RentalPropertiesTable;
 
@@ -17,10 +18,10 @@ import de.fhkoeln.gm.findyourcamp.server.db.RentalPropertiesTable;
  */
 public class LocationMatch {
 
-	public static List<Integer> getMatches(String location) {
+	public static List<String> getMatches(String location) {
 		DbConnection dbConnection = DbConnection.getInstance();
 
-		List<Integer> userIds = new ArrayList<Integer>();
+		List<String> registrationIds = new ArrayList<String>();
 
 		try {
 			Statement statement = dbConnection.createStatement();
@@ -29,7 +30,9 @@ public class LocationMatch {
 					+ " WHERE " + LocationsTable.COLUMN_NAME_LOCATION_NAME
 					+ "='" + location + "'");
 
-			locationResultSet.next();
+			if (!locationResultSet.next()) {
+				return registrationIds;
+			}
 			int locationId = locationResultSet.getInt(1);
 
 			// Zugehörige Mietobjekte und deren Vermieter holen.
@@ -37,14 +40,25 @@ public class LocationMatch {
 					+ " WHERE " + RentalPropertiesTable.COLUMN_NAME_LOCATION_ID
 					+ "=" + locationId );
 
+			StringBuilder userIds = new StringBuilder();
 			while (RentalPropertiesResultSet.next()) {
-				userIds.add(RentalPropertiesResultSet.getInt(3));
+				userIds.append(RentalPropertiesResultSet.getInt(3) + ",");
+			}
+
+			// Zugehörige Devices und deren Registierungs-ID holen.
+			String sql = "SELECT * FROM " + DevicesTable.TABLE_NAME
+					+ " WHERE " + DevicesTable.COLUMN_NAME_DEVICE_ID
+					+ " IN (" + userIds.toString().replaceAll(",$", "") + ");";
+			ResultSet DevicesResultSet = statement.executeQuery(sql);
+
+			while (DevicesResultSet.next()) {
+				registrationIds.add(DevicesResultSet.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return userIds;
+		return registrationIds;
 	}
 
 }

@@ -1,11 +1,12 @@
 package de.fhkoeln.gm.findyourcamp.server.gcm;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONValue;
-import org.json.simple.parser.ParseException;
 
+import de.fhkoeln.gm.findyourcamp.server.gcm.model.GcmMessage;
 import de.fhkoeln.gm.findyourcamp.server.matching.LocationMatch;
 import de.fhkoeln.gm.findyourcamp.server.model.Device;
 import de.fhkoeln.gm.findyourcamp.server.model.User;
@@ -16,9 +17,6 @@ import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
  *
  */
 public class MessageBroker {
-
-	public static final int ACTION_USER_REGISTRATION  = 1;
-	public static final int ACTION_SEARCH_REQUEST = 2;
 
 	Map<String, Object> data;
 	private String from;
@@ -59,11 +57,11 @@ public class MessageBroker {
 		int action = ((Long) data.get("action")).intValue();
 
 		switch (action) {
-			case ACTION_USER_REGISTRATION:
+			case MessageConstants.ACTION_USER_REGISTRATION:
 				// Registrierung
 				handleUserRegistration();
 				break;
-			case ACTION_SEARCH_REQUEST:
+			case MessageConstants.ACTION_SEARCH_REQUEST:
 				// Suchanfrage
 				handleSearchRequest();
 				break;
@@ -91,6 +89,19 @@ public class MessageBroker {
 		if (newUserId > 0) {
 			int newDeviceId = Device.assignDeviceToUser(regId, newUserId);
 			System.out.println("Registration für User " + newUserId + " und Device " + newDeviceId + " abgeschlossen." );
+
+			GcmXmppConnection gcmConnection = GcmXmppConnection.getInstance();
+
+			GcmMessage message = new GcmMessage();
+			message.setTo(this.from);
+			message.setMessageId("m-" + (System.currentTimeMillis() / 1000L));
+			message.setAction(MessageConstants.ACTION_USER_REGISTERED);
+
+			HashMap<String, Object> payload = new HashMap<String, Object>();
+			payload.put("user_id", newUserId);
+			message.setPayload(payload);
+
+			gcmConnection.sendMessage(message);
 		}
 
 	}
@@ -101,6 +112,22 @@ public class MessageBroker {
 		Logger.log(location);
 
 		// ToDo
-		List<Integer> users = LocationMatch.getMatches(location);
+		List<String> devices = LocationMatch.getMatches(location);
+
+		GcmXmppConnection gcmConnection = GcmXmppConnection.getInstance();
+		GcmMessage message = new GcmMessage();
+		message.setTo(this.from);
+		message.setMessageId("m-" + (System.currentTimeMillis() / 1000L));
+		message.setAction(MessageConstants.ACTION_SEARCH_RESULT);
+		HashMap<String, Object> payload = new HashMap<String, Object>();
+
+		if (!devices.isEmpty()) {
+			payload.put("found_items", devices.size());
+		} else {
+			payload.put("found_items", 0);
+		}
+
+		message.setPayload(payload);
+		gcmConnection.sendMessage(message);
 	}
 }

@@ -1,7 +1,6 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
 import java.text.NumberFormat;
-import java.util.HashMap;
 import java.util.Locale;
 
 import android.app.ActionBar;

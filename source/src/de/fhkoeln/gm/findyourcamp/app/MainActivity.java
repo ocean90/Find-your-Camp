@@ -1,17 +1,12 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
-import java.util.HashMap;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
-import de.fhkoeln.gm.findyourcamp.app.gcm.GcmMessage;
-import de.fhkoeln.gm.findyourcamp.app.gcm.MessageConstants;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
 
 /**
@@ -83,7 +78,7 @@ public class MainActivity extends Activity {
 			intent = new Intent(this, InsertRentalPropertyActivity.class);
 			startActivity(intent);
 			return true;
-			// Activity Ausstattung des angefragten Objektes
+		// Activity Ausstattung des angefragten Objektes
 		case R.id.action_request_rental_property:
 			intent = new Intent(this, RequestRentalPropertyActivity.class);
 			startActivity(intent);
@@ -93,22 +88,6 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	/**
-	 *
-	 * @param view
-	 */
-	public void onButtonClicked(View view) {
-		// Neue GCM Message
-		GcmMessage message = new GcmMessage();
-		message.setMessageId("m-" + (System.currentTimeMillis() / 1000L));
-		message.setAction(MessageConstants.ACTION_USER_REGISTRATION);
-		HashMap<String, Object> payload = new HashMap<String, Object>();
-		payload.put("user_name", "Max");
-		payload.put("user_email", "Max@mustermann.com");
-		message.setPayload(payload);
-		// Message wird zum GCM Service gesendet
-		client.sendMessage(message);
-	}
 
 	@Override
 	protected void onResume() {

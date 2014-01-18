@@ -1,7 +1,6 @@
 package de.fhkoeln.gm.findyourcamp.app.model;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Modell zum Mietobjekt
@@ -17,7 +16,7 @@ public class RentalProperty {
 
 	public RentalProperty() {
 	}
-	
+
 	/**
 	 * Location setzen
 	 * @param location to set

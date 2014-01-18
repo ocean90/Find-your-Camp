@@ -16,7 +16,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.json.simple.JSONValue;
 
-import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
+import de.fhkoeln.gm.findyourcamp.server.gcm.model.GcmMessage;
 import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
 
 /**
@@ -151,11 +151,12 @@ public class GcmXmppConnection {
 			}
 
 			private void handleAckReceipt(Map<String, Object> jsonObject) {
+				Logger.log(jsonObject.toString());
 				// TODO
 			}
 
 			private void handleNackReceipt(Map<String, Object> jsonObject) {
-				// TODO
+				Logger.err(jsonObject.toString());
 			}
 		}, new PacketTypeFilter(Message.class));
 
@@ -164,6 +165,7 @@ public class GcmXmppConnection {
 		connection.addPacketInterceptor(new PacketInterceptor() {
 			@Override
 			public void interceptPacket(Packet packet) {
+				Logger.log(packet.toXML());
 				// TODO
 			}
 		}, new PacketTypeFilter(Message.class));
@@ -179,9 +181,6 @@ public class GcmXmppConnection {
 		}
 
 		return true;
-	}
-
-	public void handleIncomingDataMessage(Map<String, Object> jsonObject) {
 	}
 
 	/**
@@ -200,10 +199,20 @@ public class GcmXmppConnection {
 		return JSONValue.toJSONString(message);
 	}
 
+	public boolean sendMessage(GcmMessage message) {
+		if (!message.isValid()) {
+			return false;
+		}
+
+		sendPacket(message.toJson());
+
+		return true;
+	}
+
 	/**
-	 * Sendet eine Nachricht an ein Device. (Downstream)
+	 * Sendet ein Paket an ein Device. (Downstream)
 	 */
-	public void sendPacket(String jsonRequest) {
+	private void sendPacket(String jsonRequest) {
 		Packet request = new GcmPacketExtension(jsonRequest).toPacket();
 
 		connection.sendPacket(request);

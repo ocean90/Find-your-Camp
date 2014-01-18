@@ -6,11 +6,10 @@ import java.sql.Statement;
 
 import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
 import de.fhkoeln.gm.findyourcamp.server.db.DevicesTable;
-import de.fhkoeln.gm.findyourcamp.server.db.UsersTable;
 
 /**
  * In der Datenbank wird die Zuordnung der deviceId mit der userID erstellt.
- *  
+ *
  */
 public class Device {
 

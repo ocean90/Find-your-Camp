@@ -6,6 +6,9 @@ package de.fhkoeln.gm.findyourcamp.server.gcm;
  *
  */
 public final class MessageConstants {
-	public static final int ACTION_USER_REGISTRATION  = 1;
-	public static final int ACTION_SEARCH_REQUEST = 2;
+	public static final int ACTION_USER_REGISTRATION = 1;
+	public static final int ACTION_USER_REGISTERED = 2;
+
+	public static final int ACTION_SEARCH_REQUEST = 3;
+	public static final int ACTION_SEARCH_RESULT = 4;
 }
