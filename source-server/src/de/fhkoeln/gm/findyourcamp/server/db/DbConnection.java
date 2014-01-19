@@ -13,6 +13,8 @@ public class DbConnection {
 
 	private static DbConnection instance;
 
+	//A connection (session) with a specific database. 
+	//SQL statements are executed and results are returned within the context of a connection.
 	private Connection connection;
 	public String errorMessage = "";
 
@@ -20,6 +22,7 @@ public class DbConnection {
 	private DbConnection() {
 
 		try {
+			// Runtime Class descriptor for the class named com.mysql.jdbc.Driver:
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			// Fehler: Klasse nicht gefunden.
@@ -45,7 +48,7 @@ public class DbConnection {
 	 * @return Status zum Ergebnis des Verbindungsaufbaus
 	 */
 	public boolean connect() {
-		try {
+		try {// Driver für die Datenbankverbindung getConnection baut Verbindung zur angegeben Datenbank URL auf
 			connection = DriverManager.getConnection("jdbc:mysql://"
 					+ DbConfig.HOST + ":" + DbConfig.PORT + "/"
 					+ DbConfig.DATABASE_NAME, DbConfig.USERNAME,
@@ -65,6 +68,7 @@ public class DbConnection {
 	 * @throws SQLException
 	 */
 	public Statement createStatement() throws SQLException {
+		// Ein Statement zum ausführen der SQL Befehle wird der Datenbankverbindung zugeordnet.
 		return connection.createStatement();
 	}
 

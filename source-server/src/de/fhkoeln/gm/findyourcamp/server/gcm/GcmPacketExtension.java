@@ -14,6 +14,7 @@ public class GcmPacketExtension extends DefaultPacketExtension {
 
     String json;
 
+    //Konstruktor
     public GcmPacketExtension(String json) {
       super(GCM_ELEMENT_NAME, GCM_NAMESPACE);
       this.json = json;
@@ -24,11 +25,12 @@ public class GcmPacketExtension extends DefaultPacketExtension {
     }
 
     @Override
+    // Umwandeln in XML
     public String toXML() {
       return String.format("<%s xmlns=\"%s\">%s</%s>", GCM_ELEMENT_NAME,
     		  GCM_NAMESPACE, json, GCM_ELEMENT_NAME);
     }
-
+    // ?
     public Packet toPacket() {
       return new Message() {
         // Must override toXML() because it includes a <body>
