@@ -1,13 +1,16 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -25,10 +28,11 @@ import android.widget.TextView;
 import com.google.code.widget.RangeSeekBar;
 import com.google.code.widget.RangeSeekBar.OnRangeSeekBarChangeListener;
 
-import de.fhkoeln.gm.findyourcamp.app.R;
+import de.fhkoeln.gm.findyourcamp.app.db.RentalPropertiesTable;
 import de.fhkoeln.gm.findyourcamp.app.map.PlaceAutocompleteAdapter;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalPropertyFeatures;
+import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
 /**
  * Activity zum Angeben der Ausstattung eines Mietobjektes
@@ -176,8 +180,8 @@ public class InsertRentalPropertyActivity extends Activity {
 		rentalPropertyModel.setGroupSize(groupSize);
 
 		// Preisspanne
-		int priceRangeMin = priceRangeSeekBar.getAbsoluteMinValue();
-		int priceRangeMax = priceRangeSeekBar.getAbsoluteMaxValue();
+		int priceRangeMin = priceRangeSeekBar.getSelectedMinValue();
+		int priceRangeMax = priceRangeSeekBar.getSelectedMaxValue();
 		rentalPropertyModel.setPriceRange(priceRangeMin, priceRangeMax);
 
 		// Features
@@ -255,9 +259,30 @@ public class InsertRentalPropertyActivity extends Activity {
 	 * Datenmodell der Grundstuecksausstattung wird abgespeichert
 	 */
 	private void saveRentalProperty() {
-		RentalProperty rentalPropery = prepareRentalPropertyData();
+		RentalProperty rentalProperty = prepareRentalPropertyData();
 
-		if (rentalPropery.isValid()) {
+		if (rentalProperty.isValid()) {
+			RentalPropertiesTable rentalPropertiesTable = new RentalPropertiesTable(this);
+			SQLiteDatabase rentalPropertiesDatabase = rentalPropertiesTable.getWritableDatabase();
+			ContentValues values = new ContentValues();
+			values.put(RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_LOCATION, rentalProperty.getLocation() );
+			values.put(RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_GROUP_SIZE, rentalProperty.getGroupSize() );
+			values.put(RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_MIN_PRICE, rentalProperty.getPriceRange()[0] );
+			values.put(RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_MAX_PRICE, rentalProperty.getPriceRange()[1] );
+
+			ArrayList<String> features = rentalProperty.getFeatures().getAvailableFeatures();
+			for (String feature : features) {
+				values.put(feature, true ); // Feature Key
+			}
+
+			long newRentalPropertyId = rentalPropertiesDatabase.insert( RentalPropertiesTable.TABLE_NAME, null, values);
+
+			if ( newRentalPropertyId == -1 ) {
+				Logger.error("Fehler beim Eintragen des Mietobjektes");
+			}
+
+			rentalPropertiesDatabase.close();
+
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(
 					R.string.insert_rental_property_success_dialog_message)

@@ -75,6 +75,19 @@ public class RentalProperty {
 		this.maxPrice = maxPrice;
 	}
 
+	/**
+	 * Preispanne ausgeben
+	 */
+	public int[] getPriceRange() {
+		int[] priceRange = new int[2];
+
+		priceRange[0] = minPrice;
+		priceRange[1] = maxPrice;
+
+		return priceRange;
+	}
+
+
 	public boolean isValid() {
 		if (this.location.isEmpty())
 			return false;

@@ -1,7 +1,9 @@
 package de.fhkoeln.gm.findyourcamp.app.model;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * Model zur Ausstattung des Mietobjektes
@@ -47,6 +49,19 @@ public class RentalPropertyFeatures {
 	// Features ausgeben
 	public boolean getFeature(String key) {
 		return this.features.get(key);
+	}
+
+	// Alle vorhanden Features ausgeben. (Wert = true)
+	public ArrayList<String> getAvailableFeatures() {
+		ArrayList<String> availableFeatures = new ArrayList<String>();
+
+		for (Entry<String, Boolean> feature : this.features.entrySet()) {
+			if (feature.getValue()) {
+				availableFeatures.add(feature.getKey());
+			}
+		}
+
+		return availableFeatures;
 	}
 
 	public HashMap<String, Boolean> toMap() {

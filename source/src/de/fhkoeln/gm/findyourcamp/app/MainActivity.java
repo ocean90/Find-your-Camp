@@ -1,13 +1,19 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import de.fhkoeln.gm.findyourcamp.app.db.RentalPropertiesTable;
 import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
 import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
+import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
+import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
 /**
  * MainActivity als Startpunkt der Anwendung.
@@ -23,7 +29,6 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 
 		// Abfrage ob GooglePlayService verfuegbar ist
 		if (!GooglePlayServices.check(this)) {
