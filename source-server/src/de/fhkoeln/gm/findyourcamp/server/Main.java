@@ -37,7 +37,7 @@ public class Main {
 	 * Bei Fehler Rueckgabe der Problemstelle.
 	 */
 	public Main() {
-		// Add GcmPacketExtension 
+		// GcmPacketExtension registrieren 
 		ProviderManager.getInstance().addExtensionProvider(GcmPacketExtension.GCM_ELEMENT_NAME,
 				GcmPacketExtension.GCM_NAMESPACE, new PacketExtensionProvider() {
 
@@ -61,12 +61,11 @@ public class Main {
 		System.out.println("Datenbanverbindung erfolgreich aufgebaut.");
 
 		System.out.println("App-Check...");
-		
 		// Prueft ob bereits Tabellen in der Datenbank angelegt wurden, sonst neu anlegen
 		checkAppStatus();
 		System.out.println("App-Check beendet.");
 
-		// Aufbau der GCM CSS Verbindung
+		// Aufbau der GCM CCS Verbindung
 		System.out.println("Verbindung zu CCS wird aufgebaut...");
 		gmcConnection = GcmXmppConnection.getInstance();
 		// Prueft ob Verbindung aufgebaut werden kann

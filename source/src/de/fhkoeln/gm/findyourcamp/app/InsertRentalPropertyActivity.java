@@ -132,6 +132,7 @@ public class InsertRentalPropertyActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		// Navigation zur Homeseite
+		// WO LIEGT DIE XML?
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;

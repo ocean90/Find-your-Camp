@@ -27,7 +27,7 @@ public class UsersTable {
 			"DROP TABLE IF EXISTS " + TABLE_NAME;
 
 	// TODO?
-	public UsersTable() {
+	private UsersTable() {
 	}
 
 }

@@ -93,7 +93,7 @@ public class GcmClient {
 			@Override
 			protected String doInBackground(Void... params) {
 				String registrationId = "";
-				try {
+				try {							// ProjektID von Google für Zugriff
 					registrationId = gcm.register(SENDER_ID);
 					Logger.info("Device registered, registration ID=" + registrationId);
 

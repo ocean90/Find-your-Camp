@@ -50,7 +50,7 @@ public class MessageBroker {
 		if (found_items > 0) {
 			userNotification.show("Suchanfrage erfolgreich", "Es konnte ein Mietobjekt gefunden werden.", "Camp gefunden");
 		} else {
-			userNotification.show("Suchanfrage ohne Ergebnise", "Es konnte kein Mietobjekt gefunden werden.", "Kein Camp gefunden");
+			userNotification.show("Suchanfrage ohne Ergebnisse", "Es konnte kein Mietobjekt gefunden werden.", "Kein Camp gefunden");
 		}
 	}
 

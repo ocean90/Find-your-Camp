@@ -1,4 +1,4 @@
-package de.fhkoeln.gm.findyourcamp.app.gcm;
+ package de.fhkoeln.gm.findyourcamp.app.gcm;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -36,7 +36,7 @@ public class GcmIntentService extends IntentService {
              * not interested in, or that you don't recognize.
              */
             if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-               Logger.error("Send error: " + extras.toString());
+            	Logger.error("Send error: " + extras.toString());
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
             	Logger.error("Deleted messages on server: " + extras.toString());
             // If it's a regular GCM message, do some work.

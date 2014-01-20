@@ -25,7 +25,7 @@ public class LocationMatch {
 
 		try {
 			Statement statement = dbConnection.createStatement();
-			// Zugehörige ID holen.
+			// Zugehörige Location ID holen.
 			ResultSet locationResultSet = statement.executeQuery("SELECT * FROM " + LocationsTable.TABLE_NAME
 					+ " WHERE " + LocationsTable.COLUMN_NAME_LOCATION_NAME
 					+ "='" + location + "'");
@@ -33,6 +33,7 @@ public class LocationMatch {
 			if (!locationResultSet.next()) {
 				return registrationIds;
 			}
+			
 			int locationId = locationResultSet.getInt(1);
 
 			// Zugehörige Mietobjekte und deren Vermieter holen.

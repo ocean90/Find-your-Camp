@@ -76,7 +76,7 @@ public class GcmXmppConnection {
 		//config.setDebuggerEnabled(true);
 		//XMPPConnection.DEBUG_ENABLED = true;
 
-		// Verbindung wird als XMPPVerbindung mit configWerte definiert
+		// Verbindung wird als XMPPVerbindung aus der Smack Lib mit config-Werten definiert
 		connection = new XMPPConnection(config);
 		try {
 			// Test ob Verbindung aufgebaut werden kann
@@ -109,6 +109,7 @@ public class GcmXmppConnection {
 				String json = gcmPacket.getJson();
 				try {
 					@SuppressWarnings("unchecked")
+					// Nachricht in JSON Objekt umwandeln
 					Map<String, Object> jsonObject = (Map<String, Object>) JSONValue
 							.parseWithException(json);
 
@@ -147,7 +148,6 @@ public class GcmXmppConnection {
 			private void handleIncomingDataMessage(Map<String, Object> jsonObject) {
 				MessageBroker mb = new MessageBroker(jsonObject);
 				mb.handleRequest();
-				// TODO MessageBroker
 			}
 
 			private void handleAckReceipt(Map<String, Object> jsonObject) {

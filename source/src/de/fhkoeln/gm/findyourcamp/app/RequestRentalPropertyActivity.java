@@ -50,7 +50,7 @@ public class RequestRentalPropertyActivity extends Activity {
 
 
 		/**
-		 * Country autocomplete.
+		 * City autocomplete.
 		 */
 		AutoCompleteTextView autoCompView = (AutoCompleteTextView) findViewById(R.id.rental_property_location_autocomplete);
 		autoCompView.setAdapter(new PlaceAutocompleteAdapter(this,

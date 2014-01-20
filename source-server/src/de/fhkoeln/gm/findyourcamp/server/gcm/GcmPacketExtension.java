@@ -30,7 +30,9 @@ public class GcmPacketExtension extends DefaultPacketExtension {
       return String.format("<%s xmlns=\"%s\">%s</%s>", GCM_ELEMENT_NAME,
     		  GCM_NAMESPACE, json, GCM_ELEMENT_NAME);
     }
-    // ?
+    // <message xmlns="" xml:lang="" id="" to="" form="">
+    //    <gcm xmlns="google:mobile:data">{"data":{}, "message_id":"sdsds", "to":"", "time_to_live"}</gcm>
+    // </message>
     public Packet toPacket() {
       return new Message() {
         // Must override toXML() because it includes a <body>
@@ -55,7 +57,7 @@ public class GcmPacketExtension extends DefaultPacketExtension {
             buf.append(" from=\"").append(StringUtils.escapeForXML(getFrom())).append("\"");
           }
           buf.append(">");
-          buf.append(GcmPacketExtension.this.toXML());
+          buf.append(GcmPacketExtension.this.toXML()); // WOHER? Unsere eigentliche Nachricht
           buf.append("</message>");
           return buf.toString();
         }

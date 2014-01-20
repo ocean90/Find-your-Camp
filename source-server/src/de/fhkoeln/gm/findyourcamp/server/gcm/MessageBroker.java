@@ -24,16 +24,24 @@ public class MessageBroker {
 
 	/**
 	 * Uebergebenes Object wird in JSON Objekt zur weiteren Verarbeitung umgewandelt
+	 * "from": "regid",
+	 * "message_id": "wadsdsd",
+	 * "data": {
+	 * 		"json" : "{"action":1}"
+	 * }
 	 * @param object
 	 */
 	@SuppressWarnings("unchecked")
 	public MessageBroker(Map<String, Object> object) {
+		// Payload holen
 		Map<String, Object> rawData = (Map<String, Object>) object.get("data");
 
+		// Ist json Feld vorhanden?
 		if (null == rawData.get("json")) {
 			return;
 		}
 
+		// JSON Feld holen, in String umwandeln und zum JSON Objekt umwandelen.
 		String json = rawData.get("json").toString();
 		try {
 			this.data = (Map<String, Object>) JSONValue.parseWithException(json);
@@ -90,6 +98,7 @@ public class MessageBroker {
 			int newDeviceId = Device.assignDeviceToUser(regId, newUserId);
 			System.out.println("Registration für User " + newUserId + " und Device " + newDeviceId + " abgeschlossen." );
 
+			// Sende neu registrierten User ein Feedback
 			GcmXmppConnection gcmConnection = GcmXmppConnection.getInstance();
 
 			GcmMessage message = new GcmMessage();
@@ -109,9 +118,7 @@ public class MessageBroker {
 	public void handleSearchRequest() {
 		System.out.println("Neue Suchanfrage...");
 		String location = (String) data.get("location");
-		Logger.log(location);
 
-		// ToDo
 		List<String> devices = LocationMatch.getMatches(location);
 
 		GcmXmppConnection gcmConnection = GcmXmppConnection.getInstance();

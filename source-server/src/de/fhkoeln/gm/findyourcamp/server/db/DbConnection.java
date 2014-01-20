@@ -22,7 +22,7 @@ public class DbConnection {
 	private DbConnection() {
 
 		try {
-			// Runtime Class descriptor for the class named com.mysql.jdbc.Driver:
+			// Datenbanktreiber wird zur Laufzeit geladen
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			// Fehler: Klasse nicht gefunden.

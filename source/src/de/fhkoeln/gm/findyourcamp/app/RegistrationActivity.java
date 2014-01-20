@@ -36,6 +36,7 @@ public class RegistrationActivity extends Activity {
 	public void doRegistration() {
 		GcmClient client = GcmClient.getInstance(this);
 
+		// Device wird registriert
 		client.register();
 
 		GcmMessage message = new GcmMessage();
