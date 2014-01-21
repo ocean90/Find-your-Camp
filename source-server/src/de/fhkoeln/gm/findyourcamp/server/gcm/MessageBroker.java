@@ -92,7 +92,22 @@ public class MessageBroker {
 
 		// Neue ID nach Anlegen erhalten
 		long newRentalPropertyId = RentalProperty.createRentalPropertyEntry(rentalPropertyLocalId, rentalPropertyLocation, userId);
-		Logger.log("Neue RP:" + newRentalPropertyId);
+
+		// Sende Feedback
+		GcmXmppConnection gcmConnection = GcmXmppConnection.getInstance();
+
+		GcmMessage message = new GcmMessage();
+		message.setTo(this.from);
+		message.setMessageId("m-" + (System.currentTimeMillis() / 1000L));
+		message.setAction(MessageConstants.ACTION_RENTAL_PROPERTY_REGISTERED);
+
+		HashMap<String, Object> payload = new HashMap<String, Object>();
+		payload.put("rental_property_remote_id", newRentalPropertyId);
+		message.setPayload(payload);
+
+		gcmConnection.sendMessage(message);
+
+		System.out.println("Registrierung für Mietobjekt " + rentalPropertyLocalId + "(Remote: " + newRentalPropertyId + ") abgeschlossen." );
 	}
 
 	/**

@@ -78,9 +78,9 @@ public class MessageBroker {
 		int rentalPropertyRemoteId = Integer.valueOf(data.getString("rental_property_remote_id"));
 		UserNotification userNotification = new UserNotification(appContext);
 		if (rentalPropertyRemoteId > 0) {
-			userNotification.show("Registrierung erfolgreich", "Erfolgreich registriert.", "Registrierung erfolgreich");
+			userNotification.show("Mietobjekt registriert", "Erfolgreich registriert.", "Mietobjekt registriert");
 		} else {
-			userNotification.show("Registrierung fehlerhaft", "Registrierung konnte nicht abgeschlossen werden.", "Registrierung fehlerhaft");
+			userNotification.show("Mietobjekt fehlerhaft", "Registrierung konnte nicht abgeschlossen werden.", "Mietobjekt fehlerhaft");
 		}
 	}
 }
