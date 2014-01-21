@@ -2,12 +2,19 @@ package de.fhkoeln.gm.findyourcamp.app.model;
 
 import java.util.HashMap;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import de.fhkoeln.gm.findyourcamp.app.db.RentalPropertiesTable;
+
 /**
  * Modell zum Mietobjekt
  *
  */
 public class RentalProperty {
 
+	private long id = 0;
+	private long remoteId = 0;
 	private RentalPropertyFeatures features = null;
 	private String location = "";
 	private int groupSize = 0;
@@ -15,6 +22,34 @@ public class RentalProperty {
 	private int maxPrice;
 
 	public RentalProperty() {
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the remoteId
+	 */
+	public long getRemoteId() {
+		return remoteId;
+	}
+
+	/**
+	 * @param remoteId the remoteId to set
+	 */
+	public void setRemoteId(int remoteId) {
+		this.remoteId = remoteId;
 	}
 
 	/**
@@ -111,5 +146,33 @@ public class RentalProperty {
 		map.put("features", features.toMap());
 
 		return map;
+	}
+
+	public static RentalProperty getFromId(long rental_property_id, Context appContext) {
+		RentalProperty rentalProperty = new RentalProperty();
+		RentalPropertyFeatures rentalPropertyFeatures = new RentalPropertyFeatures();
+
+		RentalPropertiesTable rentalPropertiesTable = new RentalPropertiesTable(appContext);
+		SQLiteDatabase rentalPropertiesDatabase = rentalPropertiesTable.getWritableDatabase();
+
+		String[] args = { String.valueOf(rental_property_id) };
+		Cursor cursor = rentalPropertiesDatabase.query(RentalPropertiesTable.TABLE_NAME, null, RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_ID + "=?", args, null, null, null);
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			rentalProperty.setId(cursor.getInt(0));
+			rentalProperty.setLocation(cursor.getString(1));
+			rentalProperty.setGroupSize(cursor.getInt(2));
+			rentalProperty.setPriceRange(cursor.getInt(3), cursor.getInt(4));
+			rentalProperty.setRemoteId(cursor.getInt(5));
+
+			for(int i=6; i<cursor.getCount(); i++) {
+				rentalPropertyFeatures.setFeature(cursor.getColumnName(i), (cursor.getInt(i) == 1));
+			}
+			cursor.moveToNext();
+		}
+		cursor.close();
+
+		return rentalProperty;
 	}
 }

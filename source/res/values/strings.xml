@@ -10,6 +10,7 @@
 	<string name="action_insert_rental_property">Mietobjekt anlegen</string>
 	<string name="action_request_rental_property">Mietobjekt suchen</string>
 	<string name="action_registration">Registrierung</string>
+	<string name="action_single_rental_property">Mietobjekt ansehen</string>
 
 	<string name="rental_property_location_hint">Location</string>
 	<string name="rental_property_section_title_location">Ort</string>
@@ -39,10 +40,10 @@
 	<string name="rental_property_button_save">Anlegen</string>
 	<string name="rental_property_button_search">Suchen</string>
 
-	<string name="insert_rental_property_success_dialog_title">Mietobjekt erfolgreich angelegt.</string>
-	<string name="insert_rental_property_success_dialog_message">Mietobjekt jetzt aufrufen?</string>
+	<string name="insert_rental_property_success_dialog_title">Mietobjekt lokal angelegt</string>
+	<string name="insert_rental_property_success_dialog_message">Das Mietobjekt wird nun online registriert.\nDie Mietobjekt jetzt aufrufen?</string>
 	<string name="insert_rental_property_success_dialog_yes">Ja</string>
-	<string name="insert_rental_property_success_dialog_back">Zurück</string>
+	<string name="insert_rental_property_success_dialog_back">Zur Startseite</string>
 
 	<string name="action_bar_rental_property_requests">Mietanfragen</string>
 	<string name="action_bar_search_requests">Mietanfragen</string>

@@ -1,5 +1,7 @@
 package de.fhkoeln.gm.findyourcamp.app.notification;
 
+import java.util.Random;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -13,9 +15,12 @@ public class UserNotification {
 	private Context appContext;
 	private NotificationManager notificationManager;
 	private PendingIntent pendingIntent;
+	private Random generator;
 
 	public UserNotification(Context context) {
 		this.appContext = context;
+
+		generator = new Random();
 
 		notificationManager = (NotificationManager)
 				 context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -33,6 +38,6 @@ public class UserNotification {
         .setContentIntent(pendingIntent)
         .setAutoCancel(true);
 
-		notificationManager.notify(0, notificationBuilder.build());
+		notificationManager.notify(generator.nextInt(), notificationBuilder.build());
 	}
 }

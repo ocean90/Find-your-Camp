@@ -135,8 +135,6 @@ public class RequestRentalPropertyActivity extends Activity {
 	}
 
 	private void searchRentalProperty() {
-		Logger.info("Search");
-
 		RentalProperty rentalPropery = prepareRentalPropertyData();
 
 		GcmMessage message = new GcmMessage();

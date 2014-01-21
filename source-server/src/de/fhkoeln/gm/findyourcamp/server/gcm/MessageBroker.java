@@ -9,6 +9,7 @@ import org.json.simple.JSONValue;
 import de.fhkoeln.gm.findyourcamp.server.gcm.model.GcmMessage;
 import de.fhkoeln.gm.findyourcamp.server.matching.LocationMatch;
 import de.fhkoeln.gm.findyourcamp.server.model.Device;
+import de.fhkoeln.gm.findyourcamp.server.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.server.model.User;
 import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
 
@@ -66,12 +67,16 @@ public class MessageBroker {
 
 		switch (action) {
 			case MessageConstants.ACTION_USER_REGISTRATION:
-				// Registrierung
+				// User-Registrierung
 				handleUserRegistration();
 				break;
 			case MessageConstants.ACTION_SEARCH_REQUEST:
 				// Suchanfrage
 				handleSearchRequest();
+				break;
+			case MessageConstants.ACTION_RENTAL_PROPERTY_REGISTRATION:
+				// Mietobjekt anlegen
+				handleRentalPropertyRegistration();
 				break;
 			default:
 				Logger.err("Unbekannte Aktion: " + action);
@@ -79,11 +84,22 @@ public class MessageBroker {
 		}
 	}
 
+	private void handleRentalPropertyRegistration() {
+		System.out.println("Neue Mietobjekt-Registrierung...");
+		long userId = (Long) data.get("user_id");
+		long rentalPropertyLocalId= (Long) data.get("rental_property_local_id");
+		String rentalPropertyLocation = (String) data.get("rental_property_location");
+
+		// Neue ID nach Anlegen erhalten
+		long newRentalPropertyId = RentalProperty.createRentalPropertyEntry(rentalPropertyLocalId, rentalPropertyLocation, userId);
+		Logger.log("Neue RP:" + newRentalPropertyId);
+	}
+
 	/**
 	 * Registrierung
 	 */
 	public void handleUserRegistration() {
-		System.out.println("Neue Registration...");
+		System.out.println("Neue Benutzer-Registrierung...");
 		String userName = (String) data.get("user_name");
 		String userEmail = (String) data.get("user_email");
 
@@ -96,7 +112,7 @@ public class MessageBroker {
 		// Zuordnung User mit Device ID
 		if (newUserId > 0) {
 			int newDeviceId = Device.assignDeviceToUser(regId, newUserId);
-			System.out.println("Registration für User " + newUserId + " und Device " + newDeviceId + " abgeschlossen." );
+			System.out.println("Registrierung für User " + newUserId + " und Device " + newDeviceId + " abgeschlossen." );
 
 			// Sende neu registrierten User ein Feedback
 			GcmXmppConnection gcmConnection = GcmXmppConnection.getInstance();
@@ -136,5 +152,7 @@ public class MessageBroker {
 
 		message.setPayload(payload);
 		gcmConnection.sendMessage(message);
+
+		System.out.println("Suche nach " + location + " ergab " + devices.size() + " Treffer." );
 	}
 }

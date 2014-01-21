@@ -11,4 +11,7 @@ public final class MessageConstants {
 
 	public static final int ACTION_SEARCH_REQUEST = 3;
 	public static final int ACTION_SEARCH_RESULT = 4;
+
+	public static final int ACTION_RENTAL_PROPERTY_REGISTRATION = 5;
+	public static final int ACTION_RENTAL_PROPERTY_REGISTERED = 6;
 }

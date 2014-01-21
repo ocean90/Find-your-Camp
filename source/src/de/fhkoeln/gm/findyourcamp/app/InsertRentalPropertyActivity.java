@@ -2,6 +2,7 @@ package de.fhkoeln.gm.findyourcamp.app;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -10,6 +11,8 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -29,10 +32,14 @@ import com.google.code.widget.RangeSeekBar;
 import com.google.code.widget.RangeSeekBar.OnRangeSeekBarChangeListener;
 
 import de.fhkoeln.gm.findyourcamp.app.db.RentalPropertiesTable;
+import de.fhkoeln.gm.findyourcamp.app.gcm.GcmClient;
+import de.fhkoeln.gm.findyourcamp.app.gcm.GcmMessage;
+import de.fhkoeln.gm.findyourcamp.app.gcm.MessageConstants;
 import de.fhkoeln.gm.findyourcamp.app.map.PlaceAutocompleteAdapter;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalPropertyFeatures;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
+import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
 /**
  * Activity zum Angeben der Ausstattung eines Mietobjektes
@@ -136,7 +143,6 @@ public class InsertRentalPropertyActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		// Navigation zur Homeseite
-		// WO LIEGT DIE XML?
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
@@ -275,13 +281,30 @@ public class InsertRentalPropertyActivity extends Activity {
 				values.put(feature, true ); // Feature Key
 			}
 
-			long newRentalPropertyId = rentalPropertiesDatabase.insert( RentalPropertiesTable.TABLE_NAME, null, values);
+			final long newRentalPropertyId = rentalPropertiesDatabase.insert( RentalPropertiesTable.TABLE_NAME, null, values);
 
-			if ( newRentalPropertyId == -1 ) {
+			if (newRentalPropertyId == -1) {
 				Logger.error("Fehler beim Eintragen des Mietobjektes");
+				return;
 			}
 
 			rentalPropertiesDatabase.close();
+
+			GcmMessage message = new GcmMessage();
+			message.setMessageId("m-" + (System.currentTimeMillis() / 1000L));
+			message.setAction(MessageConstants.ACTION_RENTAL_PROPERTY_REGISTRATION);
+
+			PreferencesStorage preferences = new PreferencesStorage(getApplicationContext());
+			SharedPreferences settings = preferences.getSettings();
+			int userId = settings.getInt("user_id", 0);
+
+			HashMap<String, Object> payload = new HashMap<String, Object>();
+			payload.put("user_id", userId);
+			payload.put("rental_property_local_id", newRentalPropertyId);
+			payload.put("rental_property_location", rentalProperty.getLocation() );
+			message.setPayload(payload);
+			GcmClient client = GcmClient.getInstance(this);
+			client.sendMessage(message);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(
@@ -291,8 +314,11 @@ public class InsertRentalPropertyActivity extends Activity {
 			builder.setPositiveButton(R.string.insert_rental_property_success_dialog_yes,
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
-							// User clicked OK button
+							// User wants to see the rental property
 							dialog.dismiss();
+							Intent intent = new Intent(getApplicationContext(), SingleRentalPropertyActivity.class);
+							intent.putExtra("rental_property_id", newRentalPropertyId);
+							startActivity(intent);
 						}
 					});
 			builder.setNegativeButton(R.string.insert_rental_property_success_dialog_back,
@@ -300,6 +326,7 @@ public class InsertRentalPropertyActivity extends Activity {
 						public void onClick(DialogInterface dialog, int id) {
 							// User cancelled the dialog
 							dialog.cancel();
+							finish();
 						}
 					});
 			AlertDialog dialog = builder.create();

@@ -44,7 +44,8 @@ public class User {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return 0;
 		}
+
+		return 0;
 	}
 }

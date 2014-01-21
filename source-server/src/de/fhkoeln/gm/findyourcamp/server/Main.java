@@ -28,16 +28,16 @@ public class Main {
 
 	// Neue Datenbankverbindung
 	public DbConnection dbConnection;
-	
+
 	// Neue GCMConnection
 	public GcmXmppConnection gmcConnection;
 
 	/**
-	 * Methode richtet Verbindung zur Datenbank und GCM ein. 
+	 * Methode richtet Verbindung zur Datenbank und GCM ein.
 	 * Bei Fehler Rueckgabe der Problemstelle.
 	 */
 	public Main() {
-		// GcmPacketExtension registrieren 
+		// GcmPacketExtension registrieren
 		ProviderManager.getInstance().addExtensionProvider(GcmPacketExtension.GCM_ELEMENT_NAME,
 				GcmPacketExtension.GCM_NAMESPACE, new PacketExtensionProvider() {
 
@@ -49,13 +49,13 @@ public class Main {
 						return packet;
 					}
 				});
-		
+
 		// Aufbau der Datenbankverbindung
 		System.out.println("Datenbanverbindung wird aufgebaut...");
 		dbConnection = DbConnection.getInstance();
 		//Prueft ob Verbindung aufgebaut werden kann
-		if ( ! dbConnection.connect() ) {
-			// Bei Verbindungsfehler Ausgabe der errorMessage 
+		if (!dbConnection.connect()) {
+			// Bei Verbindungsfehler Ausgabe der errorMessage
 			exit(dbConnection.errorMessage);
 		}
 		System.out.println("Datenbanverbindung erfolgreich aufgebaut.");
@@ -69,12 +69,14 @@ public class Main {
 		System.out.println("Verbindung zu CCS wird aufgebaut...");
 		gmcConnection = GcmXmppConnection.getInstance();
 		// Prueft ob Verbindung aufgebaut werden kann
-		if ( ! gmcConnection.connect(GcmConfig.CSS_USERNAME, GcmConfig.CSS_PASSWORD) ) {
-			// Bei Verbindungsfehler Ausgabe der errorMessage 
+		if (!gmcConnection.connect(GcmConfig.CSS_USERNAME, GcmConfig.CSS_PASSWORD)) {
+			// Bei Verbindungsfehler Ausgabe der errorMessage
 			exit( gmcConnection.errorMessage );
 		}
 		System.out.println("CCS Verbindung erfolgreich aufgebaut.");
+
 		System.out.println("Die Anwendung läuft nun...");
+		System.out.println("---------------------------------------------");
 	}
 
 	/**
@@ -93,7 +95,7 @@ public class Main {
 				// Tabelle existiert, nichts weiter zu tun.
 				return;
 			}
-			
+
 			// Tabellen der Datenbank werden neu eingerichtet
 			setUpDatebaseTables();
 		} catch (SQLException e) {
@@ -136,11 +138,11 @@ public class Main {
 		System.out.println("---------------------------------------------");
 		System.out.println("Enter drücken, um die Anwendung zu schließen.");
 		System.out.println("---------------------------------------------");
-		
+
 		// Einrichten der Verbindung
 		new Main();
 
-		
+
 		// Benutzereingabe zum Abbruch
 		try {
 			System.in.read();
