@@ -136,6 +136,10 @@ public class RentalProperty {
 		return true;
 	}
 
+	public String toString() {
+		return this.location;
+	}
+
 	public HashMap<String, Object> toMap() {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
@@ -149,8 +153,7 @@ public class RentalProperty {
 	}
 
 	public static RentalProperty getFromId(long rental_property_id, Context appContext) {
-		RentalProperty rentalProperty = new RentalProperty();
-		RentalPropertyFeatures rentalPropertyFeatures = new RentalPropertyFeatures();
+		RentalProperty rentalProperty = null;
 
 		RentalPropertiesTable rentalPropertiesTable = new RentalPropertiesTable(appContext);
 		SQLiteDatabase rentalPropertiesDatabase = rentalPropertiesTable.getWritableDatabase();
@@ -160,18 +163,27 @@ public class RentalProperty {
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			rentalProperty.setId(cursor.getInt(0));
-			rentalProperty.setLocation(cursor.getString(1));
-			rentalProperty.setGroupSize(cursor.getInt(2));
-			rentalProperty.setPriceRange(cursor.getInt(3), cursor.getInt(4));
-			rentalProperty.setRemoteId(cursor.getInt(5));
-
-			for(int i=6; i<cursor.getCount(); i++) {
-				rentalPropertyFeatures.setFeature(cursor.getColumnName(i), (cursor.getInt(i) == 1));
-			}
+			rentalProperty = cursorToRentalProperty(cursor);
 			cursor.moveToNext();
 		}
 		cursor.close();
+
+		return rentalProperty;
+	}
+
+	public static RentalProperty cursorToRentalProperty(Cursor cursor) {
+		RentalProperty rentalProperty = new RentalProperty();
+		RentalPropertyFeatures rentalPropertyFeatures = new RentalPropertyFeatures();
+
+		rentalProperty.setId(cursor.getInt(0));
+		rentalProperty.setLocation(cursor.getString(1));
+		rentalProperty.setGroupSize(cursor.getInt(2));
+		rentalProperty.setPriceRange(cursor.getInt(3), cursor.getInt(4));
+		rentalProperty.setRemoteId(cursor.getInt(5));
+
+		for(int i=6; i<cursor.getCount(); i++) {
+			rentalPropertyFeatures.setFeature(cursor.getColumnName(i), (cursor.getInt(i) == 1));
+		}
 
 		return rentalProperty;
 	}

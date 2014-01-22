@@ -33,7 +33,7 @@ public class LocationMatch {
 			if (!locationResultSet.next()) {
 				return registrationIds;
 			}
-			
+
 			int locationId = locationResultSet.getInt(1);
 
 			// Zugehörige Mietobjekte und deren Vermieter holen.
@@ -43,7 +43,7 @@ public class LocationMatch {
 
 			StringBuilder userIds = new StringBuilder();
 			while (RentalPropertiesResultSet.next()) {
-				userIds.append(RentalPropertiesResultSet.getInt(3) + ",");
+				userIds.append(RentalPropertiesResultSet.getInt(4) + ",");
 			}
 
 			// Zugehörige Devices und deren Registierungs-ID holen.

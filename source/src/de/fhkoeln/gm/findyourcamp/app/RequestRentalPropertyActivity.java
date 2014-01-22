@@ -29,7 +29,6 @@ import de.fhkoeln.gm.findyourcamp.app.gcm.MessageConstants;
 import de.fhkoeln.gm.findyourcamp.app.map.PlaceAutocompleteAdapter;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalPropertyFeatures;
-import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
 /**
  * Activity zur Suchanfrage
@@ -47,7 +46,6 @@ public class RequestRentalPropertyActivity extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 		setContentView(R.layout.activity_request_rental_property);
-
 
 		/**
 		 * City autocomplete.

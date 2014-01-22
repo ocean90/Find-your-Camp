@@ -45,6 +45,7 @@ public class MainActivity extends Activity {
 				}
 			} else {
 				Intent intent = new Intent(this, RegistrationActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				startActivity(intent);
 			}
 		}
@@ -80,6 +81,10 @@ public class MainActivity extends Activity {
 		// Activity Ausstattung des angefragten Objektes
 		case R.id.action_request_rental_property:
 			intent = new Intent(this, RequestRentalPropertyActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.action_list_rental_properties:
+			intent = new Intent(this, LocalRentalPropertiesActivity.class);
 			startActivity(intent);
 			return true;
 		default:

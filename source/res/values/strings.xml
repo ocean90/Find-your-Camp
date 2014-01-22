@@ -11,6 +11,7 @@
 	<string name="action_request_rental_property">Mietobjekt suchen</string>
 	<string name="action_registration">Registrierung</string>
 	<string name="action_single_rental_property">Mietobjekt ansehen</string>
+	<string name="action_list_rental_properties">Deine Mietobjekte</string>
 
 	<string name="rental_property_location_hint">Location</string>
 	<string name="rental_property_section_title_location">Ort</string>
@@ -71,4 +72,7 @@
         <item>15m²</item>
         <item>20m²</item>
     </string-array>
+
+
+    <string name="no_local_rental_properties">Du bietest noch keine Mietobjekte an!</string>
 </resources>
