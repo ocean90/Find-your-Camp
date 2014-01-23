@@ -45,7 +45,7 @@ public class LocalRentalPropertiesActivity extends ListActivity {
 		SQLiteDatabase rentalPropertiesDatabase = rentalPropertiesTable.getWritableDatabase();
 
 		Cursor cursor = rentalPropertiesDatabase.query( RentalPropertiesTable.TABLE_NAME, null, null, null, null, null,
-				null );
+			null );
 
 		cursor.moveToFirst();
 		while ( !cursor.isAfterLast() ) {
@@ -56,7 +56,7 @@ public class LocalRentalPropertiesActivity extends ListActivity {
 		cursor.close();
 
 		ArrayAdapter<RentalProperty> adapter = new ArrayAdapter<RentalProperty>( this,
-				android.R.layout.simple_list_item_1, localRentalProperties );
+			android.R.layout.simple_list_item_1, localRentalProperties );
 
 		setListAdapter( adapter );
 	}

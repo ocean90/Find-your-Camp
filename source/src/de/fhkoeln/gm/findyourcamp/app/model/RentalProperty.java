@@ -170,7 +170,7 @@ public class RentalProperty {
 
 		String[] args = { String.valueOf( rental_property_id ) };
 		Cursor cursor = rentalPropertiesDatabase.query( RentalPropertiesTable.TABLE_NAME, null,
-				RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_ID + "=?", args, null, null, null );
+			RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_ID + "=?", args, null, null, null );
 
 		cursor.moveToFirst();
 		while ( !cursor.isAfterLast() ) {
@@ -194,7 +194,7 @@ public class RentalProperty {
 
 		for ( int i = 6; i < cursor.getColumnCount(); i++ ) {
 			Logger.info( "Spalte: " + cursor.getColumnName( i ) + "Wert: " + cursor.getInt( i ) + " Boolean: "
-					+ ( cursor.getInt( i ) == 1 ) );
+				+ ( cursor.getInt( i ) == 1 ) );
 			rentalPropertyFeatures.setFeature( cursor.getColumnName( i ), ( cursor.getInt( i ) == 1 ) );
 		}
 		rentalProperty.setFeatures( rentalPropertyFeatures );

@@ -14,7 +14,7 @@ public class UsersTable extends Table {
 	public static final String COLUMN_NAME_USER_NAME = "name";
 
 	private static final String TABLE_CREATE = "CREATE TABLE " + TABLE_NAME + " (" + COLUMN_NAME_ID
-			+ " integer primary key autoincrement," + COLUMN_NAME_USER_NAME + " text NOT NULL" + ");";
+		+ " integer primary key autoincrement," + COLUMN_NAME_USER_NAME + " text NOT NULL" + ");";
 
 	private static final String TABLE_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
 

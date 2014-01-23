@@ -6,8 +6,8 @@ import java.util.Map;
 import com.google.gson.Gson;
 
 /**
- * Aktionen im Umgang mit GcmMessage.
- * Ausgabe und Setzen der Werte sowie Umwandeln in JSON
+ * Aktionen im Umgang mit GcmMessage. Ausgabe und Setzen der Werte sowie
+ * Umwandeln in JSON
  */
 public class GcmMessage {
 
@@ -25,6 +25,7 @@ public class GcmMessage {
 
 	/**
 	 * Empfaenger ausgeben
+	 * 
 	 * @return the to
 	 */
 	public String getTo() {
@@ -33,14 +34,17 @@ public class GcmMessage {
 
 	/**
 	 * Empfaenger setzen
-	 * @param to the to to set
+	 * 
+	 * @param to
+	 *            the to to set
 	 */
-	public void setTo(String to) {
+	public void setTo( String to ) {
 		this.to = to;
 	}
 
 	/**
 	 * MessageId ausgaben
+	 * 
 	 * @return the messageId
 	 */
 	public String getMessageId() {
@@ -49,14 +53,17 @@ public class GcmMessage {
 
 	/**
 	 * MessageIs setzen
-	 * @param messageId the messageId to set
+	 * 
+	 * @param messageId
+	 *            the messageId to set
 	 */
-	public void setMessageId(String messageId) {
+	public void setMessageId( String messageId ) {
 		this.messageId = messageId;
 	}
 
 	/**
 	 * CollapseKey ausgeben
+	 * 
 	 * @return the collapse_key
 	 */
 	public String getCollapseKey() {
@@ -65,9 +72,11 @@ public class GcmMessage {
 
 	/**
 	 * CollapseKey setzen
-	 * @param collapse_key the collapse_key to set
+	 * 
+	 * @param collapse_key
+	 *            the collapse_key to set
 	 */
-	public void setCollapseKey(String collapseKey) {
+	public void setCollapseKey( String collapseKey ) {
 		this.collapseKey = collapseKey;
 	}
 
@@ -79,9 +88,10 @@ public class GcmMessage {
 	}
 
 	/**
-	 * @param delay_while_idle the delay_while_idle to set
+	 * @param delay_while_idle
+	 *            the delay_while_idle to set
 	 */
-	public void setDelayWhileIdle(Boolean delayWhileIdle) {
+	public void setDelayWhileIdle( Boolean delayWhileIdle ) {
 		this.delayWhileIdle = delayWhileIdle;
 	}
 
@@ -93,9 +103,10 @@ public class GcmMessage {
 	}
 
 	/**
-	 * @param time_to_live the time_to_live to set
+	 * @param time_to_live
+	 *            the time_to_live to set
 	 */
-	public void setTimeToLive(Integer timeToLive) {
+	public void setTimeToLive( Integer timeToLive ) {
 		this.timeToLive = timeToLive;
 	}
 
@@ -107,14 +118,16 @@ public class GcmMessage {
 	}
 
 	/**
-	 * @param action the action to set
+	 * @param action
+	 *            the action to set
 	 */
-	public void setAction(int action) {
+	public void setAction( int action ) {
 		this.action = action;
 	}
 
 	/**
 	 * Payload der Message ausgeben
+	 * 
 	 * @return the payload
 	 */
 	public Map<String, Object> getPayload() {
@@ -122,9 +135,10 @@ public class GcmMessage {
 	}
 
 	/**
-	 * @param payload2 the payload to set
+	 * @param payload2
+	 *            the payload to set
 	 */
-	public void setPayload(HashMap<String, Object> payload) {
+	public void setPayload( HashMap<String, Object> payload ) {
 		this.payload = payload;
 	}
 
@@ -138,36 +152,37 @@ public class GcmMessage {
 
 	/**
 	 * Message in JSON umwandeln
+	 * 
 	 * @return
 	 */
 	public String toJson() {
 		Map<String, Object> message = new HashMap<String, Object>();
 
-		message.put("to", to);
+		message.put( "to", to );
 
-		if (collapseKey != null) {
-		  message.put("collapse_key", collapseKey);
+		if ( collapseKey != null ) {
+			message.put( "collapse_key", collapseKey );
 		}
 
-		if (timeToLive != null) {
-		  message.put("time_to_live", timeToLive);
+		if ( timeToLive != null ) {
+			message.put( "time_to_live", timeToLive );
 		}
 
-		if (delayWhileIdle != null && delayWhileIdle) {
-		  message.put("delay_while_idle", true);
+		if ( delayWhileIdle != null && delayWhileIdle ) {
+			message.put( "delay_while_idle", true );
 		}
 
-		message.put("message_id", messageId);
+		message.put( "message_id", messageId );
 
-		payload.put("action", action);
+		payload.put( "action", action );
 
 		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("json", payload);
+		data.put( "json", payload );
 
-		message.put("data", data);
+		message.put( "data", data );
 
 		Gson gson = new Gson();
 
-		return gson.toJson(message);
+		return gson.toJson( message );
 	}
 }

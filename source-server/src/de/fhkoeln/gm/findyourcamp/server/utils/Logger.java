@@ -5,12 +5,12 @@ import java.util.Calendar;
 
 /**
  * Simple logger for the console.
- *
+ * 
  * Returns the date, time, package name, method name and the message to log. You
  * can set errortype to one of the ErrorType enum. E_NONE: Hides all messages
  * E_ERROR: Only shows message which are called via Logger.err() E_ALL: Shows
  * all message which are called via Logger.err() and Logger.log()
- *
+ * 
  * @author Dominik Schilling
  */
 public class Logger {
@@ -19,11 +19,11 @@ public class Logger {
 	 * Enum for error types.
 	 */
 	public enum ErrorType {
-		E_NONE(0), E_ERROR(1), E_ALL(2);
+		E_NONE( 0 ), E_ERROR( 1 ), E_ALL( 2 );
 
 		private int code;
 
-		private ErrorType(int c) {
+		private ErrorType( int c ) {
 			code = c;
 		}
 
@@ -41,41 +41,38 @@ public class Logger {
 
 	/**
 	 * Prints a normal log message.
-	 *
+	 * 
 	 * @param String
 	 *            message
 	 */
-	public static void log(String message) {
-		if (errortype.getCode() == 2)
-			System.out.printf("%s: %s::%s() - %s\n", getDateTime(),
-					getClassName(), getMethodName(), message);
+	public static void log( String message ) {
+		if ( errortype.getCode() == 2 )
+			System.out.printf( "%s: %s::%s() - %s\n", getDateTime(), getClassName(), getMethodName(), message );
 	}
 
 	/**
 	 * Prints an error message in red.
-	 *
+	 * 
 	 * @param String
 	 *            message
 	 */
-	public static void err(String message) {
-		if (errortype.getCode() == 1 || errortype.getCode() == 2)
-			System.err.printf("%s: %s::%s() - %s\n", getDateTime(),
-					getClassName(), getMethodName(), message);
+	public static void err( String message ) {
+		if ( errortype.getCode() == 1 || errortype.getCode() == 2 )
+			System.err.printf( "%s: %s::%s() - %s\n", getDateTime(), getClassName(), getMethodName(), message );
 	}
 
 	/**
 	 * Returns the current date and time.
-	 *
+	 * 
 	 * @return String
 	 */
 	private static String getDateTime() {
-		return new SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS").format(Calendar
-				.getInstance().getTime());
+		return new SimpleDateFormat( "yyyy.MM.dd HH:mm:ss.SSS" ).format( Calendar.getInstance().getTime() );
 	}
 
 	/**
 	 * Returns the method name where the logger was called.
-	 *
+	 * 
 	 * @return String
 	 */
 	private static String getMethodName() {
@@ -85,7 +82,7 @@ public class Logger {
 
 	/**
 	 * Returns the package and class name where the logger was called.
-	 *
+	 * 
 	 * @return String
 	 */
 	private static String getClassName() {

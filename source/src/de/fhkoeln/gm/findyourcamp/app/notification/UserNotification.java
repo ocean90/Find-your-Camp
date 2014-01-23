@@ -25,14 +25,14 @@ public class UserNotification {
 		notificationManager = (NotificationManager) context.getSystemService( Context.NOTIFICATION_SERVICE );
 
 		pendingIntent = PendingIntent.getActivity( appContext, 0, new Intent( appContext, MainActivity.class ),
-				PendingIntent.FLAG_UPDATE_CURRENT );
+			PendingIntent.FLAG_UPDATE_CURRENT );
 	}
 
 	public void show( String title, String text, String ticker ) {
 
 		NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder( appContext )
-				.setContentTitle( title ).setContentText( text ).setTicker( ticker )
-				.setSmallIcon( R.drawable.ic_stat_gcm ).setContentIntent( pendingIntent ).setAutoCancel( true );
+			.setContentTitle( title ).setContentText( text ).setTicker( ticker ).setSmallIcon( R.drawable.ic_stat_gcm )
+			.setContentIntent( pendingIntent ).setAutoCancel( true );
 
 		notificationManager.notify( generator.nextInt(), notificationBuilder.build() );
 	}

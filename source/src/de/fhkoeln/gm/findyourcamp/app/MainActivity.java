@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 				if ( status != null && status.equals( "registered" ) ) {
 					TextView welcomeMessageView = (TextView) findViewById( R.id.main_welcome_message );
 					welcomeMessageView.setText( String.format(
-							getResources().getString( R.string.main_registerd_message ), userName ) );
+						getResources().getString( R.string.main_registerd_message ), userName ) );
 
 				}
 			} else {

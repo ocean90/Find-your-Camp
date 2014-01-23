@@ -2,7 +2,6 @@ package com.google.code.widget;
 
 import java.math.BigDecimal;
 
-import de.fhkoeln.gm.findyourcamp.app.R;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +15,7 @@ import android.os.Parcelable;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
+import de.fhkoeln.gm.findyourcamp.app.R;
 
 /**
  * Widget that lets users select a minimum and maximum value on a given
@@ -39,7 +39,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
 	private final Paint paint = new Paint( Paint.ANTI_ALIAS_FLAG );
 	private final Bitmap thumbImage = BitmapFactory.decodeResource( getResources(), R.drawable.seek_thumb_normal );
 	private final Bitmap thumbPressedImage = BitmapFactory.decodeResource( getResources(),
-			R.drawable.seek_thumb_pressed );
+		R.drawable.seek_thumb_pressed );
 	private final float thumbWidth = thumbImage.getWidth();
 	private final float thumbHalfWidth = 0.5f * thumbWidth;
 	private final float thumbHalfHeight = 0.5f * thumbImage.getHeight();
@@ -68,7 +68,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
 	// Localized constants from MotionEvent for compatibility
 	// with API < 8 "Froyo".
 	public static final int ACTION_POINTER_UP = 0x6, ACTION_POINTER_INDEX_MASK = 0x0000ff00,
-			ACTION_POINTER_INDEX_SHIFT = 8;
+		ACTION_POINTER_INDEX_SHIFT = 8;
 
 	private float mDownMotionX;
 	private int mActivePointerId = INVALID_POINTER_ID;
@@ -388,7 +388,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
 
 		// draw seek bar background line
 		final RectF rect = new RectF( padding, 0.5f * ( getHeight() - lineHeight ), getWidth() - padding,
-				0.5f * ( getHeight() + lineHeight ) );
+			0.5f * ( getHeight() + lineHeight ) );
 		paint.setStyle( Style.FILL );
 		paint.setColor( Color.GRAY );
 		paint.setAntiAlias( true );
@@ -449,7 +449,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
 	 */
 	private void drawThumb( float screenCoord, boolean pressed, Canvas canvas ) {
 		canvas.drawBitmap( pressed ? thumbPressedImage : thumbImage, screenCoord - thumbHalfWidth,
-				(float) ( ( 0.5f * getHeight() ) - thumbHalfHeight ), paint );
+			(float) ( ( 0.5f * getHeight() ) - thumbHalfHeight ), paint );
 	}
 
 	/**
@@ -524,7 +524,7 @@ public class RangeSeekBar<T extends Number> extends ImageView {
 	@SuppressWarnings( "unchecked" )
 	private T normalizedToValue( double normalized ) {
 		return (T) numberType.toNumber( absoluteMinValuePrim + normalized
-				* ( absoluteMaxValuePrim - absoluteMinValuePrim ) );
+			* ( absoluteMaxValuePrim - absoluteMinValuePrim ) );
 	}
 
 	/**

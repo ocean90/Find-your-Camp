@@ -66,7 +66,7 @@ public class RequestRentalPropertyActivity extends Activity {
 		 */
 		Spinner rentalPropertyGroupSizeSpinner = (Spinner) findViewById( R.id.rental_property_group_size );
 		ArrayAdapter<CharSequence> rentalPropertyGroupSizeAdapter = ArrayAdapter.createFromResource( this,
-				R.array.rental_property_group_size_array, android.R.layout.simple_spinner_item );
+			R.array.rental_property_group_size_array, android.R.layout.simple_spinner_item );
 		rentalPropertyGroupSizeAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
 		rentalPropertyGroupSizeSpinner.setAdapter( rentalPropertyGroupSizeAdapter );
 
@@ -82,7 +82,7 @@ public class RequestRentalPropertyActivity extends Activity {
 
 		final TextView priceRangeFeedback = (TextView) findViewById( R.id.rental_property_section_title_price_range_feedback );
 		priceRangeFeedback.setText( String.format( getResources().getString(
-				R.string.rental_property_section_title_price_range_feedback, priceMinFormatted, priceMaxFormatted ) ) );
+			R.string.rental_property_section_title_price_range_feedback, priceMinFormatted, priceMaxFormatted ) ) );
 
 		priceRangeSeekBar = new RangeSeekBar<Integer>( priceMin, priceMax, getApplicationContext() );
 		priceRangeSeekBar.setOnRangeSeekBarChangeListener( new OnRangeSeekBarChangeListener<Integer>() {
@@ -90,11 +90,11 @@ public class RequestRentalPropertyActivity extends Activity {
 			public void onRangeSeekBarValuesChanged( RangeSeekBar<?> bar, Integer minValue, Integer maxValue ) {
 				if ( minValue.equals( maxValue ) ) {
 					priceRangeFeedback.setText( String.format( getResources().getString(
-							R.string.rental_property_section_title_price_feedback, nf.format( minValue ) ) ) );
+						R.string.rental_property_section_title_price_feedback, nf.format( minValue ) ) ) );
 				} else {
 					priceRangeFeedback.setText( String.format( getResources().getString(
-							R.string.rental_property_section_title_price_range_feedback, nf.format( minValue ),
-							nf.format( maxValue ) ) ) );
+						R.string.rental_property_section_title_price_range_feedback, nf.format( minValue ),
+						nf.format( maxValue ) ) ) );
 				}
 			}
 		} );

@@ -80,7 +80,7 @@ public class InsertRentalPropertyActivity extends Activity {
 		 */
 		Spinner rentalPropertyGroupSizeSpinner = (Spinner) findViewById( R.id.rental_property_group_size );
 		ArrayAdapter<CharSequence> rentalPropertyGroupSizeAdapter = ArrayAdapter.createFromResource( this,
-				R.array.rental_property_group_size_array, android.R.layout.simple_spinner_item );
+			R.array.rental_property_group_size_array, android.R.layout.simple_spinner_item );
 		rentalPropertyGroupSizeAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
 		rentalPropertyGroupSizeSpinner.setAdapter( rentalPropertyGroupSizeAdapter );
 
@@ -96,7 +96,7 @@ public class InsertRentalPropertyActivity extends Activity {
 
 		final TextView priceRangeFeedback = (TextView) findViewById( R.id.rental_property_section_title_price_range_feedback );
 		priceRangeFeedback.setText( String.format( getResources().getString(
-				R.string.rental_property_section_title_price_range_feedback, priceMinFormatted, priceMaxFormatted ) ) );
+			R.string.rental_property_section_title_price_range_feedback, priceMinFormatted, priceMaxFormatted ) ) );
 
 		priceRangeSeekBar = new RangeSeekBar<Integer>( priceMin, priceMax, getApplicationContext() );
 		priceRangeSeekBar.setOnRangeSeekBarChangeListener( new OnRangeSeekBarChangeListener<Integer>() {
@@ -104,11 +104,11 @@ public class InsertRentalPropertyActivity extends Activity {
 			public void onRangeSeekBarValuesChanged( RangeSeekBar<?> bar, Integer minValue, Integer maxValue ) {
 				if ( minValue.equals( maxValue ) ) {
 					priceRangeFeedback.setText( String.format( getResources().getString(
-							R.string.rental_property_section_title_price_feedback, nf.format( minValue ) ) ) );
+						R.string.rental_property_section_title_price_feedback, nf.format( minValue ) ) ) );
 				} else {
 					priceRangeFeedback.setText( String.format( getResources().getString(
-							R.string.rental_property_section_title_price_range_feedback, nf.format( minValue ),
-							nf.format( maxValue ) ) ) );
+						R.string.rental_property_section_title_price_range_feedback, nf.format( minValue ),
+						nf.format( maxValue ) ) ) );
 				}
 			}
 		} );
@@ -247,7 +247,7 @@ public class InsertRentalPropertyActivity extends Activity {
 			}
 
 			final long newRentalPropertyId = rentalPropertiesDatabase.insert( RentalPropertiesTable.TABLE_NAME, null,
-					values );
+				values );
 
 			if ( newRentalPropertyId == -1 ) {
 				Logger.error( "Fehler beim Eintragen des Mietobjektes" );
@@ -274,25 +274,25 @@ public class InsertRentalPropertyActivity extends Activity {
 
 			AlertDialog.Builder builder = new AlertDialog.Builder( this );
 			builder.setMessage( R.string.insert_rental_property_success_dialog_message ).setTitle(
-					R.string.insert_rental_property_success_dialog_title );
+				R.string.insert_rental_property_success_dialog_title );
 			builder.setPositiveButton( R.string.insert_rental_property_success_dialog_yes,
-					new DialogInterface.OnClickListener() {
-						public void onClick( DialogInterface dialog, int id ) {
-							// User wants to see the rental property
-							dialog.dismiss();
-							Intent intent = new Intent( getApplicationContext(), SingleRentalPropertyActivity.class );
-							intent.putExtra( "rental_property_id", newRentalPropertyId );
-							startActivity( intent );
-						}
-					} );
+				new DialogInterface.OnClickListener() {
+					public void onClick( DialogInterface dialog, int id ) {
+						// User wants to see the rental property
+						dialog.dismiss();
+						Intent intent = new Intent( getApplicationContext(), SingleRentalPropertyActivity.class );
+						intent.putExtra( "rental_property_id", newRentalPropertyId );
+						startActivity( intent );
+					}
+				} );
 			builder.setNegativeButton( R.string.insert_rental_property_success_dialog_back,
-					new DialogInterface.OnClickListener() {
-						public void onClick( DialogInterface dialog, int id ) {
-							// User cancelled the dialog
-							dialog.cancel();
-							finish();
-						}
-					} );
+				new DialogInterface.OnClickListener() {
+					public void onClick( DialogInterface dialog, int id ) {
+						// User cancelled the dialog
+						dialog.cancel();
+						finish();
+					}
+				} );
 			AlertDialog dialog = builder.create();
 			dialog.show();
 		} else {

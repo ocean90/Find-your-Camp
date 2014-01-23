@@ -1,7 +1,8 @@
 package de.fhkoeln.gm.findyourcamp.server.db;
+
 /**
  * Werte zum Aufbau der Datenbankverbindung
- *
+ * 
  */
 public final class DbConfig {
 	public static final String HOST = "localhost";

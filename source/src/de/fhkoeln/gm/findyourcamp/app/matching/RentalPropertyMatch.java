@@ -65,7 +65,7 @@ public class RentalPropertyMatch {
 			currentMatch = currentMatch - 10;
 		}
 
-		Logger.info("Match:" + currentMatch);
+		Logger.info( "Match:" + currentMatch );
 		if ( currentMatch >= minMatch ) {
 			return true;
 		}
@@ -74,7 +74,7 @@ public class RentalPropertyMatch {
 	}
 
 	private static int createFeatureVectorsScalar( Vector<Integer> vectorFeaturesPresent,
-			Vector<Integer> vectorFeaturesDesired ) {
+		Vector<Integer> vectorFeaturesDesired ) {
 		if ( vectorFeaturesPresent.size() != vectorFeaturesDesired.size() ) {
 			return 0;
 		}
@@ -88,7 +88,7 @@ public class RentalPropertyMatch {
 	}
 
 	public static ArrayList<Vector<Integer>> createFeatureVectors( Map<String, Boolean> featuresDesired,
-			Map<String, Boolean> featuresPresent ) {
+		Map<String, Boolean> featuresPresent ) {
 		ArrayList<Vector<Integer>> vectors = new ArrayList<Vector<Integer>>();
 		Vector<Integer> vectorFeaturesPresent = new Vector<Integer>();
 		Vector<Integer> vectorFeaturesDesired = new Vector<Integer>();

@@ -1,7 +1,5 @@
 package de.fhkoeln.gm.findyourcamp.app.gcm;
 
-import java.util.Map;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -80,10 +78,10 @@ public class MessageBroker {
 		UserNotification userNotification = new UserNotification( appContext );
 		if ( foundItems > 0 ) {
 			userNotification.show( "Suchanfrage erfolgreich", "Es konnte ein Mietobjekt gefunden werden.",
-					"Camp gefunden" );
+				"Camp gefunden" );
 		} else {
 			userNotification.show( "Suchanfrage ohne Ergebnisse", "Es konnte kein Mietobjekt gefunden werden.",
-					"Kein Camp gefunden" );
+				"Kein Camp gefunden" );
 		}
 	}
 
@@ -98,10 +96,10 @@ public class MessageBroker {
 
 		if ( userId > 0 ) {
 			userNotification
-					.show( "Registrierung erfolgreich", "Erfolgreich registriert.", "Registrierung erfolgreich" );
+				.show( "Registrierung erfolgreich", "Erfolgreich registriert.", "Registrierung erfolgreich" );
 		} else {
 			userNotification.show( "Registrierung fehlerhaft", "Registrierung konnte nicht abgeschlossen werden.",
-					"Registrierung fehlerhaft" );
+				"Registrierung fehlerhaft" );
 		}
 	}
 
@@ -112,7 +110,7 @@ public class MessageBroker {
 			userNotification.show( "Mietobjekt registriert", "Erfolgreich registriert.", "Mietobjekt registriert" );
 		} else {
 			userNotification.show( "Mietobjekt fehlerhaft", "Registrierung konnte nicht abgeschlossen werden.",
-					"Mietobjekt fehlerhaft" );
+				"Mietobjekt fehlerhaft" );
 		}
 	}
 }
