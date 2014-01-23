@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
 import de.fhkoeln.gm.findyourcamp.server.db.DevicesTable;
@@ -18,10 +18,14 @@ import de.fhkoeln.gm.findyourcamp.server.db.RentalPropertiesTable;
  */
 public class LocationMatch {
 
-	public static List<String> getMatches(String location) {
+	public static HashMap<String,ArrayList<Object>> getMatches(String location) {
 		DbConnection dbConnection = DbConnection.getInstance();
 
-		List<String> registrationIds = new ArrayList<String>();
+		ArrayList<Object> registrationIds = new ArrayList<Object>();
+		ArrayList<Object> localRentalPropertyIds = new ArrayList<Object>();
+		HashMap<String,ArrayList<Object>> result = new HashMap<String,ArrayList<Object>>();
+		result.put("registrationIds", registrationIds);
+		result.put("localRentalPropertyIds", localRentalPropertyIds);
 
 		try {
 			Statement statement = dbConnection.createStatement();
@@ -31,7 +35,7 @@ public class LocationMatch {
 					+ "='" + location + "'");
 
 			if (!locationResultSet.next()) {
-				return registrationIds;
+				return result;
 			}
 
 			int locationId = locationResultSet.getInt(1);
@@ -44,6 +48,7 @@ public class LocationMatch {
 			StringBuilder userIds = new StringBuilder();
 			while (RentalPropertiesResultSet.next()) {
 				userIds.append(RentalPropertiesResultSet.getInt(4) + ",");
+				localRentalPropertyIds.add(RentalPropertiesResultSet.getInt(2));
 			}
 
 			// Zugehörige Devices und deren Registierungs-ID holen.
@@ -55,11 +60,14 @@ public class LocationMatch {
 			while (DevicesResultSet.next()) {
 				registrationIds.add(DevicesResultSet.getString(2));
 			}
+
+			result.put("registrationIds", registrationIds);
+			result.put("localRentalPropertyIds", localRentalPropertyIds);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return registrationIds;
+		return result;
 	}
 
 }

@@ -13,12 +13,12 @@ public class DbConnection {
 
 	private static DbConnection instance;
 
-	//A connection (session) with a specific database. 
+	//A connection (session) with a specific database.
 	//SQL statements are executed and results are returned within the context of a connection.
 	private Connection connection;
 	public String errorMessage = "";
 
-	
+
 	private DbConnection() {
 
 		try {
@@ -61,7 +61,7 @@ public class DbConnection {
 
 		return true;
 	}
-	
+
 	/**
 	 * Erstellen eines Statementobjektes zum Senden von SQL Befehlen
 	 * @return Statement

@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="libs/smack/smackx.jar"/>
 	<classpathentry kind="lib" path="libs/mysql/mysql-connector-java-bin.jar"/>
 	<classpathentry kind="lib" path="libs/sqlite/sqlite-jdbc.jar"/>
+	<classpathentry kind="lib" path="libs/gson/gson-2.2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,10 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.fhkoeln.gm.findyourcamp.app.db.RentalPropertiesTable;
+import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
 /**
  * Modell zum Mietobjekt
- *
+ * 
  */
 public class RentalProperty {
 
@@ -32,9 +33,10 @@ public class RentalProperty {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId( int id ) {
 		this.id = id;
 	}
 
@@ -46,22 +48,26 @@ public class RentalProperty {
 	}
 
 	/**
-	 * @param remoteId the remoteId to set
+	 * @param remoteId
+	 *            the remoteId to set
 	 */
-	public void setRemoteId(int remoteId) {
+	public void setRemoteId( int remoteId ) {
 		this.remoteId = remoteId;
 	}
 
 	/**
 	 * Location setzen
-	 * @param location to set
+	 * 
+	 * @param location
+	 *            to set
 	 */
-	public void setLocation(String location) {
+	public void setLocation( String location ) {
 		this.location = location;
 	}
 
 	/**
 	 * Location ausgeben
+	 * 
 	 * @return location to get
 	 */
 	public String getLocation() {
@@ -70,14 +76,16 @@ public class RentalProperty {
 
 	/**
 	 * Ausstattungsfeatures setzen
+	 * 
 	 * @param features
 	 */
-	public void setFeatures(RentalPropertyFeatures features) {
+	public void setFeatures( RentalPropertyFeatures features ) {
 		this.features = features;
 	}
 
 	/**
 	 * Ausstattungsfeatures ausgeben
+	 * 
 	 * @return features to get
 	 */
 	public RentalPropertyFeatures getFeatures() {
@@ -86,14 +94,16 @@ public class RentalProperty {
 
 	/**
 	 * Gruppengroeße setzen
+	 * 
 	 * @param groupSize
 	 */
-	public void setGroupSize(int groupSize) {
+	public void setGroupSize( int groupSize ) {
 		this.groupSize = groupSize;
 	}
 
 	/**
 	 * Gruppengroeße ausgeben
+	 * 
 	 * @return gruppengroeße to get
 	 */
 	public int getGroupSize() {
@@ -102,10 +112,11 @@ public class RentalProperty {
 
 	/**
 	 * Preispanne setzen
+	 * 
 	 * @param minPrice
 	 * @param maxPrice
 	 */
-	public void setPriceRange(int minPrice, int maxPrice) {
+	public void setPriceRange( int minPrice, int maxPrice ) {
 		this.minPrice = minPrice;
 		this.maxPrice = maxPrice;
 	}
@@ -122,15 +133,14 @@ public class RentalProperty {
 		return priceRange;
 	}
 
-
 	public boolean isValid() {
-		if (this.location.isEmpty())
+		if ( this.location.isEmpty() )
 			return false;
 
-		if (this.features == null)
+		if ( this.features == null )
 			return false;
 
-		if (this.groupSize == 0)
+		if ( this.groupSize == 0 )
 			return false;
 
 		return true;
@@ -143,27 +153,28 @@ public class RentalProperty {
 	public HashMap<String, Object> toMap() {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
-		map.put("location", location);
-		map.put("group_size", groupSize);
-		map.put("min_price", minPrice);
-		map.put("max_price", maxPrice);
-		map.put("features", features.toMap());
+		map.put( "location", location );
+		map.put( "group_size", groupSize );
+		map.put( "min_price", minPrice );
+		map.put( "max_price", maxPrice );
+		map.put( "features", features.toMap() );
 
 		return map;
 	}
 
-	public static RentalProperty getFromId(long rental_property_id, Context appContext) {
+	public static RentalProperty getFromId( long rental_property_id, Context appContext ) {
 		RentalProperty rentalProperty = null;
 
-		RentalPropertiesTable rentalPropertiesTable = new RentalPropertiesTable(appContext);
+		RentalPropertiesTable rentalPropertiesTable = new RentalPropertiesTable( appContext );
 		SQLiteDatabase rentalPropertiesDatabase = rentalPropertiesTable.getWritableDatabase();
 
-		String[] args = { String.valueOf(rental_property_id) };
-		Cursor cursor = rentalPropertiesDatabase.query(RentalPropertiesTable.TABLE_NAME, null, RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_ID + "=?", args, null, null, null);
+		String[] args = { String.valueOf( rental_property_id ) };
+		Cursor cursor = rentalPropertiesDatabase.query( RentalPropertiesTable.TABLE_NAME, null,
+				RentalPropertiesTable.COLUMN_NAME_RENTAL_PROPERTY_ID + "=?", args, null, null, null );
 
 		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			rentalProperty = cursorToRentalProperty(cursor);
+		while ( !cursor.isAfterLast() ) {
+			rentalProperty = cursorToRentalProperty( cursor );
 			cursor.moveToNext();
 		}
 		cursor.close();
@@ -171,19 +182,22 @@ public class RentalProperty {
 		return rentalProperty;
 	}
 
-	public static RentalProperty cursorToRentalProperty(Cursor cursor) {
+	public static RentalProperty cursorToRentalProperty( Cursor cursor ) {
 		RentalProperty rentalProperty = new RentalProperty();
 		RentalPropertyFeatures rentalPropertyFeatures = new RentalPropertyFeatures();
 
-		rentalProperty.setId(cursor.getInt(0));
-		rentalProperty.setLocation(cursor.getString(1));
-		rentalProperty.setGroupSize(cursor.getInt(2));
-		rentalProperty.setPriceRange(cursor.getInt(3), cursor.getInt(4));
-		rentalProperty.setRemoteId(cursor.getInt(5));
+		rentalProperty.setId( cursor.getInt( 0 ) );
+		rentalProperty.setLocation( cursor.getString( 1 ) );
+		rentalProperty.setGroupSize( cursor.getInt( 2 ) );
+		rentalProperty.setPriceRange( cursor.getInt( 3 ), cursor.getInt( 4 ) );
+		rentalProperty.setRemoteId( cursor.getInt( 5 ) );
 
-		for(int i=6; i<cursor.getCount(); i++) {
-			rentalPropertyFeatures.setFeature(cursor.getColumnName(i), (cursor.getInt(i) == 1));
+		for ( int i = 6; i < cursor.getColumnCount(); i++ ) {
+			Logger.info( "Spalte: " + cursor.getColumnName( i ) + "Wert: " + cursor.getInt( i ) + " Boolean: "
+					+ ( cursor.getInt( i ) == 1 ) );
+			rentalPropertyFeatures.setFeature( cursor.getColumnName( i ), ( cursor.getInt( i ) == 1 ) );
 		}
+		rentalProperty.setFeatures( rentalPropertyFeatures );
 
 		return rentalProperty;
 	}

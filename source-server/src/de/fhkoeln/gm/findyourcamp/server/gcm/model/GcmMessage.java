@@ -3,7 +3,7 @@ package de.fhkoeln.gm.findyourcamp.server.gcm.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.simple.JSONValue;
+import com.google.gson.Gson;
 
 /**
  * Aktionen im Umgang mit GcmMessage.
@@ -160,8 +160,14 @@ public class GcmMessage {
 		message.put("message_id", messageId);
 
 		payload.put("action", action);
-		message.put("data", payload);
 
-		return JSONValue.toJSONString(message);
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("json", payload);
+
+		message.put("data", data);
+
+		Gson gson = new Gson();
+
+		return gson.toJson(message);
 	}
 }

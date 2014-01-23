@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 /**
  * Model zur Ausstattung des Mietobjektes
- *
+ * 
  */
 public class RentalPropertyFeatures {
 	final public static String TOILETS_AVAILABLE_KEY = "toilets_available";
@@ -23,41 +23,42 @@ public class RentalPropertyFeatures {
 	final public static String CARAVAN_PARKING_POSSIBLE_KEY = "caravan_parking_possible";
 	final public static String CAMPFIRE_ALLOWED_KEY = "campfire_allowed";
 
-	private HashMap<String,Boolean> features;
+	private HashMap<String, Boolean> features;
 
 	public RentalPropertyFeatures() {
-		this.features = new HashMap<String,Boolean>();
+		this.features = new HashMap<String, Boolean>();
 
 		this.setDefaultValues();
 	}
 
 	// Defaultwerte setzen
 	private void setDefaultValues() {
-		for (Field field : RentalPropertyFeatures.class.getDeclaredFields()) {
-			field.setAccessible(true);
-           try {
-        	   setFeature( (String)field.get(null), false);
-           } catch (Exception e) {}
-        }
+		for ( Field field : RentalPropertyFeatures.class.getDeclaredFields() ) {
+			field.setAccessible( true );
+			try {
+				setFeature( (String) field.get( null ), false );
+			} catch ( Exception e ) {
+			}
+		}
 	}
 
 	// Features hinzufuegen
-	public void setFeature(String key, Boolean value) {
-		this.features.put(key, value);
+	public void setFeature( String key, Boolean value ) {
+		this.features.put( key, value );
 	}
 
 	// Features ausgeben
-	public boolean getFeature(String key) {
-		return this.features.get(key);
+	public boolean getFeature( String key ) {
+		return this.features.get( key );
 	}
 
 	// Alle vorhanden Features ausgeben. (Wert = true)
 	public ArrayList<String> getAvailableFeatures() {
 		ArrayList<String> availableFeatures = new ArrayList<String>();
 
-		for (Entry<String, Boolean> feature : this.features.entrySet()) {
-			if (feature.getValue()) {
-				availableFeatures.add(feature.getKey());
+		for ( Entry<String, Boolean> feature : this.features.entrySet() ) {
+			if ( feature.getValue() ) {
+				availableFeatures.add( feature.getKey() );
 			}
 		}
 

@@ -4,7 +4,7 @@ import android.util.Log;
 
 /**
  * Simple logger.
- *
+ * 
  */
 final public class Logger {
 
@@ -16,40 +16,44 @@ final public class Logger {
 
 	/**
 	 * Prints a debug log message.
-	 *
-	 * @param String message
+	 * 
+	 * @param String
+	 *            message
 	 */
-	public static void debug(String message) {
-		Log.d(TAG, message);
+	public static void debug( String message ) {
+		Log.d( TAG, message );
 	}
 
 	/**
 	 * Prints an error message.
-	 *
-	 * @param String message
+	 * 
+	 * @param String
+	 *            message
 	 */
-	public static void error(String message) {
-		Log.e(TAG, message);
+	public static void error( String message ) {
+		Log.e( TAG, message );
 	}
 
 	/**
 	 * Prints an info message.
-	 *
-	 * @param String message
+	 * 
+	 * @param String
+	 *            message
 	 */
-	public static void info(String message) {
-		Log.i(TAG, message);
+	public static void info( String message ) {
+		Log.i( TAG, message );
 	}
 
 	/**
 	 * Prints an error message with exception data.
-	 *
-	 * @param String message
-	 * @param Throwable tr
+	 * 
+	 * @param String
+	 *            message
+	 * @param Throwable
+	 *            tr
 	 */
-	public static void error(String message, Throwable tr) {
-		Log.e(TAG, message, tr);
+	public static void error( String message, Throwable tr ) {
+		Log.e( TAG, message, tr );
 	}
-
 
 }

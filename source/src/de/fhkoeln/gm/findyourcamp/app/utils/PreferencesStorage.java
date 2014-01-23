@@ -8,8 +8,8 @@ public class PreferencesStorage {
 
 	private SharedPreferences settings;
 
-	public PreferencesStorage(Context context) {
-		 this.settings = PreferenceManager.getDefaultSharedPreferences(context);
+	public PreferencesStorage( Context context ) {
+		this.settings = PreferenceManager.getDefaultSharedPreferences( context );
 	}
 
 	public SharedPreferences getSettings() {

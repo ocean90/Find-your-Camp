@@ -13,9 +13,9 @@ import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
 /**
- * Klasse des GcmClient.
- * Erstellen eines Clintes, Registrierung eines neuen Devices und Senden einer Nachricht
- *
+ * Klasse des GcmClient. Erstellen eines Clintes, Registrierung eines neuen
+ * Devices und Senden einer Nachricht
+ * 
  */
 public class GcmClient {
 
@@ -30,20 +30,19 @@ public class GcmClient {
 	/**
 	 * Konstruktor des GcmClient.
 	 */
-	private GcmClient(Context context) {
+	private GcmClient( Context context ) {
 		this.appContext = context;
-		this.gcm = GoogleCloudMessaging.getInstance(context);
+		this.gcm = GoogleCloudMessaging.getInstance( context );
 	}
 
 	/**
-	 * Singleton.
-	 * Erzeugt genau eine Instanz des Objektes für diese Klasse.
-	 *
+	 * Singleton. Erzeugt genau eine Instanz des Objektes für diese Klasse.
+	 * 
 	 * @return Instanz des GcmClient
 	 */
-	public static GcmClient getInstance(Context context) {
-		if (GcmClient.instance == null) {
-			GcmClient.instance = new GcmClient(context);
+	public static GcmClient getInstance( Context context ) {
+		if ( GcmClient.instance == null ) {
+			GcmClient.instance = new GcmClient( context );
 		}
 
 		return GcmClient.instance;
@@ -55,12 +54,13 @@ public class GcmClient {
 
 	/**
 	 * Pruefen ob regID vorhanden und Ausgabe
+	 * 
 	 * @return registrationID
 	 */
 	public String getRegistrationId() {
-		PreferencesStorage preferences = new PreferencesStorage(this.appContext);
+		PreferencesStorage preferences = new PreferencesStorage( this.appContext );
 		SharedPreferences settings = preferences.getSettings();
-		String registrationId = settings.getString("registrationId", "");
+		String registrationId = settings.getString( "registrationId", "" );
 
 		// Wenn keine regID vorhanden
 		if ( registrationId.isEmpty() )
@@ -73,15 +73,16 @@ public class GcmClient {
 
 	/**
 	 * Uebergebene regID wird gespeichert.
+	 * 
 	 * @param registrationId
 	 */
 	public void saveRegisrationId( String registrationId ) {
-		PreferencesStorage preferences = new PreferencesStorage(this.appContext);
+		PreferencesStorage preferences = new PreferencesStorage( this.appContext );
 		// Editor zum Modifizieren
 		SharedPreferences.Editor preferencesEditor = preferences.getEditor();
 		// Neue regID setzen
-		preferencesEditor.putString("registrationId", registrationId);
-		//Speichern des regID zum Objekt
+		preferencesEditor.putString( "registrationId", registrationId );
+		// Speichern des regID zum Objekt
 		preferencesEditor.commit();
 	}
 
@@ -91,53 +92,53 @@ public class GcmClient {
 	public void register() {
 		new AsyncTask<Void, Void, String>() {
 			@Override
-			protected String doInBackground(Void... params) {
+			protected String doInBackground( Void... params ) {
 				String registrationId = "";
-				try {							// ProjektID von Google für Zugriff
-					registrationId = gcm.register(SENDER_ID);
-					Logger.info("Device registered, registration ID=" + registrationId);
+				try { // ProjektID von Google für Zugriff
+					registrationId = gcm.register( SENDER_ID );
+					Logger.info( "Device registered, registration ID=" + registrationId );
 
 					// neue regID sichern
-					saveRegisrationId(registrationId);
-				} catch (IOException ex) {
-					Logger.error(ex.getMessage());
+					saveRegisrationId( registrationId );
+				} catch ( IOException ex ) {
+					Logger.error( ex.getMessage() );
 				}
 				return registrationId;
 			}
 
 			@Override
-			protected void onPostExecute(String msg) {
+			protected void onPostExecute( String msg ) {
 			}
-		}.execute(null, null, null);
+		}.execute( null, null, null );
 	}
 
 	/**
 	 * Send a message to GCM service.
-	 *
+	 * 
 	 * @param message
 	 * @return feedback
 	 */
-	public void sendMessage(GcmMessage message) {
+	public void sendMessage( GcmMessage message ) {
 
-        new AsyncTask<GcmMessage, Void, String>() {
-            @Override
-            protected String doInBackground(GcmMessage...params) {
-            	GcmMessage message = params[0];
+		new AsyncTask<GcmMessage, Void, String>() {
+			@Override
+			protected String doInBackground( GcmMessage... params ) {
+				GcmMessage message = params[0];
 
-                String feedback = "";
-                try {
-                	gcm.send(SENDER_ID + API_ENDPOINT, message.getMessageId(), message.getData());
-                	feedback = "Nachricht gesendet";
-                } catch (IOException ex) {
-               	 	Logger.error(ex.getMessage());
-                }
-                return feedback;
-            }
+				String feedback = "";
+				try {
+					gcm.send( SENDER_ID + API_ENDPOINT, message.getMessageId(), message.getData() );
+					feedback = "Nachricht gesendet";
+				} catch ( IOException ex ) {
+					Logger.error( ex.getMessage() );
+				}
+				return feedback;
+			}
 
-            @Override
-            protected void onPostExecute(String feedback) {
-            }
-        }.execute(message, null, null);
+			@Override
+			protected void onPostExecute( String feedback ) {
+			}
+		}.execute( message, null, null );
 	}
 
 }
