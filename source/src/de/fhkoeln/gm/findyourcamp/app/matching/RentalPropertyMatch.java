@@ -43,13 +43,15 @@ public class RentalPropertyMatch {
 		Map<String, Boolean> featuresPresent = rentalProperty.getFeatures().toMap();
 
 		// Check price values
-		if ( maxPriceDesired > minPricePresent ) {
+		if ( maxPriceDesired < minPricePresent ) {
+			Logger.info( "maxPriceDesired < minPricePresent: " + maxPriceDesired + "<" + minPricePresent );
 			currentMatch = currentMatch - 10;
 		}
 
 		// Check group size values
 		if ( groupSizeDesired > groupSizePresent ) {
-			currentMatch = currentMatch - 10;
+			Logger.info( "groupSizeDesired > groupSizePresent: " + groupSizeDesired + ">" + groupSizePresent );
+			currentMatch = currentMatch - 20;
 		}
 
 		// Calculate the scalar product
@@ -58,9 +60,11 @@ public class RentalPropertyMatch {
 
 		// Check feature matching
 		if ( featureVectorsScalar < ( featuresDesiredCount / 2 ) ) {
+			Logger.info( "featureVectorsScalar < ( featuresDesiredCount / 2 ): " + featureVectorsScalar + "<" +  ( featuresDesiredCount / 2 ) );
 			// Only half of the desired features exist
 			currentMatch = currentMatch - 30;
-		} else if ( featureVectorsScalar >= ( featuresDesiredCount / 2 ) ) {
+		} else if ( ( featureVectorsScalar < featuresDesiredCount ) && ( featureVectorsScalar >= ( featuresDesiredCount / 2 ) ) ) {
+			Logger.info( "featureVectorsScalar >= ( featuresDesiredCount / 2 ): " + featureVectorsScalar + ">=" +  ( featuresDesiredCount / 2 ) );
 			// Not all desired features exist
 			currentMatch = currentMatch - 10;
 		}

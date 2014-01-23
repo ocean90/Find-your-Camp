@@ -6,11 +6,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import de.fhkoeln.gm.findyourcamp.app.db.RentalPropertiesTable;
-import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
 /**
  * Modell zum Mietobjekt
- * 
+ *
  */
 public class RentalProperty {
 
@@ -57,7 +56,7 @@ public class RentalProperty {
 
 	/**
 	 * Location setzen
-	 * 
+	 *
 	 * @param location
 	 *            to set
 	 */
@@ -67,7 +66,7 @@ public class RentalProperty {
 
 	/**
 	 * Location ausgeben
-	 * 
+	 *
 	 * @return location to get
 	 */
 	public String getLocation() {
@@ -76,7 +75,7 @@ public class RentalProperty {
 
 	/**
 	 * Ausstattungsfeatures setzen
-	 * 
+	 *
 	 * @param features
 	 */
 	public void setFeatures( RentalPropertyFeatures features ) {
@@ -85,7 +84,7 @@ public class RentalProperty {
 
 	/**
 	 * Ausstattungsfeatures ausgeben
-	 * 
+	 *
 	 * @return features to get
 	 */
 	public RentalPropertyFeatures getFeatures() {
@@ -94,7 +93,7 @@ public class RentalProperty {
 
 	/**
 	 * Gruppengroeße setzen
-	 * 
+	 *
 	 * @param groupSize
 	 */
 	public void setGroupSize( int groupSize ) {
@@ -103,7 +102,7 @@ public class RentalProperty {
 
 	/**
 	 * Gruppengroeße ausgeben
-	 * 
+	 *
 	 * @return gruppengroeße to get
 	 */
 	public int getGroupSize() {
@@ -112,7 +111,7 @@ public class RentalProperty {
 
 	/**
 	 * Preispanne setzen
-	 * 
+	 *
 	 * @param minPrice
 	 * @param maxPrice
 	 */
@@ -193,8 +192,6 @@ public class RentalProperty {
 		rentalProperty.setRemoteId( cursor.getInt( 5 ) );
 
 		for ( int i = 6; i < cursor.getColumnCount(); i++ ) {
-			Logger.info( "Spalte: " + cursor.getColumnName( i ) + "Wert: " + cursor.getInt( i ) + " Boolean: "
-				+ ( cursor.getInt( i ) == 1 ) );
 			rentalPropertyFeatures.setFeature( cursor.getColumnName( i ), ( cursor.getInt( i ) == 1 ) );
 		}
 		rentalProperty.setFeatures( rentalPropertyFeatures );
