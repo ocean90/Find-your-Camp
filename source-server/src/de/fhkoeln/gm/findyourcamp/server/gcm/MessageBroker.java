@@ -1,5 +1,8 @@
 package de.fhkoeln.gm.findyourcamp.server.gcm;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,6 +11,8 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import de.fhkoeln.gm.findyourcamp.server.db.DbConnection;
+import de.fhkoeln.gm.findyourcamp.server.db.DevicesTable;
 import de.fhkoeln.gm.findyourcamp.server.gcm.model.GcmMessage;
 import de.fhkoeln.gm.findyourcamp.server.matching.LocationMatch;
 import de.fhkoeln.gm.findyourcamp.server.model.Device;
@@ -18,7 +23,7 @@ import de.fhkoeln.gm.findyourcamp.server.utils.Logger;
 /**
  * Messagebroker leitet eingehende Nachricht an Aktion zur Registrierung oder
  * Suchanfrage weiter.
- * 
+ *
  */
 public class MessageBroker {
 
@@ -29,7 +34,7 @@ public class MessageBroker {
 	 * Uebergebenes Object wird in JSON Objekt zur weiteren Verarbeitung
 	 * umgewandelt "from": "regid", "message_id": "wadsdsd", "data": { "json" :
 	 * "{"action":1}" }
-	 * 
+	 *
 	 * @param object
 	 */
 	@SuppressWarnings( "unchecked" )
@@ -74,6 +79,10 @@ public class MessageBroker {
 				// Suchanfrage
 				handleSearchRequest();
 				break;
+			case MessageConstants.ACTION_MATCH_RESPONSE:
+				// Mietobjekt gefunden
+				handleMatchResponse();
+				break;
 			case MessageConstants.ACTION_RENTAL_PROPERTY_REGISTRATION:
 				// Mietobjekt anlegen
 				handleRentalPropertyRegistration();
@@ -82,6 +91,50 @@ public class MessageBroker {
 				Logger.err( "Unbekannte Aktion: " + action );
 				break;
 		}
+	}
+
+	private void handleMatchResponse() {
+		long hostUserId = (Long) data.get( "host_user_id" );
+		long rentUserId = (Long) data.get( "rent_user_id" );
+		DbConnection dbConnection = DbConnection.getInstance();
+
+		ArrayList<String> registrationIds = new ArrayList<String>();
+		// Zugehörige Devices und deren Registierungs-ID holen.
+		Statement statement;
+		try {
+			statement = dbConnection.createStatement();
+			String sql = "SELECT * FROM " + DevicesTable.TABLE_NAME + " WHERE " + DevicesTable.COLUMN_NAME_DEVICE_ID
+				+ " =" + rentUserId + ";";
+			ResultSet DevicesResultSet = statement.executeQuery( sql );
+
+			while ( DevicesResultSet.next() ) {
+				registrationIds.add( DevicesResultSet.getString( 2 ) );
+			}
+
+		} catch ( SQLException e ) {
+			e.printStackTrace();
+		}
+
+		if ( registrationIds.isEmpty() ) {
+			return;
+		}
+
+		GcmXmppConnection gcmConnection = GcmXmppConnection.getInstance();
+
+		for ( Iterator<String> registrationIdsIterator = registrationIds.iterator(); registrationIdsIterator
+			.hasNext(); ) {
+			String registrationId = (String) registrationIdsIterator.next();
+			GcmMessage message = new GcmMessage();
+			message.setTo( registrationId );
+			message.setMessageId( "m-" + ( System.currentTimeMillis() / 1000L ) );
+			message.setAction( MessageConstants.ACTION_SEARCH_RESULT );
+			HashMap<String, Object> payload = new HashMap<String, Object>();
+			payload.put( "host_user_id", hostUserId );
+			message.setPayload( payload );
+
+			gcmConnection.sendMessage( message );
+		}
+
 	}
 
 	private void handleRentalPropertyRegistration() {
@@ -157,9 +210,11 @@ public class MessageBroker {
 		Long minPrice = (Long) data.get( "min_price" );
 		Long maxPrice = (Long) data.get( "max_price" );
 		Long groupSize = (Long) data.get( "group_size" );
+		Long rentUserId = (Long) data.get( "rent_user_id" );
 
-		HashMap<String, ArrayList<Object>> matches = LocationMatch.getMatches( location );
+		HashMap<String, ArrayList<Object>> matches = LocationMatch.getMatches( location, rentUserId );
 		ArrayList<Object> registrationIds = matches.get( "registrationIds" );
+		ArrayList<Object> userIds = matches.get( "userIds" );
 		ArrayList<Object> localRentalPropertyIds = matches.get( "localRentalPropertyIds" );
 
 		GcmXmppConnection gcmConnection = GcmXmppConnection.getInstance();
@@ -173,27 +228,29 @@ public class MessageBroker {
 			message.setPayload( payload );
 			gcmConnection.sendMessage( message );
 		} else {
+			int i = 0;
 			for ( Iterator<Object> registrationIdsIterator = registrationIds.iterator(); registrationIdsIterator
 				.hasNext(); ) {
-				for ( Iterator<Object> localRentalPropertyIdsIterator = localRentalPropertyIds.iterator(); localRentalPropertyIdsIterator
-					.hasNext(); ) {
 
-					String registrationId = (String) registrationIdsIterator.next();
-					Integer localRentalPropertyId = (Integer) localRentalPropertyIdsIterator.next();
+				String registrationId = (String) registrationIdsIterator.next();
+				Integer userId = (Integer) userIds.get( i );
+				Integer localRentalPropertyId = (Integer) localRentalPropertyIds.get( i );
 
-					GcmMessage message = new GcmMessage();
-					message.setTo( registrationId );
-					message.setMessageId( "m-" + ( System.currentTimeMillis() / 1000L ) );
-					message.setAction( MessageConstants.ACTION_MATCH_REQUEST );
-					HashMap<String, Object> payload = new HashMap<String, Object>();
-					payload.put( "features", features );
-					payload.put( "min_price", minPrice );
-					payload.put( "max_price", maxPrice );
-					payload.put( "group_size", groupSize );
-					payload.put( "rental_property_local_id", localRentalPropertyId );
-					message.setPayload( payload );
-					gcmConnection.sendMessage( message );
-				}
+				GcmMessage message = new GcmMessage();
+				message.setTo( registrationId );
+				message.setMessageId( "m-" + ( System.currentTimeMillis() / 1000L ) );
+				message.setAction( MessageConstants.ACTION_MATCH_REQUEST );
+				HashMap<String, Object> payload = new HashMap<String, Object>();
+				payload.put( "features", features );
+				payload.put( "min_price", minPrice );
+				payload.put( "max_price", maxPrice );
+				payload.put( "group_size", groupSize );
+				payload.put( "rental_property_local_id", localRentalPropertyId );
+				payload.put( "user_id", userId );
+				payload.put( "rent_user_id", rentUserId );
+				message.setPayload( payload );
+
+				gcmConnection.sendMessage( message );
 			}
 		}
 

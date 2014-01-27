@@ -11,18 +11,18 @@ import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 
 public class RentalPropertyMatch {
 
-	public static int maxMatch = 100;
-	public static int minMatch = 50;
+	public final static int MAX_MATCH_RATE = 100;
+	public final static int MIN_MATCH_RATE = 50;
 
-	public static boolean getMatchResult( JsonDatatypes data, Context appContext ) {
+	public static int getMatchResult( JsonDatatypes data, Context appContext ) {
 		int rentalPropertyLocalId = data.getRentalPropertyLocalId();
 
 		RentalProperty rentalProperty = RentalProperty.getFromId( rentalPropertyLocalId, appContext );
 		if ( rentalProperty == null ) {
-			return false;
+			return 0;
 		}
 
-		int currentMatch = maxMatch;
+		int currentMatch = MAX_MATCH_RATE;
 
 		// Get desired values
 		int minPriceDesired = data.getMinPrice();
@@ -69,12 +69,9 @@ public class RentalPropertyMatch {
 			currentMatch = currentMatch - 10;
 		}
 
-		Logger.info( "Match:" + currentMatch );
-		if ( currentMatch >= minMatch ) {
-			return true;
-		}
 
-		return false;
+		return currentMatch;
+
 	}
 
 	private static int createFeatureVectorsScalar( Vector<Integer> vectorFeaturesPresent,

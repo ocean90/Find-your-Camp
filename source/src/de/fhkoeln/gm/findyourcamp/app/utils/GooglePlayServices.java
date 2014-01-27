@@ -11,7 +11,7 @@ public class GooglePlayServices {
 
 	/**
 	 * Check if Google Play services is available.
-	 * 
+	 *
 	 * @see http://developer.android.com/google/play-services/setup.html#ensure
 	 * @return
 	 */
@@ -24,6 +24,7 @@ public class GooglePlayServices {
 		 */
 		if ( resultCode != ConnectionResult.SUCCESS ) {
 			if ( GooglePlayServicesUtil.isUserRecoverableError( resultCode ) ) {
+				Logger.info("geht nicht");
 				GooglePlayServicesUtil.getErrorDialog( resultCode, activity, PLAY_SERVICES_RESOLUTION_REQUEST ).show();
 			}
 

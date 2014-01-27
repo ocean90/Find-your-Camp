@@ -14,17 +14,19 @@ import de.fhkoeln.gm.findyourcamp.server.db.RentalPropertiesTable;
 /**
  * Matching des Ortes der Suchanfrage mit den Orten zu registrierten
  * Grundstuecken
- * 
+ *
  */
 public class LocationMatch {
 
-	public static HashMap<String, ArrayList<Object>> getMatches( String location ) {
+	public static HashMap<String, ArrayList<Object>> getMatches( String location, long rentUserId ) {
 		DbConnection dbConnection = DbConnection.getInstance();
 
 		ArrayList<Object> registrationIds = new ArrayList<Object>();
+		ArrayList<Object> userIds = new ArrayList<Object>();
 		ArrayList<Object> localRentalPropertyIds = new ArrayList<Object>();
 		HashMap<String, ArrayList<Object>> result = new HashMap<String, ArrayList<Object>>();
 		result.put( "registrationIds", registrationIds );
+		result.put( "userIds", userIds );
 		result.put( "localRentalPropertyIds", localRentalPropertyIds );
 
 		try {
@@ -44,15 +46,24 @@ public class LocationMatch {
 				+ RentalPropertiesTable.TABLE_NAME + " WHERE " + RentalPropertiesTable.COLUMN_NAME_LOCATION_ID + "="
 				+ locationId );
 
-			StringBuilder userIds = new StringBuilder();
+			StringBuilder userIdsCsv = new StringBuilder();
 			while ( RentalPropertiesResultSet.next() ) {
-				userIds.append( RentalPropertiesResultSet.getInt( 4 ) + "," );
+				int  hostUserId = RentalPropertiesResultSet.getInt( 4 );
+				if ( rentUserId == (int) hostUserId ) {
+					continue;
+				}
+				userIds.add( hostUserId );
+				userIdsCsv.append( hostUserId + "," );
 				localRentalPropertyIds.add( RentalPropertiesResultSet.getInt( 2 ) );
+			}
+
+			if ( userIds.isEmpty() ) {
+				return result;
 			}
 
 			// Zugehörige Devices und deren Registierungs-ID holen.
 			String sql = "SELECT * FROM " + DevicesTable.TABLE_NAME + " WHERE " + DevicesTable.COLUMN_NAME_DEVICE_ID
-				+ " IN (" + userIds.toString().replaceAll( ",$", "" ) + ");";
+				+ " IN (" + userIdsCsv.toString().replaceAll( ",$", "" ) + ");";
 			ResultSet DevicesResultSet = statement.executeQuery( sql );
 
 			while ( DevicesResultSet.next() ) {
@@ -60,6 +71,7 @@ public class LocationMatch {
 			}
 
 			result.put( "registrationIds", registrationIds );
+			result.put( "userIds", userIds );
 			result.put( "localRentalPropertyIds", localRentalPropertyIds );
 		} catch ( SQLException e ) {
 			e.printStackTrace();

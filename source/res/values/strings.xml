@@ -12,6 +12,8 @@
 	<string name="action_registration">Registrierung</string>
 	<string name="action_single_rental_property">Mietobjekt ansehen</string>
 	<string name="action_list_rental_properties">Deine Mietobjekte</string>
+	<string name="action_response_rental_property">Mietobjekt mieten</string>
+	<string name="action_share_rental_property">Mietobjekt freigeben</string>
 
 	<string name="rental_property_location_hint">Location</string>
 	<string name="rental_property_section_title_location">Ort</string>
@@ -58,6 +60,8 @@
 	<string name="main_welcome_message">Willkommen zurück, starte jetzt eine neue Suche oder leg ein neues Mietobjekt an.</string>
 	<string name="main_registration_message">Hallo, bitte registriere dich!</string>
 	<string name="main_registerd_message">Hallo %$1s, danke für deine Registrierung. Starte jetzt eine neue Suche oder leg ein neues Mietobjekt an.</string>
+
+	<string name="share_rental_property">Freigeben</string>
 
     <string-array name="rental_property_group_size_array">
         <item>1</item>

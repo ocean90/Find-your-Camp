@@ -11,7 +11,7 @@ import de.fhkoeln.gm.findyourcamp.app.utils.GooglePlayServices;
 
 /**
  * MainActivity als Startpunkt der Anwendung.
- * 
+ *
  */
 public class MainActivity extends Activity {
 
@@ -40,7 +40,6 @@ public class MainActivity extends Activity {
 					TextView welcomeMessageView = (TextView) findViewById( R.id.main_welcome_message );
 					welcomeMessageView.setText( String.format(
 						getResources().getString( R.string.main_registerd_message ), userName ) );
-
 				}
 			} else {
 				Intent intent = new Intent( this, RegistrationActivity.class );

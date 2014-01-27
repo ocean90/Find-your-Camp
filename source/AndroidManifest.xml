@@ -72,13 +72,29 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.fhkoeln.gm.findyourcamp.app.MainActivity" />
         </activity>
-         <activity
+        <activity
             android:name="de.fhkoeln.gm.findyourcamp.app.SingleRentalPropertyActivity"
             android:label="@string/action_single_rental_property"
             android:parentActivityName="de.fhkoeln.gm.findyourcamp.app.LocalRentalPropertiesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.fhkoeln.gm.findyourcamp.app.LocalRentalPropertiesActivity" />
+        </activity>
+        <activity
+            android:name="de.fhkoeln.gm.findyourcamp.app.ResponseRentalPropertyActivity"
+            android:label="@string/action_response_rental_property"
+            android:parentActivityName="de.fhkoeln.gm.findyourcamp.app.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.fhkoeln.gm.findyourcamp.app.MainActivity" />
+        </activity>
+        <activity
+            android:name="de.fhkoeln.gm.findyourcamp.app.ShareRentalPropertyActivity"
+            android:label="@string/action_share_rental_property"
+            android:parentActivityName="de.fhkoeln.gm.findyourcamp.app.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.fhkoeln.gm.findyourcamp.app.MainActivity" />
         </activity>
         <activity
             android:name="de.fhkoeln.gm.findyourcamp.app.LocalRentalPropertiesActivity"

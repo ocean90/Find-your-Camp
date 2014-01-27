@@ -12,6 +12,8 @@ final public class JsonDatatypes {
 	private int rental_property_local_id = 0;
 	private int user_id = 0;
 	private int found_items = 0;
+	private int host_user_id = 0;
+	private int rent_user_id = 0;
 
 	/**
 	 * @return the min_price
@@ -75,4 +77,19 @@ final public class JsonDatatypes {
 	public int getFoundItems() {
 		return found_items;
 	}
+
+	/**
+	 * @return the host_user_id
+	 */
+	public int getHostUserId() {
+		return host_user_id;
+	}
+
+	/**
+	 * @return the host_user_id
+	 */
+	public int getRentUserId() {
+		return rent_user_id;
+	}
+
 }

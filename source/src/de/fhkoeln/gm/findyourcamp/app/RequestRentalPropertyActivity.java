@@ -1,11 +1,13 @@
 package de.fhkoeln.gm.findyourcamp.app;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -29,10 +31,11 @@ import de.fhkoeln.gm.findyourcamp.app.gcm.MessageConstants;
 import de.fhkoeln.gm.findyourcamp.app.map.PlaceAutocompleteAdapter;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.app.model.RentalPropertyFeatures;
+import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
 /**
  * Activity zur Suchanfrage
- * 
+ *
  */
 public class RequestRentalPropertyActivity extends Activity {
 
@@ -120,7 +123,14 @@ public class RequestRentalPropertyActivity extends Activity {
 		message.setMessageId( "m-" + ( System.currentTimeMillis() / 1000L ) );
 		message.setAction( MessageConstants.ACTION_SEARCH_REQUEST );
 
-		message.setPayload( rentalPropery.toMap() );
+		HashMap<String, Object> payload = rentalPropery.toMap();
+
+		PreferencesStorage preferences = new PreferencesStorage( getApplicationContext() );
+		SharedPreferences settings = preferences.getSettings();
+		int userId = settings.getInt( "user_id", 0 );
+
+		payload.put( "rent_user_id", userId );
+		message.setPayload( payload  );
 
 		GcmClient client = GcmClient.getInstance( this );
 		client.sendMessage( message );

@@ -6,15 +6,18 @@ import android.os.Bundle;
 
 import com.google.gson.Gson;
 
+import de.fhkoeln.gm.findyourcamp.app.ResponseRentalPropertyActivity;
+import de.fhkoeln.gm.findyourcamp.app.ShareRentalPropertyActivity;
 import de.fhkoeln.gm.findyourcamp.app.gson.JsonDatatypes;
 import de.fhkoeln.gm.findyourcamp.app.matching.RentalPropertyMatch;
+import de.fhkoeln.gm.findyourcamp.app.model.RentalProperty;
 import de.fhkoeln.gm.findyourcamp.app.notification.UserNotification;
 import de.fhkoeln.gm.findyourcamp.app.utils.Logger;
 import de.fhkoeln.gm.findyourcamp.app.utils.PreferencesStorage;
 
 /**
  * MessageBroker zur Weiterleitung der Nachricht an geeignete Funktion
- * 
+ *
  */
 public class MessageBroker {
 
@@ -66,22 +69,34 @@ public class MessageBroker {
 	}
 
 	private void handleMatchRequest() {
-		boolean matchResult = RentalPropertyMatch.getMatchResult( data, appContext );
-
 		UserNotification userNotification = new UserNotification( appContext );
-		userNotification.show( "Matchvorgang läuft", "", "Matchvorgang läuft" );
+		userNotification.show( "Matchvorgang läuft", "", "Matchvorgang läuft", null, null );
 
+		int matchResult = RentalPropertyMatch.getMatchResult( data, appContext );
+
+		if ( matchResult < RentalPropertyMatch.MIN_MATCH_RATE ) {
+			return;
+		}
+
+		Bundle notificationData = new Bundle();
+		notificationData.putInt( "match_rate", matchResult );
+		notificationData.putInt( "rent_user_id", data.getRentUserId() );
+
+		userNotification.show( "Matchvorgang erfolgreich", "Mietobjekt freigeben?",
+			"Mietobjekt freigeben", notificationData, ShareRentalPropertyActivity.class );
 	}
 
 	private void handleSearchResult() {
 		int foundItems = data.getFoundItems();
+		int hostUserId = data.getHostUserId();
 		UserNotification userNotification = new UserNotification( appContext );
-		if ( foundItems > 0 ) {
+
+		if ( hostUserId > 0 ) {
 			userNotification.show( "Suchanfrage erfolgreich", "Es konnte ein Mietobjekt gefunden werden.",
-				"Camp gefunden" );
+				"Camp gefunden", null, ResponseRentalPropertyActivity.class );
 		} else {
 			userNotification.show( "Suchanfrage ohne Ergebnisse", "Es konnte kein Mietobjekt gefunden werden.",
-				"Kein Camp gefunden" );
+				"Kein Camp gefunden", null, ResponseRentalPropertyActivity.class );
 		}
 	}
 
@@ -95,22 +110,26 @@ public class MessageBroker {
 		preferencesEditor.commit();
 
 		if ( userId > 0 ) {
-			userNotification
-				.show( "Registrierung erfolgreich", "Erfolgreich registriert.", "Registrierung erfolgreich" );
+			userNotification.show( "Registrierung erfolgreich", "Erfolgreich registriert.",
+				"Registrierung erfolgreich", null, null );
 		} else {
 			userNotification.show( "Registrierung fehlerhaft", "Registrierung konnte nicht abgeschlossen werden.",
-				"Registrierung fehlerhaft" );
+				"Registrierung fehlerhaft", null, null );
 		}
 	}
 
 	private void handleRentalPropertyRegistered() {
 		int rentalPropertyRemoteId = data.getRentalPropertyRemoteId();
+
+		// TODO ID speichern.
+
 		UserNotification userNotification = new UserNotification( appContext );
 		if ( rentalPropertyRemoteId > 0 ) {
-			userNotification.show( "Mietobjekt registriert", "Erfolgreich registriert.", "Mietobjekt registriert" );
+			userNotification.show( "Mietobjekt registriert", "Erfolgreich registriert.", "Mietobjekt registriert",
+				null, null );
 		} else {
 			userNotification.show( "Mietobjekt fehlerhaft", "Registrierung konnte nicht abgeschlossen werden.",
-				"Mietobjekt fehlerhaft" );
+				"Mietobjekt fehlerhaft", null, null );
 		}
 	}
 }
